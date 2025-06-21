@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="32.723253824000004 6.9771884 271.442072704 261.37621160000003" id="svg1" version="1.1" style="max-height: 500px" width="271.442072704" height="261.37621160000003">
+  <defs id="defs1">
+    
+    <clipPath id="clipPath99" clipPathUnits="userSpaceOnUse">
+      <path id="path99" transform="translate(-290.55381,-1509.5952)" d="m 84.7,1766.207 c -24.666,0 -44.662,-19.996 -44.662,-44.662 v 0 -111.942 c 0,-24.666 19.996,-44.661 44.662,-44.661 v 0 h 1765.41 c 24.666,0 44.661,19.995 44.661,44.661 v 0 111.942 c 0,24.666 -19.995,44.662 -44.661,44.662 v 0 z"/>
+    </clipPath>
+    <clipPath id="clipPath112" clipPathUnits="userSpaceOnUse">
+      <path id="path112" transform="translate(-152.9364,-1680.2969)" d="M 0,2534.298 H 1920 V 0 H 0 Z"/>
+    </clipPath>
+    <clipPath id="clipPath116" clipPathUnits="userSpaceOnUse">
+      <path id="path116" transform="translate(-222.32191,-1616.097)" d="M 0,2534.298 H 1920 V 0 H 0 Z"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(-53.383998,-1024.124)" id="g1">
+    <g id="group-MC0">
+      <path clip-path="url(#clipPath99)" transform="matrix(1.3333333,0,0,-1.3333333,387.40507,1366.2731)" style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 0,0 v 0 c -60.573,172.668 -206.993,279.831 -430.298,312.919 184.017,123.191 272.503,279.534 257.954,459.222" id="path98"/>
+      <path clip-path="url(#clipPath112)" transform="matrix(1.3333333,0,0,-1.3333333,203.9152,1138.6709)" style="fill:#f27c40;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 0,0 c -3.745,12.251 -13.072,20.208 -27.413,23.244 11.951,8.002 17.785,18.629 17.008,31.221 3.92,-11.991 13.26,-19.72 27.32,-22.752 C 4.702,23.604 -1.046,12.823 0,0" id="path111"/>
+      <path clip-path="url(#clipPath116)" transform="matrix(1.3333333,0,0,-1.3333333,296.4292,1224.2707)" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 0,0 c 2.61,5.803 1.41,12.073 -3.576,18.374 7.752,-1.43 13.83,0.311 17.803,5.161 C 11.779,17.763 13.062,11.572 17.931,5.373 10.034,6.859 3.939,5.032 0,0" id="path115"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="94.53383646017699 0 208.40413946902657 268.35328" id="svg1" version="1.1" style="max-height: 500px" width="208.40413946902657" height="268.35328">
+  <defs id="defs1">
+    
+    <clipPath id="clipPath97" clipPathUnits="userSpaceOnUse">
+      <path id="path97" transform="translate(-2076.4542,-1592.1329)" d="m 84.7,1766.207 c -24.666,0 -44.662,-19.996 -44.662,-44.662 v 0 -111.942 c 0,-24.666 19.996,-44.661 44.662,-44.661 v 0 h 1765.41 c 24.666,0 44.661,19.995 44.661,44.661 v 0 111.942 c 0,24.666 -19.995,44.662 -44.661,44.662 v 0 z"/>
+    </clipPath>
+    <clipPath id="clipPath114" clipPathUnits="userSpaceOnUse">
+      <path id="path114" transform="translate(-1848.8472,-1585.9463)" d="M 0,2534.298 H 1920 V 0 H 0 Z"/>
+    </clipPath>
+    <clipPath id="clipPath118" clipPathUnits="userSpaceOnUse">
+      <path id="path118" transform="translate(-1782.0931,-1688.1537)" d="M 0,2534.298 H 1920 V 0 H 0 Z"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(-2222.8862,-1024.1241)" id="g1">
+    <g id="group-MC0">
+      <path clip-path="url(#clipPath97)" transform="matrix(1.3333333,0,0,-1.3333333,2768.6055,1256.2229)" style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 0,0 c -100.145,52.462 -211.455,39.147 -326.27,-40.036 31.192,133.214 5.259,241.133 -77.056,316.166 99.727,-49.6 209.72,-34.739 322.629,42.528 C -112.986,182.975 -85.539,74.664 0,0 Z" id="path96"/>
+      <path clip-path="url(#clipPath114)" transform="matrix(1.3333333,0,0,-1.3333333,2465.1296,1264.4717)" style="fill:#f27c40;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 0,0 C 1.557,8.973 -1.807,17.015 -9.93,23.543 0.22,24.784 7.331,29.653 10.88,37.889 9.518,29.025 12.962,21.125 20.908,14.688 10.559,13.464 3.452,8.47 0,0" id="path113"/>
+      <path clip-path="url(#clipPath118)" transform="matrix(1.3333333,0,0,-1.3333333,2376.1241,1128.1951)" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 0,0 c -10.566,6.143 -22.909,4.968 -36.186,-3.555 4.54,14.795 2.591,26.924 -5.828,35.538 10.545,-5.821 22.755,-4.471 35.807,3.844 C -10.888,20.76 -8.776,8.582 0,0" id="path117"/>
+    </g>
+  </g>
+</svg>

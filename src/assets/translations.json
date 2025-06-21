@@ -1,0 +1,527 @@
+{
+  "en": {
+    "common": {
+      "search": "Search",
+      "optional": "Optional",
+      "close": "Close",
+      "loading": "Loading...",
+      "available_hire": "Available for Hire",
+      "copyright": "Copyright © Falakey 2024."
+    },
+    "navbar": {
+      "select_language": "Select Language",
+      "explore": "Explore",
+      "challenges": "Challenges",
+      "search_photo": "Search for photos..",
+      "image_submit": "Submit an image",
+      "collections": "Collections"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "image_submit": "Upload Image",
+      "listings": "Listings",
+      "downloads": "Downloads",
+      "messages": "Messages",
+      "notifications": "Notifications",
+      "account_details": "Account Details",
+      "logout": "Log out",
+      "favorites": "Favorites"
+    },
+    "home": {
+      "banner_slogan": "Discover. Download. Create Freely.",
+      "photo_by": "Photo By"
+    },
+    "stars": {
+      "falakey_stars": "Falakey's Stars",
+      "views": "Views",
+      "recent": "Recent",
+      "all_time": "All Time",
+      "loading": "Loading the stars 🤩...",
+      "no_stars": "There is no More Data",
+      "top_stars_text": "Members with the most views on content added in the last month.",
+      "recent_stars_text": "Members with the most content views all-time."
+    },
+    "challenge": {
+      "title": "Explore The Challenges!",
+      "description": "Unleash your creativity through photo and video challenges that push your limits, ignite your passion, and showcase your talent to the world. Your masterpiece might just win you incredible rewards!",
+      "join_challenge": "Join Challenge",
+      "learn_more": "Learn More",
+      "sponsored_by": "Sponsored by",
+      "sponsers": "Sponsors",
+      "days_left": " Days Left",
+      "ended": "Ended",
+      "all_submissions": "All Submissions",
+      "about": "About This Challenge",
+      "no_description": "No Description Available",
+      "read_more": "Read More",
+      "read_less": "Read Less",
+      "submissions": "Challenge Submissions",
+      "key_information": "Key Information",
+      "deadline": "Submission Deadline",
+      "terms_and_conditions": "Terms and Conditions",
+      "joined": "joined the challenge",
+      "winners": "Winners",
+      "prizes": "Prizes",
+      "top_prizes": "Show only top prizes",
+      "all_prizes": "Show all",
+      "loading": "Loading...",
+      "past_challenges": "Past Challenges"
+    },
+    "account_types": {
+      "lets_get_started": "Hey! Let’s get you started.",
+      "upload_photos": "Upload Photos or sell on market",
+      "upload_photos_description": "Join a network of +8m creatives worldwide. Get hired for shoots and distribute your work.",
+      "buy_images": "Buy images or book photo shoots",
+      "buy_images_description": "Create a business account to license royalty-free photography and book photo shoots worldwide."
+    },
+    "authentication": {
+      "new_falakey": "New to Falakey?",
+      "sign_up_free": "Sign up for free",
+      "login": "Log in",
+      "register": "Create Account",
+      "password_reset_success_title": "Password Reseted Successfully!",
+      "password_reset_success_text": "Login with Your new Password",
+      "welcome_back": "Welcome Back.",
+      "continue_with_google": "Continue With Google",
+      "loading_google_url": "Loading Google Url...",
+      "or": "OR",
+      "username_or_email": "Username or Email",
+      "password": "Password",
+      "lost_password": "Lost your password?",
+      "create_your_account": "Create your account.",
+      "username": "Username",
+      "email": "Email",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "confirm_password": "Repeat Password",
+      "terms_agreement": "I agree with the terms and conditions"
+    },
+    "forget_password": {
+      "title": "Request a password reset.",
+      "description": "Please enter your email address. You will receive a link to create a new password via email.",
+      "email_placeholder": "Email",
+      "password_placeholder": "Password",
+      "confirm_password_placeholder": "Confirm Password",
+      "otp_placeholder": "OTP CODE",
+      "reset_password_button": "Reset Password",
+      "submit_otp_button": "Submit OTP",
+      "loading": "Loading..."
+    },
+    "uploaded_data": {
+      "add_location": "Add Location",
+      "title_placeholder": "Title",
+      "tags_placeholder": "Select Tags",
+      "collection_placeholder": "Select Collection",
+      "description_placeholder": "Add Description"
+    },
+    "author": {
+      "anonymous": "Anonymous",
+      "hire_button": "Hire",
+      "follow": "Follow",
+      "unfollow": "Unfollow",
+      "default": "Default",
+      "profile_tag": "'s Profile",
+      "connect": "Connect with ",
+      "followers": "Followers",
+      "following": "Followings",
+      "no_followers": "No Followers Yet",
+      "no_followings": "No Followings Yet",
+      "view_profile": "View Profile",
+      "send_message": "Send Message"
+    },
+    "explore": {
+      "title": "Explore",
+      "filters": "Filters"
+    },
+    "leaderboard": {
+      "views": "Views",
+      "see_all": "See all media >"
+    },
+    "listing": {
+      "type": "Type",
+      "created": "Created ",
+      "favorite_count": "Favorite Count",
+      "download_count": "Download Count",
+      "views": "Views"
+    },
+    "masonry": {
+      "download": "Download",
+      "loading": "Loading...",
+      "no_posts": "No More Posts Found",
+      "hire": "Hire",
+      "view_profile": "View Profile"
+    },
+    "post": {
+      "share": "Share",
+      "download": "Download",
+      "downloads": "Downloads",
+      "views": "Views",
+      "free_to_use": "Free to use under the Falakey License"
+    },
+    "favorite_modal": {
+      "my_favorites": "My Favorites",
+      "no_favorites": "You have no favorites yet."
+    },
+    "message_modal": {
+      "send_message": "Send Message",
+      "message_placeholder": "Type your message here...",
+      "send": "Send",
+      "loading": "Loading...",
+      "no_messages": "No messages yet."
+    },
+    "notification_modal": {
+      "notifications": "Notifications",
+      "messages": "Messages",
+      "no_notifications": "No notifications yet.",
+      "no_messages": "No messages yet."
+    },
+    "upload_modal": {
+      "upload_image": "Upload Image",
+      "image_placeholder": "Drag and drop an image here or click to select",
+      "image_requirements": "Image Requirements",
+      "image_requirements_description": "Images must be at least 1000px wide and in JPG, PNG, or WEBP format.",
+      "title": "Submit to Falakey",
+      "submit": "Submit",
+      "cancel": "Cancel ",
+      "loading": "Loading...",
+      "max_items": "Max items reached",
+      "add_up_to": "Add up to",
+      "more_items": "more items",
+      "drag_and_drop": "Drag and drop your images here or click to select",
+      "img_clear": "Images are clear & original",
+      "zero_tolerance": "Zero tolerance for nudity, violence or hate",
+      "read_terms": "Read the Falakey Terms",
+      "you_own": "Only upload images you own the rights to",
+      "respect_others": "Respect the intellectual property of others",
+      "success": "Post Uploaded Successfully!"
+    },
+    "account_details": {
+      "title": "Account Details",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "display_name": "Display Name",
+      "display_name_description": "This will be how your name will be displayed in the account section and in reviews",
+      "email": "Email Address",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "pinterest": "Pinterest",
+      "linkedin": "LinkedIn",
+      "available_for_hire": "Available for Hire? (optional)",
+      "password_change": "Password Change",
+      "current_password": "Current Password (leave blank to keep current password)",
+      "new_password": "New Password (leave blank to keep current password)",
+      "confirm_new_password": "Confirm New Password (leave blank to keep current password)",
+      "avatar": "Avatar Image",
+      "upload_avatar": "Upload Avatar",
+      "max_size": "Maximum upload file size: 1,024 MB",
+      "biography": "Biographical info",
+      "loading": "Loading...",
+      "save_changes": "Save Changes"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "view_profile": "View Public Profile",
+      "views": "Views Today",
+      "total_downloads": "Total Downloads",
+      "total_favorites": "Total Favorites",
+      "listings": "Listings",
+      "listings_description": "Manage all your listings and track important information",
+      "messages": "Messages",
+      "messages_description": "View and manage your messages with other users",
+      "notifications": "Notifications",
+      "notifications_description": "Stay updated with all the important notifications"
+    },
+    "download": {
+      "title": "Download History",
+      "loading": "Loading..."
+    },
+    "listing_dashboard": {
+      "listings": "Listings",
+      "all_types": "All Listing Types",
+      "photo": "photo",
+      "video": "video",
+      "all_status": "All Listing Statuses",
+      "active": "Active",
+      "draft": "Draft",
+      "pending": "Pending Review",
+      "filter": "Filter"
+    },
+    "messages_dashboard": {
+      "title": "Messages"
+    },
+    "google": {
+      "success_title": "Authentication Successfully!",
+      "success_text": "You are logged in successfully",
+      "error_title": "Authentication Not Wroking!",
+      "error_text": "There might be an error! Please try with email password login and not gmail",
+      "ok": "OK"
+    },
+    "footer": {
+      "about_us": "About Us",
+      "content_license": "Content License",
+      "copy_right": "Copyright © Falakey 2024."
+    }
+  },
+  "ar": {
+    "common": {
+      "search": "بحث",
+      "optional": "اختياري",
+      "close": "إغلاق",
+      "loading": "جارٍ التحميل...",
+      "available_hire": "متاح للتوظيف",
+      "copyright": "حقوق النشر © فلكي 2024."
+    },
+    "navbar": {
+      "select_language": "اختر اللغة",
+      "explore": "استكشاف",
+      "challenges": "تحديات",
+      "search_photo": "ابحث عن الصور..",
+      "image_submit": "إرسال صورة",
+      "collections": "مجموعات"
+    },
+    "sidebar": {
+      "dashboard": "لوحة القيادة",
+      "image_submit": "إرسال صورة",
+
+      "listings": "القائمة",
+      "downloads": "التنزيلات",
+      "messages": "الرسائل",
+      "notifications": "الإشعارات",
+      "account_details": "تفاصيل الحساب",
+      "logout": "تسجيل الخروج",
+      "favorites": "المفضلة"
+    },
+    "home": {
+      "banner_slogan": "اكتشف. قم بالتنزيل. أنشئ بحرية.",
+      "photo_by": "صورة بواسطة"
+    },
+    "stars": {
+      "falakey_stars": "نجوم فلكي",
+      "views": "مشاهدة",
+      "recent": "حديث",
+      "all_time": "كل الوقت",
+      "loading": "جارٍ تحميل النجوم 🤩...",
+      "no_stars": "لا توجد بيانات أخرى",
+      "top_stars_text": "الأعضاء الذين لديهم أكبر عدد من المشاهدات على المحتوى المضاف في الشهر الماضي.",
+      "recent_stars_text": "الأعضاء الذين لديهم أكبر عدد من مشاهدات المحتوى على مر الزمن."
+    },
+    "challenge": {
+      "title": "استكشف التحديات!",
+      "description": "أطلق العنان لإبداعك من خلال تحديات الصور والفيديو التي تدفع حدودك، وتحفّز شغفك، وتُظهر موهبتك أمام العالم. قد تفوز أعمالك الرائعة بجوائز رائعة!",
+      "join_challenge": "انضم إلى التحدي",
+      "learn_more": "اعرف المزيد",
+      "sponsored_by": "برعاية",
+      "sponsers": "الرعاة",
+      "days_left": " أيام متبقية",
+      "ended": "انتهى",
+      "all_submissions": "جميع المشاركات",
+      "about": "عن هذا التحدي",
+      "no_description": "لا يوجد وصف متاح",
+      "read_more": "اقرأ المزيد",
+      "read_less": "اقرأ أقل",
+      "submissions": "مشاركات التحدي",
+      "key_information": "معلومات مهمة",
+      "deadline": "آخر موعد للمشاركة",
+      "terms_and_conditions": "الشروط والأحكام",
+      "joined": "انضم إلى التحدي",
+      "winners": "الفائزون",
+      "prizes": "الجوائز",
+      "top_prizes": "عرض الجواهر المميزة فقط",
+      "all_prizes": "عرض الجميع",
+      "loading": "جارٍ التحميل...",
+      "past_challenges": "التحديات السابقة"
+    },
+    "account_types": {
+      "lets_get_started": "مرحبًا! لنبدأ معك.",
+      "upload_photos": "قم برفع الصور أو البيع في السوق",
+      "upload_photos_description": "انضم إلى شبكة تضم أكثر من 8 ملايين مبدع حول العالم. احصل على فرص تصوير ووزّع أعمالك.",
+      "buy_images": "اشترِ الصور أو احجز جلسات تصوير",
+      "buy_images_description": "أنشئ حسابًا تجاريًا لترخيص الصور الخالية من الحقوق وحجز جلسات التصوير حول العالم."
+    },
+    "authentication": {
+      "login": "تسجيل الدخول",
+      "register": "إنشاء حساب",
+      "password_reset_success_title": "تم إعادة تعيين كلمة المرور بنجاح!",
+      "password_reset_success_text": "قم بتسجيل الدخول باستخدام كلمة المرور الجديدة",
+      "welcome_back": "مرحبًا بعودتك.",
+      "continue_with_google": "المتابعة باستخدام جوجل",
+      "loading_google_url": "جارٍ تحميل رابط جوجل...",
+      "or": "أو",
+      "username_or_email": "اسم المستخدم أو البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "lost_password": "هل نسيت كلمة المرور؟",
+      "create_your_account": "أنشئ حسابك.",
+      "username": "اسم المستخدم",
+      "email": "البريد الإلكتروني",
+      "first_name": "الاسم الأول",
+      "last_name": "اسم العائلة",
+      "confirm_password": "تأكيد كلمة المرور",
+      "terms_agreement": "أوافق على الشروط والأحكام"
+    },
+    "forget_password": {
+      "title": "طلب إعادة تعيين كلمة المرور.",
+      "description": "يرجى إدخال عنوان بريدك الإلكتروني. ستتلقى رابطًا لإنشاء كلمة مرور جديدة عبر البريد الإلكتروني.",
+      "email_placeholder": "البريد الإلكتروني",
+      "password_placeholder": "كلمة المرور",
+      "confirm_password_placeholder": "تأكيد كلمة المرور",
+      "otp_placeholder": "رمز التحقق",
+      "reset_password_button": "إعادة تعيين كلمة المرور",
+      "submit_otp_button": "إرسال الرمز",
+      "loading": "جارٍ التحميل..."
+    },
+    "uploaded_data": {
+      "add_location": "إضافة الموقع",
+      "title_placeholder": "العنوان",
+      "tags_placeholder": "اختر الوسوم",
+      "collection_placeholder": "اختر المجموعة",
+      "description_placeholder": "أضف وصفًا"
+    },
+    "author": {
+      "anonymous": "مجهول",
+      "hire_button": "توظيف",
+      "follow": "متابعة",
+      "unfollow": "إلغاء المتابعة",
+      "default": "افتراضي",
+      "profile_tag": "الملف الشخصي لـ",
+      "connect": "تواصل مع ",
+      "followers": "المتابعون",
+      "following": "المتابَعون",
+      "no_followers": "لا يوجد متابعون بعد",
+      "no_followings": "لا يوجد متابَعون بعد",
+      "view_profile": "عرض الملف الشخصي",
+      "send_message": "إرسال رسالة"
+    },
+    "explore": {
+      "title": "استكشاف",
+      "filters": "الفلاتر"
+    },
+    "leaderboard": {
+      "views": "مشاهدات",
+      "see_all": "عرض كل الوسائط >"
+    },
+    "listing": {
+      "type": "النوع",
+      "created": "تم الإنشاء",
+      "favorite_count": "عدد الإعجابات",
+      "download_count": "عدد التنزيلات",
+      "views": "المشاهدات"
+    },
+    "masonry": {
+      "download": "تنزيل",
+      "loading": "جارٍ التحميل...",
+      "no_posts": "لا توجد مشاركات أخرى",
+      "hire": "توظيف",
+      "view_profile": "عرض الملف الشخصي"
+    },
+    "post": {
+      "share": "مشاركة",
+      "download": "تنزيل",
+      "downloads": "التنزيلات",
+      "views": "المشاهدات",
+      "free_to_use": "مجاني الاستخدام بموجب ترخيص فلكي"
+    },
+    "favorite_modal": {
+      "my_favorites": "مفضلتي",
+      "no_favorites": "لا توجد عناصر مفضلة بعد."
+    },
+    "message_modal": {
+      "send_message": "إرسال رسالة",
+      "message_placeholder": "اكتب رسالتك هنا...",
+      "send": "إرسال",
+      "loading": "جارٍ التحميل...",
+      "no_messages": "لا توجد رسائل بعد."
+    },
+    "notification_modal": {
+      "notifications": "الإشعارات",
+      "messages": "الرسائل",
+      "no_notifications": "لا توجد إشعارات بعد.",
+      "no_messages": "لا توجد رسائل بعد."
+    },
+    "upload_modal": {
+      "upload_image": "رفع صورة",
+      "image_placeholder": "اسحب وأفلت صورة هنا أو انقر لتحديد",
+      "image_requirements": "متطلبات الصورة",
+      "image_requirements_description": "يجب أن تكون الصور بعرض 1000 بكسل على الأقل وبتنسيق JPG أو PNG أو WEBP.",
+      "title": "إرسال إلى فلكي",
+      "submit": "إرسال",
+      "cancel": "إلغاء",
+      "loading": "جارٍ التحميل...",
+      "max_items": "تم الوصول إلى الحد الأقصى للعناصر",
+      "add_up_to": "أضف حتى",
+      "more_items": "عناصر إضافية",
+      "drag_and_drop": "اسحب وأفلت الصور هنا أو انقر لتحديدها",
+      "img_clear": "الصور واضحة وأصلية",
+      "zero_tolerance": "صفر تسامح مع التعري أو العنف أو الكراهية",
+      "read_terms": "اقرأ شروط فلكي",
+      "you_own": "ارفع فقط الصور التي تملك حقوقها",
+      "respect_others": "احترم الملكية الفكرية للآخرين",
+      "success": "تم رفع المشاركة بنجاح!"
+    },
+    "account_details": {
+      "title": "تفاصيل الحساب",
+      "first_name": "الاسم الأول",
+      "last_name": "اسم العائلة",
+      "display_name": "اسم العرض",
+      "display_name_description": "هذا هو الطريقة التي سيُعرض بها اسمك في قسم الحساب والمراجعات",
+      "email": "عنوان البريد الإلكتروني",
+      "instagram": "إنستغرام",
+      "facebook": "فيسبوك",
+      "pinterest": "بينتيريست",
+      "linkedin": "لينكد إن",
+      "available_for_hire": "متاح للتوظيف؟ (اختياري)",
+      "password_change": "تغيير كلمة المرور",
+      "current_password": "كلمة المرور الحالية (اتركها فارغة للحفاظ عليها)",
+      "new_password": "كلمة المرور الجديدة (اتركها فارغة للحفاظ عليها)",
+      "confirm_new_password": "تأكيد كلمة المرور الجديدة (اتركها فارغة للحفاظ عليها)",
+      "avatar": "صورة الملف الشخصي",
+      "upload_avatar": "رفع صورة الملف",
+      "max_size": "الحجم الأقصى للملف: 1024 ميجا بايت",
+      "biography": "معلومات سيرة ذاتية",
+      "loading": "جارٍ التحميل...",
+      "save_changes": "حفظ التغييرات"
+    },
+    "dashboard": {
+      "title": "لوحة القيادة",
+      "view_profile": "عرض الملف العام",
+      "views": "مشاهدات اليوم",
+      "total_downloads": "إجمالي التنزيلات",
+      "total_favorites": "إجمالي الإعجابات",
+      "listings": "القائمة",
+      "listings_description": "إدارة جميع قوائمك وتتبع المعلومات المهمة",
+      "messages": "الرسائل",
+      "messages_description": "عرض وإدارة الرسائل مع المستخدمين الآخرين",
+      "notifications": "الإشعارات",
+      "notifications_description": "ابقَ على اطلاع دائم بجميع الإشعارات المهمة"
+    },
+    "download": {
+      "title": "سجل التنزيلات",
+      "loading": "جارٍ التحميل..."
+    },
+    "listing_dashboard": {
+      "listings": "القائمة",
+      "all_types": "جميع أنواع القائمة",
+      "photo": "صورة",
+      "video": "فيديو",
+      "all_status": "جميع حالات القائمة",
+      "active": "نشط",
+      "draft": "مسودة",
+      "pending": "قيد المراجعة",
+      "filter": "تصفية"
+    },
+    "messages_dashboard": {
+      "title": "الرسائل"
+    },
+    "google": {
+      "success_title": "تم التحقق بنجاح!",
+      "success_text": "تم تسجيل الدخول بنجاح",
+      "error_title": "فشل التحقق!",
+      "error_text": "حدث خطأ ما! يرجى المحاولة باستخدام البريد الإلكتروني وكلمة المرور بدلاً من جوجل",
+      "ok": "حسنا"
+    },
+    "footer": {
+      "about_us": "من نحن",
+      "content_license": "ترخيص المحتوى",
+      "copy_right": "حقوق النشر © فلكي 2024."
+    }
+  }
+}
