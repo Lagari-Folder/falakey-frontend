@@ -17,6 +17,7 @@ export interface UploadParam {
     lat?: string;
   };
   title?: string;
+  isLocked?: string;
   tags?: Tag[];
   collections?: Collection[];
   description?: string;

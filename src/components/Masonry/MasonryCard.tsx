@@ -57,8 +57,7 @@ const MasonryCard = React.memo(
     };
 
     const { t } = useTrans();
-      const { local } = useSelector((state: RootState) => state.translation);
-
+    const { local } = useSelector((state: RootState) => state.translation);
 
     return (
       <>
@@ -84,7 +83,10 @@ const MasonryCard = React.memo(
                   e.preventDefault();
 
                   if (e.ctrlKey || e.metaKey) {
-                    window.open(`/${local}/author/${data.author?.username}`, "_blank");
+                    window.open(
+                      `/${local}/author/${data.author?.username}`,
+                      "_blank"
+                    );
                   } else {
                     navigate("/author/" + data.author?.username);
                   }
@@ -267,30 +269,32 @@ const MasonryCard = React.memo(
                 </motion.div>
                 {data.favorites_count}
               </div>
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  // const isMobile = /Mobi|Android|iPhone|iPad/i.test(
-                  //   navigator.userAgent
-                  // );
+              {data.is_locked ? null : (
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    // const isMobile = /Mobi|Android|iPhone|iPad/i.test(
+                    //   navigator.userAgent
+                    // );
 
-                  // if (isMobile) {
-                  //   window.open(`/listing/${data.slug}`, "_self");
-                  // } else
-                  if (e.ctrlKey || e.metaKey) {
-                    window.open(`/listing/${data.slug}`, "_blank");
-                  } else {
-                    handleClick();
-                  }
-                }}
-                className="lg:h-[50px] md:h-[45px] h-[40px] max-w-[80px] w-full flex cursor-pointer px-2 gap-2 justify-between shadow-md rounded-md  items-center my-2 bg-gray-50 border-gray-200 border text-gray-500 "
-              >
-                <div className="text-center lg:text-lg md:text-md text-sm  ">
-                  {t("masonry.download")}
+                    // if (isMobile) {
+                    //   window.open(`/listing/${data.slug}`, "_self");
+                    // } else
+                    if (e.ctrlKey || e.metaKey) {
+                      window.open(`/listing/${data.slug}`, "_blank");
+                    } else {
+                      handleClick();
+                    }
+                  }}
+                  className="lg:h-[50px] md:h-[45px] h-[40px] max-w-[80px] w-full flex cursor-pointer px-2 gap-2 justify-between shadow-md rounded-md  items-center my-2 bg-gray-50 border-gray-200 border text-gray-500 "
+                >
+                  <div className="text-center lg:text-lg md:text-md text-sm  ">
+                    {t("masonry.download")}
+                  </div>
+                  <FontAwesomeIcon icon={faArrowDown} />
                 </div>
-                <FontAwesomeIcon icon={faArrowDown} />
-              </div>
+              )}
             </div>
             <a
               href={`/listing/${data.slug}`}
@@ -430,9 +434,11 @@ const MasonryCard = React.memo(
                       </div>
                     </a>
                   )}
-                  <div className="rounded-full bg-black/60 text-white size-[35px] flex justify-center items-center">
-                    <FontAwesomeIcon icon={faArrowDown} />
-                  </div>
+                  {data.is_locked ? null : (
+                    <div className="rounded-full bg-black/60 text-white size-[35px] flex justify-center items-center">
+                      <FontAwesomeIcon icon={faArrowDown} />
+                    </div>
+                  )}
                 </div>
               </div>
             </a>

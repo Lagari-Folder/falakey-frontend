@@ -28,6 +28,7 @@ export interface Post {
   preview_links?: Media;
   aspect_ratio?: number;
   is_favorite?: boolean;
+  is_locked?: boolean;
   favorites_count: number;
   created_at?: string;
   status?: { key: string; color: string };

@@ -54,6 +54,8 @@ export const useUploadHook = () => {
           },
         }
       );
+      
+      
 
       if (response.data["success"]) {
         setData((prevData) => ({ ...prevData, tags: response.data["data"] }));
@@ -123,6 +125,7 @@ export const useUploadHook = () => {
           formData.append(`items[${index}][${filter.key}]`, filter?.value);
         });
         formData.append(`items[${index}][title]`, element.title ?? "");
+        formData.append(`items[${index}][is_locked]`, element.isLocked ?? 'false');
         formData.append(
           `items[${index}][location]`,
           element.location ? element.location.name ?? "" : ""

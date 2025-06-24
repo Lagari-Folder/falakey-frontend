@@ -1,6 +1,8 @@
 import {
   faClose,
   faLocationDot,
+  faLock,
+  faLockOpen,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +21,7 @@ import { useTrans } from "@/utils/translation";
 const UploadedData = ({
   data: uploadedData,
   handleRemove,
+  handleLock,
   handleLocationChange,
   handleTitleChange,
   handleTagsChanges,
@@ -27,6 +30,7 @@ const UploadedData = ({
 }: {
   data: UploadParam;
   handleRemove: (id: number) => void;
+  handleLock: (id: number, locked: boolean) => void;
   handleLocationChange: (
     id: number,
     location: {
@@ -51,6 +55,7 @@ const UploadedData = ({
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationSelected, setLocationSelected] = useState(true);
   const [locationSelectedName, setLocationSelectedName] = useState("");
+  const [isLocked, setIsLocked] = useState(false);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -73,7 +78,16 @@ const UploadedData = ({
     <div className="w-[500px] min-h-[520px]">
       <div className="relative h-[570px] w-full">
         <div className="absolute right-0 left-0 top-0 bottom-0 hover:opacity-100 opacity-0 transition-opacity ease-in duration-200 z-20">
-          <div className="w-full flex justify-end text-white">
+          <div className="w-full flex justify-between text-white">
+            <div
+              className="rounded-full size-[30px] m-3 bg-black/80 flex justify-center items-center cursor-pointer"
+              onClick={() => {
+                setIsLocked(!isLocked);
+                handleLock(uploadedData.id, !isLocked);
+              }}
+            >
+              <FontAwesomeIcon icon={isLocked ? faLock : faLockOpen} />
+            </div>
             <div
               className="rounded-full size-[30px] m-3 bg-black/80 flex justify-center items-center cursor-pointer"
               onClick={() => handleRemove(uploadedData.id)}

@@ -249,6 +249,13 @@ const UploadModal = ({
     handleImageToUploadData(selectedFiles);
   };
 
+  const handleLockChange = (id: number, locked: boolean) => {
+    setUploadData((prevData) =>
+      prevData.map((data) =>
+        data.id === id ? { ...data, isLocked: locked ? "true" : "false" } : data
+      )
+    );
+  };
   const handleTitleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     id: number
@@ -412,6 +419,7 @@ const UploadModal = ({
                     }
                     handleTitleChange={(e, id) => handleTitleChange(e, id)}
                     handleRemove={(id) => handleRemove(id)}
+                    handleLock={(id, locked) => handleLockChange(id, locked)}
                   />
                 ))}
               </div>

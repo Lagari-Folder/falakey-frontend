@@ -17,6 +17,7 @@ const PictureDetailHeader = ({
   favoriteCount,
   isFavorite,
   toggleFavorite,
+  isLocked,
 }: {
   author?: Author;
   slug: string;
@@ -28,6 +29,7 @@ const PictureDetailHeader = ({
   }[];
   favoriteCount: number;
   isFavorite: boolean;
+  isLocked: boolean;
   toggleFavorite: (e: any) => void;
 }) => {
   const [favoriteHeart, setFavoriteHeart] = useState(isFavorite);
@@ -131,46 +133,48 @@ const PictureDetailHeader = ({
             <span className="text-black">{favoriteCount}</span>
           </button>
         </div>
-        <div className="relative">
-          <button
-            onClick={() => {
-              setshowShare(false);
-              setShowDownload(!showDownload);
-            }}
-            className="px-4 py-2 gap-2 flex bg-[#b17ece] text-white rounded-md items-center justify-center"
-          >
-            <p>{t("post.download")}</p>
-            <span className="flex items-center justify-center">
-              <DownloadingIcon fontSize="small" />
-            </span>
-          </button>
+        {isLocked ? null : (
+          <div className="relative">
+            <button
+              onClick={() => {
+                setshowShare(false);
+                setShowDownload(!showDownload);
+              }}
+              className="px-4 py-2 gap-2 flex bg-[#b17ece] text-white rounded-md items-center justify-center"
+            >
+              <p>{t("post.download")}</p>
+              <span className="flex items-center justify-center">
+                <DownloadingIcon fontSize="small" />
+              </span>
+            </button>
 
-          {showDownload && (
-            <div className="absolute top-full mt-2 right-0 bg-[#eee] rounded-lg shadow-lg w-72 z-10">
-              <ul className="text-[#000]  py-5">
-                {downloads?.map((download, index) => (
-                  <li key={index}>
-                    <a
-                      className="text-[16px] w-full flex items-baseline gap-4 px-8 py-2 text-left font-bold text-[#000] rounded-md hover:text-[#44175b]  transition-colors"
-                      href={download.link}
-                      target="_self"
-                    >
-                      <div className="flex items-center gap-1">
-                        <div>{download.label}</div>
-                        <span className="text-[11px]">
-                          ({download.extension})
+            {showDownload && (
+              <div className="absolute top-full mt-2 right-0 bg-[#eee] rounded-lg shadow-lg w-72 z-10">
+                <ul className="text-[#000]  py-5">
+                  {downloads?.map((download, index) => (
+                    <li key={index}>
+                      <a
+                        className="text-[16px] w-full flex items-baseline gap-4 px-8 py-2 text-left font-bold text-[#000] rounded-md hover:text-[#44175b]  transition-colors"
+                        href={download.link}
+                        target="_self"
+                      >
+                        <div className="flex items-center gap-1">
+                          <div>{download.label}</div>
+                          <span className="text-[11px]">
+                            ({download.extension})
+                          </span>
+                        </div>
+                        <span className="text-[13px] font-normal">
+                          {download.dimensions}
                         </span>
-                      </div>
-                      <span className="text-[13px] font-normal">
-                        {download.dimensions}
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

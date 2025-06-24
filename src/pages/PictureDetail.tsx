@@ -103,6 +103,7 @@ const PictureDetail = () => {
               downloads={postDetail?.download_data ?? []}
               favoriteCount={favoriteCount}
               isFavorite={isFavorite}
+              isLocked={postDetail?.is_locked ?? false}
               toggleFavorite={(e: any) => {
                 if (!isLoggedIn) {
                   setOpenAuthModal(true);
