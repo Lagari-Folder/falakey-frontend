@@ -1,10 +1,11 @@
 // src/GoogleCallback.js
 
 import { login } from "@/lib/slices/authSlice";
+import { RootState } from "@/lib/store";
 import { useTrans } from "@/utils/translation";
 import axios from "axios";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -31,7 +32,6 @@ function GoogleCallback() {
       if (response.data["success"]) {
         Swal.fire({
           title: t("google.success_title"),
-          text: t("google.success_text"),
           icon: "success",
           confirmButtonText: t("google.ok"),
         });
@@ -46,7 +46,6 @@ function GoogleCallback() {
       } else {
         Swal.fire({
           title: t("google.error_title"),
-          text: t("google.error_text"),
           icon: "success",
           confirmButtonText: t("google.ok"),
         });
@@ -54,7 +53,9 @@ function GoogleCallback() {
     });
   useEffect(() => {}, []);
 
-  return <Navigate to="/" />;
+  const { local } = useSelector((state: RootState) => state.translation);
+
+  return <Navigate to={`/${local}/`} />;
 }
 
 export default GoogleCallback;

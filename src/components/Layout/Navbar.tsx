@@ -154,7 +154,7 @@ const Navbar = () => {
               if (e.key === "Enter" && searchValue.trim() !== "") {
                 handleSearchEvent();
                 navigate(
-                  `/${local}/explore?types=${
+                  `/explore?types=${
                     previousearchData.types ?? "photo"
                   }&search=${encodeURIComponent(
                     searchValue !== ""

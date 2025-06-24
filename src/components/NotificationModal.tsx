@@ -43,9 +43,9 @@ const NotificationModal = ({
   return (
     <div
       ref={modalRef}
-      className="absolute top-full z-30 mt-2 bg-[#ffffff] end-0 rounded-lg shadow-lg w-96   text-black !text-md font-semibold"
+      className="absolute top-full z-50 mt-2 bg-[#ffffff] end-0 rounded-lg shadow-lg w-96   text-black !text-md font-semibold"
     >
-      <div className="   rounded-t-lg">
+      <div className="rounded-t-lg">
         <Tabs
           sx={{
             "& .MuiTabs-flexContainer": {
