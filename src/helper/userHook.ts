@@ -17,7 +17,7 @@ export const useUserHook = () => {
 
     try {
       const response = await axios.get(
-        import.meta.env.VITE_BASE_URL + `users/profile/private?locale=${local}`,
+        import.meta.env.VITE_BASE_URL + "users/profile/private?locale=${local}",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -120,9 +120,8 @@ export const getNotifications = async (token: string) => {
         },
       }
     );
-    console.log(response.data);
     if (response.data["success"]) {
-      return [true, response.data];
+      return [true, response.data["data"]];
     }
     return [];
   } catch (error) {

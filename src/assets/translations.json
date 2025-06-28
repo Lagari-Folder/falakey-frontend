@@ -6,9 +6,7 @@
       "close": "Close",
       "loading": "Loading...",
       "available_hire": "Available for Hire",
-      "copyright": "Copyright © Falakey 2024.",
-      "error": "Error!",
-      "error_text": "An unexpected error occurred."
+      "copyright": "Copyright © Falakey 2024."
     },
     "navbar": {
       "select_language": "Select Language",
@@ -158,8 +156,7 @@
       "download": "Download",
       "downloads": "Downloads",
       "views": "Views",
-      "free_to_use": "Free to use under the Falakey License",
-      "premium": "Premium"
+      "free_to_use": "Free to use under the Falakey License"
     },
     "favorite_modal": {
       "my_favorites": "My Favorites",
@@ -232,9 +229,7 @@
       "messages": "Messages",
       "messages_description": "View and manage your messages with other users",
       "notifications": "Notifications",
-      "notifications_description": "Stay updated with all the important notifications",
-      "credits": "Credits",
-      "view_plans": "View Plans"
+      "notifications_description": "Stay updated with all the important notifications"
     },
     "download": {
       "title": "Download History",
@@ -264,7 +259,7 @@
     "footer": {
       "about_us": "About Us",
       "content_license": "Content License",
-      "copy_right": "Copyright © Falakey"
+      "copy_right": "Copyright © Falakey 2024."
     }
   },
   "ar": {
@@ -274,9 +269,7 @@
       "close": "إغلاق",
       "loading": "جارٍ التحميل...",
       "available_hire": "متاح للتوظيف",
-      "copyright": "حقوق النشر © فلكي 2024.",
-      "error": "خطأ!",
-      "error_text": "حدث خطأ غير متوقع."
+      "copyright": "حقوق النشر © فلكي 2024."
     },
     "navbar": {
       "select_language": "اختر اللغة",
@@ -287,7 +280,7 @@
       "collections": "مجموعات"
     },
     "sidebar": {
-      "dashboard": "لوحة التحكم",
+      "dashboard": "لوحة القيادة",
       "image_submit": "إرسال صورة",
 
       "listings": "القائمة",
@@ -425,8 +418,7 @@
       "download": "تنزيل",
       "downloads": "التنزيلات",
       "views": "المشاهدات",
-      "free_to_use": "مجاني الاستخدام بموجب ترخيص فلكي",
-      "premium": "مميز"
+      "free_to_use": "مجاني الاستخدام بموجب ترخيص فلكي"
     },
     "favorite_modal": {
       "my_favorites": "مفضلتي",
@@ -489,7 +481,7 @@
       "save_changes": "حفظ التغييرات"
     },
     "dashboard": {
-      "title": "لوحة التحكم",
+      "title": "لوحة القيادة",
       "view_profile": "عرض الملف العام",
       "views": "مشاهدات اليوم",
       "total_downloads": "إجمالي التنزيلات",
@@ -499,9 +491,7 @@
       "messages": "الرسائل",
       "messages_description": "عرض وإدارة الرسائل مع المستخدمين الآخرين",
       "notifications": "الإشعارات",
-      "notifications_description": "ابقَ على اطلاع دائم بجميع الإشعارات المهمة",
-      "credits": "النقاط",
-      "view_plans": "عرض الباقات"
+      "notifications_description": "ابقَ على اطلاع دائم بجميع الإشعارات المهمة"
     },
     "download": {
       "title": "سجل التنزيلات",
@@ -531,7 +521,7 @@
     "footer": {
       "about_us": "من نحن",
       "content_license": "ترخيص المحتوى",
-      "copy_right": "حقوق النشر © فلكي"
+      "copy_right": "حقوق النشر © فلكي 2024."
     }
   }
 }

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const Footer = () => {
   const { t } = useTrans();
-  const { local } = useSelector((state: RootState) => state.translation);
+    const { local } = useSelector((state: RootState) => state.translation);
 
   return (
     <div className="bg-white border-t-2 w-full">
@@ -16,9 +16,7 @@ const Footer = () => {
               <a href={`/${local}/license`}>{t("footer.content_license")}</a>
             </div>
           </div>
-          <div>
-            {t("footer.copy_right")} {new Date().getFullYear()}.
-          </div>
+          <div>{t("footer.copy_right")}</div>
         </div>
       </div>
     </div>

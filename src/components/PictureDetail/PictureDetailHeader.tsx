@@ -7,11 +7,9 @@ import unkownProfile from "../../../public/images/unkown-profile.png";
 import AvailableForHire from "../Common/AvailableForHire";
 import { Author } from "@/models/author";
 import { useTrans } from "@/utils/translation";
+
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
-import StarIcon from "@mui/icons-material/Star";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
-
 const PictureDetailHeader = ({
   author,
   slug,
@@ -20,7 +18,6 @@ const PictureDetailHeader = ({
   isFavorite,
   toggleFavorite,
   isLocked,
-  isPremium,
 }: {
   author?: Author;
   slug: string;
@@ -33,7 +30,6 @@ const PictureDetailHeader = ({
   favoriteCount: number;
   isFavorite: boolean;
   isLocked: boolean;
-  isPremium: boolean;
   toggleFavorite: (e: any) => void;
 }) => {
   const [favoriteHeart, setFavoriteHeart] = useState(isFavorite);
@@ -137,45 +133,25 @@ const PictureDetailHeader = ({
             <span className="text-black">{favoriteCount}</span>
           </button>
         </div>
-        {isLocked ? (
-          <button
-            disabled
-            className="sm:h-[45px] h-[30px] aspect-square px-2 gap-2 flex bg-[#b17ece]/50 text-white rounded-md items-center justify-center"
-          >
-            <p className="sm:block hidden">{t("post.download")}</p>
-            <span className="flex items-center justify-center">
-              <FontAwesomeIcon icon={faLock} />
-            </span>
-          </button>
-        ) : isPremium ? (
-          <button
-            onClick={() => {
-              // Handle premium purchase logic
-            }}
-            className="sm:h-[45px] h-[30px] px-2 gap-2 flex bg-yellow-500 text-white rounded-md items-center justify-center"
-          >
-            <StarIcon fontSize="small" />
-            <p className="sm:block hidden">{t("post.premium")}</p>
-          </button>
-        ) : (
+        {isLocked ? null : (
           <div className="relative">
             <button
               onClick={() => {
                 setshowShare(false);
                 setShowDownload(!showDownload);
               }}
-              className="sm:h-[45px] h-[30px] aspect-square px-2 gap-2 flex bg-[#b17ece] text-white rounded-md items-center justify-center"
+              className="px-4 py-2 gap-2 flex bg-[#b17ece] text-white rounded-md items-center justify-center"
             >
-              <p className="sm:block hidden">{t("post.download")}</p>
+              <p>{t("post.download")}</p>
               <span className="flex items-center justify-center">
                 <DownloadingIcon fontSize="small" />
               </span>
             </button>
 
             {showDownload && (
-              <div className="absolute top-full mt-2 bg-[#eee] rounded-lg shadow-lg w-72 z-10 max-lg:-start-[300%] end-0">
-                <ul className="text-[#000]  pt-5 pb-5">
-                  {downloads.map((download, index) => (
+              <div className="absolute top-full mt-2 right-0 bg-[#eee] rounded-lg shadow-lg w-72 z-10">
+                <ul className="text-[#000]  py-5">
+                  {downloads?.map((download, index) => (
                     <li key={index}>
                       <a
                         className="text-[16px] w-full flex items-baseline gap-4 px-8 py-2 text-left font-bold text-[#000] rounded-md hover:text-[#44175b]  transition-colors"
@@ -188,7 +164,7 @@ const PictureDetailHeader = ({
                             ({download.extension})
                           </span>
                         </div>
-                        <span className="text-[13px]  font-normal" dir="ltr">
+                        <span className="text-[13px] font-normal">
                           {download.dimensions}
                         </span>
                       </a>

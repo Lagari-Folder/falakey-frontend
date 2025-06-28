@@ -22,15 +22,8 @@ const Author = () => {
   const [user, setUser] = useState<User>();
   const dispatch = useDispatch();
   const { token } = useSelector((state: RootState) => state.auth);
-  const previousSearch = useSelector((state: RootState) => state.search);
 
-  dispatch(
-    search({
-      author: username,
-      types: previousSearch.types,
-      placeholder: previousSearch.placeholder,
-    })
-  );
+  dispatch(search({}));
   useEffect(() => {
     if (username) {
       setLoading(true);
@@ -61,7 +54,7 @@ const Author = () => {
             title=""
             classTitle="text-3xl mb-6"
             screenWidth="w-[95%]"
-            stringFiltering={``}
+            stringFiltering={`author=${username}`}
           />
         </div>
       </div>

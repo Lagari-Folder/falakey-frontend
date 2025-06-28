@@ -34,7 +34,7 @@ const LeaderBoardCard = ({ data }: { data: LeaderBoardUser }) => {
             {data.author?.display_name}
           </a>
           <p className="text-md text-gray-600">
-            {data.total_views_display} {t("stars.views")}
+            {data.total_views} {t("stars.views")}
           </p>
 
           {/* <button
@@ -72,7 +72,7 @@ const LeaderBoardCard = ({ data }: { data: LeaderBoardUser }) => {
                   href={`/author/${data.author?.username}`}
                   className="absolute inset-0 cursor-pointer bg-black bg-opacity-60 flex flex-col items-center justify-center text-[40px] text-white rounded-lg"
                 >
-                  <span>+{data.total_posts_display}</span>
+                  <span>+{(data.total_posts ?? 0) - 4}</span>
                   <div className="text-white py-1 px-3 text-[17px] font-noto rounded">
                     {t("leaderboard.see_all")}
                   </div>

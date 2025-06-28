@@ -103,6 +103,7 @@ const PictureDetail = () => {
               downloads={postDetail?.download_data ?? []}
               favoriteCount={favoriteCount}
               isFavorite={isFavorite}
+              isLocked={postDetail?.is_locked ?? false}
               toggleFavorite={(e: any) => {
                 if (!isLoggedIn) {
                   setOpenAuthModal(true);
@@ -110,8 +111,6 @@ const PictureDetail = () => {
                   handleFavorite(e);
                 }
               }}
-              isLocked={postDetail?.is_download_locked ?? false}
-              isPremium={postDetail?.is_premium ?? false}
             />
             {postDetail?.type == "video" ? (
               <video

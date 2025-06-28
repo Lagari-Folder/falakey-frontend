@@ -26,7 +26,7 @@ const NotificationModal = ({
         !modalRef.current.contains(event.target as Node) &&
         openModal
       ) {
-        setTimeout(() => modalHandler(false), 0); // Close modal if clicked outside
+        modalHandler(false); // Close modal if clicked outside
       }
     };
 
@@ -43,7 +43,7 @@ const NotificationModal = ({
   return (
     <div
       ref={modalRef}
-      className="absolute top-full z-50 mt-2 bg-[#ffffff] end-0 rounded-lg shadow-lg w-96 text-black !text-md font-semibold"
+      className="absolute top-full z-50 mt-2 bg-[#ffffff] end-0 rounded-lg shadow-lg w-96   text-black !text-md font-semibold"
     >
       <div className="rounded-t-lg">
         <Tabs
@@ -100,14 +100,13 @@ const NotificationModal = ({
       <div className="min-h-80 max-h-80 overflow-x-auto">
         {selectedType == 0 &&
           (notifications.length > 0 ? (
-            notifications.map((notification, index) => (
+            notifications.map((notification) => (
               <div
-                key={index}
                 className={`${
                   notification.is_read
-                    ? "border-s-gray-400"
-                    : "border-s-blue-400"
-                }  border-s-4 mx-1 my-2 p-3`}
+                    ? "border-l-gray-400"
+                    : "border-l-blue-400"
+                }  border-l-4 mx-1 my-2 p-3`}
               >
                 <div className="font-semibold">{notification.title}</div>
                 <div className="font-normal text-sm line-clamp-1 text-ellipsis">
@@ -122,14 +121,13 @@ const NotificationModal = ({
           ))}
         {selectedType == 1 &&
           (chats.length > 0 ? (
-            chats.map((chat, index) => (
+            chats.map((chat) => (
               <div
-                key={index}
                 className={`${
                   chat.last_message.is_read
-                    ? "border-s-gray-400"
-                    : "border-s-blue-400"
-                }  border-s-4 mx-1 my-2 p-3`}
+                    ? "border-l-gray-400"
+                    : "border-l-blue-400"
+                }  border-l-4 mx-1 my-2 p-3`}
               >
                 <div className="font-semibold">{chat.peer.display_name}</div>
                 <div className="font-normal text-sm line-clamp-1 text-ellipsis">

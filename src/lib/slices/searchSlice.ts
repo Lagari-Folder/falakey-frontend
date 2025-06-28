@@ -15,7 +15,6 @@ const getInitialStateFromURL = () => {
     },
     sort: params.get("sort") || null,
     collection: params.get("collection") || null,
-    author: params.get("author") || null,
   };
 };
 
@@ -30,7 +29,6 @@ const searchSlice = createSlice({
       state.filter = action.payload.filter;
       state.sort = action.payload.sort;
       state.collection = action.payload.collection;
-      state.author = action.payload.author;
     },
     clear: (state) => {
       state.types = "photo";
@@ -39,7 +37,6 @@ const searchSlice = createSlice({
       state.filter = { orientation: null, size: null, color: null };
       state.sort = null;
       state.collection = null;
-      state.author = null;
     },
   },
 });

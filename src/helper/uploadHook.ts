@@ -2,7 +2,6 @@ import { RootState } from "@/lib/store";
 import { Collection } from "@/models/collection";
 import { Tag } from "@/models/tag";
 import { UploadParam } from "@/models/uploadParam";
-import { useTrans } from "@/utils/translation";
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -40,7 +39,6 @@ export const useUploadHook = () => {
   }>({ success: false, message: "", loading: false });
   const { token } = useSelector((state: RootState) => state.auth);
   const { local } = useSelector((state: RootState) => state.translation);
-  const { t } = useTrans();
 
   const getTags = async () => {
     try {
@@ -56,6 +54,8 @@ export const useUploadHook = () => {
           },
         }
       );
+      
+      
 
       if (response.data["success"]) {
         setData((prevData) => ({ ...prevData, tags: response.data["data"] }));
@@ -125,10 +125,7 @@ export const useUploadHook = () => {
           formData.append(`items[${index}][${filter.key}]`, filter?.value);
         });
         formData.append(`items[${index}][title]`, element.title ?? "");
-        formData.append(
-          `items[${index}][is_download_locked]`,
-          element.isLocked ?? "false"
-        );
+        formData.append(`items[${index}][is_locked]`, element.isLocked ?? 'false');
         formData.append(
           `items[${index}][location]`,
           element.location ? element.location.name ?? "" : ""
@@ -171,11 +168,6 @@ export const useUploadHook = () => {
           `items[${index}][width]`,
           element.img?.width?.toString() ?? ""
         );
-        if (element.img?.thumbnail)
-          formData.append(
-            `items[${index}][thumbnail]`,
-            element.img?.thumbnail ?? ""
-          );
       }
 
       const response = await axios.post(
@@ -203,12 +195,21 @@ export const useUploadHook = () => {
         });
       }
     } catch (error) {
-      setSuccessUpload({
-        success: false,
-        message: t("common.error_text"),
-        loading: false,
-      });
-
+      if (axios.isAxiosError(error) && error.response) {
+        // Axios error with a response
+        setSuccessUpload({
+          success: false,
+          message: error.response.data["message"],
+          loading: false,
+        });
+      } else {
+        // Fallback for unexpected errors
+        setSuccessUpload({
+          success: false,
+          message: "An unexpected error occurred.",
+          loading: false,
+        });
+      }
       return error;
     }
   };

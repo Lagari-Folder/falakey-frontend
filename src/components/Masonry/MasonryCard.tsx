@@ -1,5 +1,5 @@
 import { Post } from "@/models/post";
-import { faArrowDown, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import AvailableForHire from "../Common/AvailableForHire";
@@ -13,7 +13,6 @@ import { fireConfettiAtClickPosition } from "@/helper/favoriteConfetti";
 import { FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useNavigateWithLocale } from "@/helper/navigateWithLocale";
-import logo from "../../../public/star-icon.svg";
 
 const MasonryCard = React.memo(
   ({
@@ -41,14 +40,14 @@ const MasonryCard = React.memo(
 
     const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 
-    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const videoRef = useRef<HTMLVideoElement | null>(null); // Fix: Use null instead of undefined
 
     const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
 
     const handleVideoEnter = () => {
       hoverTimeout.current = setTimeout(() => {
         videoRef.current?.play();
-      }, 150);
+      }, 150); // Delay to prevent spam
     };
 
     const handleVideoLeave = () => {
@@ -59,7 +58,6 @@ const MasonryCard = React.memo(
 
     const { t } = useTrans();
     const { local } = useSelector((state: RootState) => state.translation);
-    console.log(data);
 
     return (
       <>
@@ -219,16 +217,27 @@ const MasonryCard = React.memo(
                   }}
                 />
               )}
-              {data.is_premium ? (
-                <div className="absolute flex items-center gap-1.5 top-2 start-2 bg-primary/60 text-white px-2 py-1 rounded-md text-xs font-bold">
-                  <img src={logo} className="size-[15px] object-cover" alt="" />
-                  {t("post.premium")}
-                </div>
-              ) : null}
             </a>
+            {/* {data.location && (
+          <div
+            className="absolute bottom-[60px] cursor-pointer left-2 flex items-center justify-center gap-1 drop-shadow-2xl text-sm text-white xl:hidden z-10"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(
+                `https://www.google.com/maps?q=${data.location_lat!},${
+                  data.location_lng
+                }`,
+                "_blank"
+              );
+            }}
+          >
+            <FontAwesomeIcon icon={faLocationDot} />
+            <div>{data.location}</div>
+          </div>
+        )} */}
             <div className="flex mt-1 justify-between items-center xl:hidden">
               <div
-                className="lg:h-[50px] md:h-[45px] h-[40px]  cursor-pointer w-fit   bg-gray-50 px-2 py-2 border-gray-200 border text-gray-500 rounded-lg shadow-md flex gap-2 justify-start items-center"
+                className="lg:h-[50px] md:h-[45px] h-[40px]  cursor-pointer  bg-gray-50 px-2 py-2 border-gray-200 border text-gray-500 rounded-lg shadow-md flex gap-2 justify-center items-center"
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
@@ -260,18 +269,18 @@ const MasonryCard = React.memo(
                 </motion.div>
                 {data.favorites_count}
               </div>
-              {data.is_download_locked ? (
-                <div className="lg:h-[50px] md:h-[45px] h-[40px] max-w-[80px] w-full flex cursor-pointer px-2 gap-2 justify-between shadow-md rounded-md  items-center my-2 bg-gray-50 border-gray-200 border text-gray-500 ">
-                  <div className="text-center lg:text-lg md:text-md text-sm  ">
-                    {t("masonry.download")}
-                  </div>
-                  <FontAwesomeIcon icon={faLock} />
-                </div>
-              ) : (
+              {data.is_locked ? null : (
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
+                    // const isMobile = /Mobi|Android|iPhone|iPad/i.test(
+                    //   navigator.userAgent
+                    // );
+
+                    // if (isMobile) {
+                    //   window.open(`/listing/${data.slug}`, "_self");
+                    // } else
                     if (e.ctrlKey || e.metaKey) {
                       window.open(`/listing/${data.slug}`, "_blank");
                     } else {
@@ -313,8 +322,25 @@ const MasonryCard = React.memo(
             >
               <div className="flex flex-col justify-between h-full text-white py-3 px-4 z-20">
                 <div className="flex justify-end items-center">
+                  {/* {data.location && (
+                <div
+                  className="flex items-center justify-center gap-1 drop-shadow-2xl text-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(
+                      `https://www.google.com/maps?q=${data.location_lat!},${
+                        data.location_lng
+                      }`,
+                      "_blank"
+                    );
+                  }}
+                >
+                  <FontAwesomeIcon icon={faLocationDot} />
+                  <div>{data.location}</div>
+                </div>
+              )} */}
                   <div
-                    className="flex gap-2 max-h-[40px] justify-start  items-center"
+                    className="flex gap-2 max-h-[40px] max-w-[90px] items-center"
                     onClick={(e) => {
                       e.stopPropagation();
                       e.preventDefault();
@@ -408,11 +434,7 @@ const MasonryCard = React.memo(
                       </div>
                     </a>
                   )}
-                  {data.is_download_locked ? (
-                    <div className="rounded-full bg-black/60 text-white size-[35px] flex justify-center items-center">
-                      <FontAwesomeIcon icon={faLock} />
-                    </div>
-                  ) : (
+                  {data.is_locked ? null : (
                     <div className="rounded-full bg-black/60 text-white size-[35px] flex justify-center items-center">
                       <FontAwesomeIcon icon={faArrowDown} />
                     </div>

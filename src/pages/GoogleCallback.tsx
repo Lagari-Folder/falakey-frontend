@@ -31,7 +31,7 @@ function GoogleCallback() {
     .then((response) => {
       if (response.data["success"]) {
         Swal.fire({
-          title: t("google.success_text"),
+          title: t("google.success_title"),
           icon: "success",
           confirmButtonText: t("google.ok"),
         });
