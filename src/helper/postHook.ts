@@ -292,17 +292,26 @@ export const getFileTemp = async (file: File, token: string) => {
         },
       }
     );
+    console.log(response.data.success);
+
+    if (response.data.success) {
+      return {
+        success: true,
+        message: "File uploaded successfully.",
+        temp_path: response.data?.data?.temp_path || undefined,
+        preview_url: response.data?.data?.preview_url || undefined,
+      };
+    }
+    console.log("HELLO");
 
     return {
-      success: true,
-      message: "File uploaded successfully.",
-      temp_path: response.data?.data?.temp_path || undefined,
-      preview_url: response.data?.data?.preview_url || undefined,
+      success: false,
+      message: response.data.message,
     };
   } catch (error: any) {
     return {
       success: false,
-      message: "",
+      message: error.response.data.message ?? "",
       temp_file_path: "",
     };
   }

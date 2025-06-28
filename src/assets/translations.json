@@ -114,7 +114,8 @@
       "title_placeholder": "Title",
       "tags_placeholder": "Select Tags",
       "collection_placeholder": "Select Collection",
-      "description_placeholder": "Add Description"
+      "description_placeholder": "Add Description",
+      "premium": "Premium"
     },
     "author": {
       "anonymous": "Anonymous",
@@ -381,7 +382,8 @@
       "title_placeholder": "العنوان",
       "tags_placeholder": "اختر الوسوم",
       "collection_placeholder": "اختر المجموعة",
-      "description_placeholder": "أضف وصفًا"
+      "description_placeholder": "أضف وصفًا",
+      "premium": "مميز"
     },
     "author": {
       "anonymous": "مجهول",

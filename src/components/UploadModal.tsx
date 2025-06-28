@@ -162,6 +162,8 @@ const UploadModal = ({
         // Continue with getFileTemp logic...
         getFileTemp(file, token!)
           .then((result) => {
+            console.log(result);
+
             if (result["success"]) {
               setUploadData((prevFiles: UploadParam[]) =>
                 prevFiles.map((uploadFile) =>
@@ -185,7 +187,7 @@ const UploadModal = ({
 
               Swal.fire({
                 title: t("common.error"),
-                text: t("common.error_text"),
+                text: result["message"],
                 icon: "error",
               });
             }
@@ -252,7 +254,14 @@ const UploadModal = ({
   const handleLockChange = (id: number, locked: boolean) => {
     setUploadData((prevData) =>
       prevData.map((data) =>
-        data.id === id ? { ...data, isLocked: locked ? "true" : "false" } : data
+        data.id === id ? { ...data, isLocked: locked ? true : false } : data
+      )
+    );
+  };
+  const handlePremiumChange = (id: number, premium: boolean) => {
+    setUploadData((prevData) =>
+      prevData.map((data) =>
+        data.id === id ? { ...data, isPremium: premium ? true : false } : data
       )
     );
   };
@@ -420,6 +429,9 @@ const UploadModal = ({
                     handleTitleChange={(e, id) => handleTitleChange(e, id)}
                     handleRemove={(id) => handleRemove(id)}
                     handleLock={(id, locked) => handleLockChange(id, locked)}
+                    handlePremiumChange={(id, premium) =>
+                      handlePremiumChange(id, premium)
+                    }
                   />
                 ))}
               </div>
