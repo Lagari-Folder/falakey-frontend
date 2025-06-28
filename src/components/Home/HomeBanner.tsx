@@ -54,7 +54,7 @@ const HomeBanner = ({
             </div>
             <div className="flex justify-end text-start me-4">
               <Link
-                to={`/author/${authorSlug}`}
+                to={`/${local}/author/${authorSlug}`}
                 className="font-semibold rounded-md flex items-center space-x-1 hover:text-blue-500"
               >
                 <span className="text-gray-400/80 sm:text-md  text-[0.7rem]">

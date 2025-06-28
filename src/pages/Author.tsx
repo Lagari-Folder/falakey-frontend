@@ -23,7 +23,12 @@ const Author = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state: RootState) => state.auth);
 
-  dispatch(search({}));
+  dispatch(
+    search({
+      types: "photo",
+      author: username,
+    })
+  );
   useEffect(() => {
     if (username) {
       setLoading(true);
