@@ -59,13 +59,23 @@ const Navbar = () => {
   }, [location]);
 
   useEffect(() => {
-    if (openAuthModal || openUploadModal || showFavoritesModal) {
+    if (
+      openAuthModal ||
+      openUploadModal ||
+      showFavoritesModal ||
+      openNotificationModal
+    ) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
     }
     return () => document.body.classList.remove("overflow-hidden");
-  }, [openAuthModal, openUploadModal, showFavoritesModal]);
+  }, [
+    openAuthModal,
+    openUploadModal,
+    showFavoritesModal,
+    openNotificationModal,
+  ]);
 
   const handleSearchEvent = () => {
     setSearchValue(
@@ -91,12 +101,13 @@ const Navbar = () => {
   useEffect(() => {
     if (isLoggedIn) {
       getNotifications(token ?? "").then((result) => {
+
         if (result[0]) {
-          setNotifications(result[1]["notifications"]["list"]);
-          setChats(result[1]["chats"]["list"]);
+          setNotifications(result[1]["data"]["notifications"]["list"]);
+          setChats(result[1]["data"]["chats"]["list"]);
           setUnread(
-            result[1]["notifications"]["unread_count"] +
-              result[1]["chats"]["unread_count"]
+            result[1]["data"]["notifications"]["unread_count"] +
+              result[1]["data"]["chats"]["unread_count"]
           );
         }
       });
@@ -190,8 +201,8 @@ const Navbar = () => {
               <div
                 className="flex cursor-pointer items-center justify-center text-gray-400 !text-[23px]"
                 onClick={(e) => {
-                  e.preventDefault();
                   e.stopPropagation();
+                  e.preventDefault();
 
                   setOpenNotificationModal((prev) => !prev);
                 }}

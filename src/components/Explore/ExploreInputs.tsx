@@ -71,13 +71,14 @@ const ExploreInputs = () => {
                   : "bg-transparent text-black  hover:bg-gray-300"
               }  rounded-full`}
               onClick={() => {
-                dispatch(
-                  search({
-                    ...searchState,
-                    types: type.key,
-                    placeholder: type.search_placeholder,
-                  })
-                );
+                if (type.count ?? 0 > 0)
+                  dispatch(
+                    search({
+                      ...searchState,
+                      types: type.key,
+                      placeholder: type.search_placeholder,
+                    })
+                  );
               }}
             >
               <div className="sm:text-md text-sm font-semibold">

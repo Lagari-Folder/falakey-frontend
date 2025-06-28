@@ -1,6 +1,7 @@
 import { RootState } from "@/lib/store";
 import { Post } from "@/models/post";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -108,6 +109,7 @@ export const useMasonryPostHook = () => {
         }
       });
     }
+    if (searchState.author) params.append("author", searchState.author);
 
     if (stringFiltering) {
       const filters = new URLSearchParams(stringFiltering);
@@ -117,7 +119,6 @@ export const useMasonryPostHook = () => {
         }
       }
     }
-
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}posts?page=${
@@ -176,6 +177,10 @@ export const useMasonryPostHook = () => {
       }))
     );
   };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return {
     fetchPosts,
@@ -271,12 +276,14 @@ export const toggleFavoritePost = async (
  * Upload temp file
  */
 export const getFileTemp = async (file: File, token: string) => {
+  const local = Cookies.get("locale") || "ar";
+
   try {
     const formData = new FormData();
     formData.append("file", file);
 
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}files/temp-upload`,
+      `${import.meta.env.VITE_BASE_URL}files/temp-upload?locale=${local}`,
       formData,
       {
         headers: {
@@ -293,21 +300,9 @@ export const getFileTemp = async (file: File, token: string) => {
       preview_url: response.data?.data?.preview_url || undefined,
     };
   } catch (error: any) {
-    let errorMessage = "Something went wrong. Please try again.";
-
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 422) {
-        errorMessage =
-          error.response.data?.message ||
-          "Invalid file format or size. Please check your file and try again.";
-      } else {
-        errorMessage = error.response?.data?.message || errorMessage;
-      }
-    }
-
     return {
       success: false,
-      message: errorMessage,
+      message: "",
       temp_file_path: "",
     };
   }

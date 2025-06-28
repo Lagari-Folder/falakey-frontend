@@ -31,6 +31,7 @@ import SEO from "./components/Common/SEO";
 import { useSelector } from "react-redux";
 import { RootState } from "./lib/store";
 import SearchTabs from "./components/SearchTabs";
+import Plans from "./pages/Plans";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
 
         <Route path=":locale/my-account" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
+          <Route path="plans" element={<Plans />} />
           <Route path="listings" element={<ListingsDashboard />} />
           <Route path="messages" element={<MessagesDashboard />} />
           <Route

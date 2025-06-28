@@ -14,10 +14,9 @@ const NotificationsDashboard = () => {
   useEffect(() => {
     getNotifications(token ?? "").then((result) => {
       if (result[0]) {
-        setNotifications(result[1]["general"]);
+        setNotifications(result[1]["data"]["notifications"]["list"]);
       }
     });
-
   }, [token]); // ✅ FIXED: use [token] instead of [notifications] to avoid infinite loop
 
   const { t } = useTrans();

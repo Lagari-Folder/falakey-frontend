@@ -83,7 +83,7 @@ const ChallengeDetails = () => {
         </div>
       ) : (
         <div className="bg-primary w-[100%]">
-          <div className="text-4xl font-bold py-[20px] bg-white z-10 w-full lg:sticky top-0 flex justify-between md:flex-nowrap flex-wrap items-center gap-2 px-8">
+          <div className="text-4xl font-bold py-[20px] bg-white z-50 w-full lg:sticky top-0 flex justify-between md:flex-nowrap flex-wrap items-center gap-2 px-8">
             <div className="flex flex-wrap gap-2">
               <h1 className="text-start">
                 {data?.title}

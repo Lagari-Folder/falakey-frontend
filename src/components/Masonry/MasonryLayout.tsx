@@ -47,6 +47,7 @@ const MasonryLayout = ({
   } = useMasonryPostHook();
 
   const fetchData = async () => {
+
     if (isFetchingRef.current) return;
     isFetchingRef.current = true;
     await fetchPosts(stringFiltering);
@@ -54,6 +55,8 @@ const MasonryLayout = ({
   };
 
   useEffect(() => {
+    console.log("hello");
+
     fetchData();
   }, [stringFiltering]);
 

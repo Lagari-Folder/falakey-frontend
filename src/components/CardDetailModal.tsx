@@ -20,9 +20,10 @@ import AvailableForHire from "./Common/AvailableForHire";
 import AuthenticationModal from "./Authentication/AuthenticationModal";
 import { useTrans } from "@/utils/translation";
 import { fireConfettiAtClickPosition } from "@/helper/favoriteConfetti";
-
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
+import StarIcon from "@mui/icons-material/Star";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 export const CardDetailModal = ({
   slug,
@@ -47,7 +48,7 @@ export const CardDetailModal = ({
   const [showDownload, setShowDownload] = useState(false);
   const [showShare, setshowShare] = useState(false);
   const {
-    data: fetchedPostDetail, // Renamed to avoid conflict
+    data: fetchedPostDetail,
     loading: isLoading,
     error,
   } = useFetchPostDetail(slug);
@@ -67,10 +68,10 @@ export const CardDetailModal = ({
           prevPostDetail && prevPostDetail.id === postDetail!.id
             ? {
                 ...prevPostDetail,
-                is_favorite: !prevPostDetail.is_favorite, // Toggle favorite status
+                is_favorite: !prevPostDetail.is_favorite,
                 favorites_count: prevPostDetail.is_favorite
                   ? prevPostDetail.favorites_count - 1
-                  : prevPostDetail.favorites_count + 1, // Adjust count
+                  : prevPostDetail.favorites_count + 1,
               }
             : prevPostDetail
         );
@@ -84,10 +85,7 @@ export const CardDetailModal = ({
   const Spinner = () => (
     <div className="flex justify-center items-center h-full">
       <div className="flex justify-center items-center">
-        <ImageIcon
-          fontSize="medium"
-          className="text-gray-900 animate-pulse" // Fading animation
-        />
+        <ImageIcon fontSize="medium" className="text-gray-900 animate-pulse" />
       </div>
     </div>
   );
@@ -113,7 +111,7 @@ export const CardDetailModal = ({
           } max-w-[768px]:w-11/12 sm:max-h-[90vh] max-h-[100vh] overflow-y-auto scrollbar-hide`}
           onClick={(e) => {
             e.stopPropagation();
-          }} // Stop propagation on inner div click
+          }}
         >
           {isLoading ? (
             <Spinner />
@@ -228,7 +226,27 @@ export const CardDetailModal = ({
                       {postDetail?.favorites_count}
                     </span>
                   </button>
-                  {postDetail?.is_locked ? null : (
+                  {postDetail?.is_download_locked ? (
+                    <button
+                      disabled
+                      className="sm:h-[45px] h-[30px] aspect-square px-2 gap-2 flex bg-[#b17ece]/50 text-white rounded-md items-center justify-center"
+                    >
+                      <p className="sm:block hidden">{t("post.download")}</p>
+                      <span className="flex items-center justify-center">
+                        <FontAwesomeIcon icon={faLock} />
+                      </span>
+                    </button>
+                  ) : postDetail?.is_premium ? (
+                    <button
+                      onClick={() => {
+                        // Handle premium purchase logic
+                      }}
+                      className="sm:h-[45px] h-[30px] px-2 gap-2 flex bg-yellow-500 text-white rounded-md items-center justify-center"
+                    >
+                      <StarIcon fontSize="small" />
+                      <p className="sm:block hidden">{t("post.premium")}</p>
+                    </button>
+                  ) : (
                     <div className="relative">
                       <button
                         onClick={() => {
@@ -244,7 +262,7 @@ export const CardDetailModal = ({
                       </button>
 
                       {showDownload && (
-                        <div className="absolute top-full mt-2 bg-[#eee] rounded-lg shadow-lg w-72 z-10 right-0 ">
+                        <div className="absolute top-full mt-2 bg-[#eee] rounded-lg shadow-lg w-72 z-10 max-lg:-start-[300%] end-0">
                           <ul className="text-[#000]  pt-5 pb-5">
                             {postDetail?.download_data?.map(
                               (download, index) => (
@@ -260,8 +278,11 @@ export const CardDetailModal = ({
                                         ({download.extension})
                                       </span>
                                     </div>
-                                    <span className="text-[13px] font-normal">
-                                      {download.dimensions}{" "}
+                                    <span
+                                      className="text-[13px]  font-normal"
+                                      dir="ltr"
+                                    >
+                                      {download.dimensions}
                                     </span>
                                   </a>
                                 </li>
@@ -283,7 +304,7 @@ export const CardDetailModal = ({
               </div>
 
               {/* Main content with image */}
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center relative">
                 {postDetail?.type == "video" ? (
                   <video
                     controls
@@ -356,7 +377,9 @@ export const CardDetailModal = ({
                 )}
                 <p className="flex items-center font-semibold gap-1">
                   <GppGoodOutlinedIcon fontSize="small" />
-                  {t("post.free_to_use")}
+                  {postDetail?.is_premium
+                    ? t("post.premium_content")
+                    : t("post.free_to_use")}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2 md:justify-start justify-center my-5 mx-3">

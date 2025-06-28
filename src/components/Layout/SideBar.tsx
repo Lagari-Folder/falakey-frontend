@@ -31,7 +31,9 @@ const SideBar = () => {
           className="w-full "
         >
           <MenuItem value={`/${local}/my-account`}>
-            <NavLink to={`/${local}/my-account`}>{t("siderbar.dashboard")}</NavLink>
+            <NavLink to={`/${local}/my-account`}>
+              {t("siderbar.dashboard")}
+            </NavLink>
           </MenuItem>
           <MenuItem value={`/${local}/my-account/listings`}>
             <NavLink to={`/${local}/my-account/listings`}>
@@ -65,32 +67,32 @@ const SideBar = () => {
       </div>
       <div className="lg:flex hidden fixed left-0 top-[70px] bottom-0 w-[60px] bg-white flex-col items-center justify-start py-6 shadow-md gap-6 z-50">
         <SideBarLink
-          title="Dashboard"
+          title={t("sidebar.dashboard")}
           route={`/${local}/my-account`}
           element={<DashboardIcon className="!text-[20px]" />}
         />
         <SideBarLink
-          title="Listings"
+          title={t("sidebar.listings")}
           route={`/${local}/my-account/listings`}
           element={<LocationOnIcon className="!text-[20px]" />}
         />
         <SideBarLink
-          title="Downloads"
+          title={t("sidebar.downloads")}
           route={`/${local}/my-account/downloads`}
           element={<DownloadIcon className="!text-[20px]" />}
         />
         <SideBarLink
-          title="Messages"
+          title={t("sidebar.messages")}
           route={`/${local}/my-account/messages`}
           element={<MessageIcon className="!text-[20px]" />}
         />
         <SideBarLink
-          title="Notifications"
+          title={t("sidebar.notifications")}
           route={`/${local}/my-account/notification-settings`}
           element={<NotificationsIcon className="!text-[20px]" />}
         />
         <SideBarLink
-          title="Account Details"
+          title={t("sidebar.account_details")}
           route={`/${local}/my-account/account-details`}
           element={<StyleIcon className="!text-[20px]" />}
         />
@@ -108,7 +110,7 @@ const SideBar = () => {
               hoverState ? "left-[60px] " : "left-0 opacity-0"
             } top-0 bottom-0 transition-all duration-300 text-[14px] font-semibold rounded-r-md  px-4 min-w-fit  bg-black  text-white flex items-center justify-center`}
           >
-            {t("siderbar.logout")}
+            {t("sidebar.logout")}
           </div>
         </div>
       </div>

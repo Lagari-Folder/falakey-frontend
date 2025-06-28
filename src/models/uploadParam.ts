@@ -10,6 +10,7 @@ export interface UploadParam {
     width?: number;
     file?: File;
     loading: boolean;
+    thumbnail?: File;
   };
   location?: {
     name?: string;

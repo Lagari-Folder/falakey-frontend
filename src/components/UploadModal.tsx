@@ -184,20 +184,20 @@ const UploadModal = ({
               );
 
               Swal.fire({
-                title: "Error!",
-                text: result["message"] ?? "",
+                title: t("common.error"),
+                text: t("common.error_text"),
                 icon: "error",
               });
             }
           })
-          .catch((e) => {
+          .catch(() => {
             setUploadData((prevFiles: UploadParam[]) =>
               prevFiles.filter((uploadFile) => uploadFile.img!.file !== file)
             );
 
             Swal.fire({
-              title: "Error!",
-              text: e["response"]["data"]["message"] ?? "",
+              title: t("common.error"),
+              text: t("common.error_text"),
               icon: "error",
             });
           })
@@ -320,7 +320,7 @@ const UploadModal = ({
     } else {
       if (successUpload.message)
         Swal.fire({
-          title: "Error!",
+          title: t("common.error"),
           text: successUpload.message ?? "",
           icon: "error",
         });

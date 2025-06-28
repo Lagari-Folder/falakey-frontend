@@ -3,13 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
 import { BarChart } from "@mui/x-charts/BarChart";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { useTrans } from "@/utils/translation";
@@ -17,8 +15,8 @@ import { useTrans } from "@/utils/translation";
 const Dashboard = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTrans();
-    const { local } = useSelector((state: RootState) => state.translation);
-
+  const { local } = useSelector((state: RootState) => state.translation);
+  const navigate = useNavigate();
 
   return (
     <div className="sm:px-8 md:px-12 xl:px-16">
@@ -26,6 +24,8 @@ const Dashboard = () => {
       <h1 className="text-[24px] sm:text-[28px] md:text-[30px] font-semibold font-lexend text-left mb-6">
         {t("dashboard.title")}
       </h1>
+
+      {/* Profile Card */}
       <div className="w-full bg-primary rounded-lg p-8 space-y-6">
         <div className="flex justify-between">
           <div className="aspect-square size-[80px] bg-white rounded-lg overflow-hidden flex items-center justify-center">
@@ -51,6 +51,22 @@ const Dashboard = () => {
           {user?.display_name}
         </div>
       </div>
+
+      {/* Credits Section */}
+      <div className="my-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-300 p-5 rounded-lg">
+        <div className="text-xl font-semibold">
+          {t("dashboard.credits")}:{" "}
+          <span className="text-primary font-bold">{user?.credits ?? 0}</span>
+        </div>
+        <button
+          onClick={() => navigate(`/${local}/my-account/plans`)}
+          className="bg-primary text-white px-5 py-2 rounded-md font-semibold hover:bg-opacity-90"
+        >
+          {t("dashboard.view_plans")}
+        </button>
+      </div>
+
+      {/* Stats Cards */}
       <div className="flex flex-wrap items-center gap-x-4">
         <DasshboardCard
           icon={<RemoveRedEyeIcon />}
@@ -69,6 +85,7 @@ const Dashboard = () => {
         />
       </div>
 
+      {/* Bar Chart */}
       <BarChart
         xAxis={[
           {
@@ -108,17 +125,12 @@ const Dashboard = () => {
             scaleType: "band",
           },
         ]}
-        series={[
-          {
-            data: [
-              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            ],
-          },
-        ]}
+        series={[{ data: new Array(35).fill(0) }]}
         height={300}
         className="border rounded-md"
       />
+
+      {/* Dashboard Links */}
       <div className="flex flex-wrap items-center gap-4">
         <DashboardLink
           icon={<LocationOnIcon />}
@@ -158,12 +170,13 @@ const DasshboardCard = ({
         {icon}
       </div>
       <div>
-        <div className="font-semibold">{title} </div>
+        <div className="font-semibold">{title}</div>
         <div className="font-bold text-xl">{value}</div>
       </div>
     </div>
   );
 };
+
 const DashboardLink = ({
   icon,
   title,

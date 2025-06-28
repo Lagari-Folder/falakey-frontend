@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CardDetailModal from "../CardDetailModal";
 import MasonryLayout from "./MasonryLayout";
 import { useSelector } from "react-redux";
@@ -15,13 +15,15 @@ const MasonryWrapper = ({
   screenWidth?: string;
   classTitle?: string;
   stringFiltering?: string;
-  resetDataRef?: React.RefObject<{ resetData: () => void }>;
 }) => {
   const { width } = useWindowSize();
   const [columnCount, setColumnCount] = useState(3);
   const [modalDataSlug, setModalDataSlug] = useState<string>();
   const searchState = useSelector((state: RootState) => state.search);
 
+  const previousURLRef = useRef<string | null>(null);
+
+  // Manage body scroll when modal is open
   useEffect(() => {
     if (modalDataSlug) {
       document.body.classList.add("overflow-hidden");
@@ -31,37 +33,39 @@ const MasonryWrapper = ({
     return () => document.body.classList.remove("overflow-hidden");
   }, [modalDataSlug]);
 
+  // ✅ Handle click to open modal and save previous route
   const handleCardClick = (slug: string) => {
+    previousURLRef.current = window.location.pathname + window.location.search;
     window.history.pushState({ modalOpen: true }, "", `/listing/${slug}`);
     setModalDataSlug(slug);
   };
 
+  // ✅ Close modal and go back to previous URL
   const closeModal = () => {
-    setModalDataSlug(undefined);
+    if (previousURLRef.current) {
+      window.history.back(); // This will trigger popstate and modal will close in there
+    } else {
+      setModalDataSlug(undefined); // fallback if no history exists
+    }
   };
 
+  // ✅ Listen to back/forward navigation
   useEffect(() => {
-    const handleBackButton = () => {
-      if (modalDataSlug !== undefined) {
-        setModalDataSlug(undefined);
-      }
+    const handlePopState = () => {
+      setModalDataSlug(undefined);
     };
 
-    window.addEventListener("popstate", handleBackButton);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
-    return () => {
-      window.removeEventListener("popstate", handleBackButton);
-    };
-  }, [modalDataSlug]);
-
+  // Handle responsive column layout
   useEffect(() => {
     if (searchState.types == "vector") {
       if (width >= 1000) {
         setColumnCount(4);
       } else if (width >= 850) {
         setColumnCount(3);
-      } else if (width >= 500) {
-        setColumnCount(2);
       } else {
         setColumnCount(2);
       }
@@ -72,8 +76,6 @@ const MasonryWrapper = ({
         setColumnCount(4);
       } else if (width >= 850) {
         setColumnCount(3);
-      } else if (width >= 650) {
-        setColumnCount(2);
       } else {
         setColumnCount(2);
       }

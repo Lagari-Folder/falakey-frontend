@@ -9,7 +9,11 @@ export const useSearchParamsHook = () => {
     const { types, search, filter, sort, collection } = searchState;
     const params: Record<string, string> = {};
 
-    if (types) params.types = types;
+    if (types) {
+      params.types = types;
+    } else {
+      params.types = "photo";
+    }
     if (search) params.search = search;
     if (filter) {
       if (filter.orientation) params.orientation = filter.orientation;

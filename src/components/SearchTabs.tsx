@@ -5,7 +5,7 @@ import { RootState } from "@/lib/store";
 import { Tab, Tabs } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const SearchTabs = ({ onChangeAddons }: { onChangeAddons?: () => void }) => {
   const navigate = useNavigateWithLocale();
@@ -18,6 +18,7 @@ const SearchTabs = ({ onChangeAddons }: { onChangeAddons?: () => void }) => {
   const { local, dir } = useSelector((state: RootState) => state.translation);
 
   useEffect(() => {
+
     if (collection) {
       dispatch(
         search({
@@ -35,6 +36,7 @@ const SearchTabs = ({ onChangeAddons }: { onChangeAddons?: () => void }) => {
 
   return (
     <Tabs
+      dir={dir}
       sx={{
         "& .MuiTabs-flexContainer": {
           display: "flex",
@@ -47,9 +49,7 @@ const SearchTabs = ({ onChangeAddons }: { onChangeAddons?: () => void }) => {
         "& .MuiTabs-indicator": {
           backgroundColor: "#111111",
         },
-        "& .MuiSvgIcon-root": {
-          transform: `${dir === "rtl" ? "rotateY(180deg)" : "none"}`,
-        },
+
         fontFamily: "HelveticaNeue, sans-serif",
       }}
       className="w-full mb-4 items-center border-b-2 border-gray-200 "

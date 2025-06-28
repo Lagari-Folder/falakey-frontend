@@ -15,4 +15,5 @@ export interface User {
   followers_count?: number;
   following_count?: number;
   is_followed?: boolean;
+  credits?: number;
 }
