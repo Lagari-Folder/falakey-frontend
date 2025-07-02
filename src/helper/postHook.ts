@@ -286,11 +286,17 @@ export const getFileTemp = async (file: File, token: string) => {
       }
     );
 
+    if (response.data.success)
+      return {
+        success: true,
+        message: "File uploaded successfully.",
+        temp_path: response.data?.data?.temp_path || undefined,
+        preview_url: response.data?.data?.preview_url || undefined,
+      };
+
     return {
-      success: true,
-      message: "File uploaded successfully.",
-      temp_path: response.data?.data?.temp_path || undefined,
-      preview_url: response.data?.data?.preview_url || undefined,
+      success: false,
+      message: response.data.message,
     };
   } catch (error: any) {
     let errorMessage = "Something went wrong. Please try again.";
@@ -304,7 +310,6 @@ export const getFileTemp = async (file: File, token: string) => {
         errorMessage = error.response?.data?.message || errorMessage;
       }
     }
-
     return {
       success: false,
       message: errorMessage,
