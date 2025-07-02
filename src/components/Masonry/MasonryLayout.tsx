@@ -55,7 +55,6 @@ const MasonryLayout = ({
   };
 
   useEffect(() => {
-    console.log("hello");
 
     fetchData();
   }, [stringFiltering]);

@@ -292,7 +292,8 @@ export const getFileTemp = async (file: File, token: string) => {
         },
       }
     );
-    console.log(response.data.success);
+
+    console.log(response.data);
 
     if (response.data.success) {
       return {
@@ -302,7 +303,6 @@ export const getFileTemp = async (file: File, token: string) => {
         preview_url: response.data?.data?.preview_url || undefined,
       };
     }
-    console.log("HELLO");
 
     return {
       success: false,

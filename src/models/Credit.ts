@@ -3,5 +3,5 @@ export interface Credit {
   amount: number;
   currency: string;
   is_active: boolean;
-  points: number;
+  credits: number;
 }

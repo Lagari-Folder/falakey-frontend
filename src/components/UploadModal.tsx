@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 import uploadImg from "../../public/images/upload-modal.svg";
 import uploadAdd from "../../public/icons/upload-add.svg";
 import { useEffect, useRef, useState } from "react";
-import UploadedData from "./Authentication/UploadedData";
+import UploadedData from "./UploadedModal/UploadedData";
 import { Tag } from "@/models/tag";
 import { Collection } from "@/models/collection";
 import { getFileTemp } from "@/helper/postHook";
@@ -162,7 +162,6 @@ const UploadModal = ({
         // Continue with getFileTemp logic...
         getFileTemp(file, token!)
           .then((result) => {
-            console.log(result);
 
             if (result["success"]) {
               setUploadData((prevFiles: UploadParam[]) =>

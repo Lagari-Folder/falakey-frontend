@@ -98,9 +98,8 @@ const PictureDetail = () => {
         ) : (
           <div className="w-size space-y-6">
             <PictureDetailHeader
-              author={postDetail?.author}
-              slug={postDetail?.slug ?? ""}
-              downloads={postDetail?.download_data ?? []}
+            
+              post={postDetail!}
               favoriteCount={favoriteCount}
               isFavorite={isFavorite}
               toggleFavorite={(e: any) => {
@@ -110,8 +109,7 @@ const PictureDetail = () => {
                   handleFavorite(e);
                 }
               }}
-              isLocked={postDetail?.is_download_locked ?? false}
-              isPremium={postDetail?.is_premium ?? false}
+              
             />
             {postDetail?.type == "video" ? (
               <video

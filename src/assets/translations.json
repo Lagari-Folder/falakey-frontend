@@ -8,7 +8,9 @@
       "available_hire": "Available for Hire",
       "copyright": "Copyright © Falakey 2024.",
       "error": "Error!",
-      "error_text": "An unexpected error occurred."
+      "error_text": "An unexpected error occurred.",
+      "cancel": "Cancel",
+      "confirm_purchase": "Confirm Purchase"
     },
     "navbar": {
       "select_language": "Select Language",
@@ -160,7 +162,17 @@
       "downloads": "Downloads",
       "views": "Views",
       "free_to_use": "Free to use under the Falakey License",
-      "premium": "Premium"
+      "premium": "Premium",
+      "premium_confirm_title": "Unlock Premium Post",
+      "premium_confirm_message": "You are about to unlock this post using your credits.",
+      "title": "Title",
+      "credits_required": "Credits Required",
+      "your_credits": "Your Credits",
+      "not_enough_credits": "Not Enough Credits",
+      "need_more_credits_message": "You don't have enough credits to unlock this post. Please buy more credits to proceed.",
+      "buy_credits": "Buy Credits",
+      "purchase_success_title": "Purchase Successful",
+      "purchase_success_message": "You've successfully unlocked this post!"
     },
     "favorite_modal": {
       "my_favorites": "My Favorites",
@@ -277,7 +289,9 @@
       "available_hire": "متاح للتوظيف",
       "copyright": "حقوق النشر © فلكي 2024.",
       "error": "خطأ!",
-      "error_text": "حدث خطأ غير متوقع."
+      "error_text": "حدث خطأ غير متوقع.",
+      "cancel": "إلغاء",
+      "confirm_purchase": "تأكيد الشراء"
     },
     "navbar": {
       "select_language": "اختر اللغة",
@@ -428,7 +442,17 @@
       "downloads": "التنزيلات",
       "views": "المشاهدات",
       "free_to_use": "مجاني الاستخدام بموجب ترخيص فلكي",
-      "premium": "مميز"
+      "premium": "مميز",
+      "premium_confirm_title": "فتح المشاركة المميزة",
+      "premium_confirm_message": "أنت على وشك فتح هذه المشاركة باستخدام نقاطك.",
+      "title": "العنوان",
+      "credits_required": "النقاط المطلوبة",
+      "your_credits": "نقاطك",
+      "not_enough_credits": "نقاط غير كافية",
+      "need_more_credits_message": "ليس لديك ما يكفي من النقاط لفتح هذه المشاركة. يرجى شراء المزيد من النقاط للمتابعة.",
+      "buy_credits": "شراء نقاط",
+      "purchase_success_title": "تم الشراء بنجاح",
+      "purchase_success_message": "لقد قمت بفتح هذه المشاركة بنجاح!"
     },
     "favorite_modal": {
       "my_favorites": "مفضلتي",

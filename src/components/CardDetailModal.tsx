@@ -22,8 +22,8 @@ import { useTrans } from "@/utils/translation";
 import { fireConfettiAtClickPosition } from "@/helper/favoriteConfetti";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
-import StarIcon from "@mui/icons-material/Star";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import LockedButton from "./PictureDetail/LockedButton";
+import PremiumButton from "./PictureDetail/PremiumButton";
 
 export const CardDetailModal = ({
   slug,
@@ -227,25 +227,9 @@ export const CardDetailModal = ({
                     </span>
                   </button>
                   {postDetail?.is_download_locked ? (
-                    <button
-                      disabled
-                      className="sm:h-[45px] h-[30px] aspect-square px-2 gap-2 flex bg-[#b17ece]/50 text-white rounded-md items-center justify-center"
-                    >
-                      <p className="sm:block hidden">{t("post.download")}</p>
-                      <span className="flex items-center justify-center">
-                        <FontAwesomeIcon icon={faLock} />
-                      </span>
-                    </button>
+                    <LockedButton />
                   ) : postDetail?.is_premium ? (
-                    <button
-                      onClick={() => {
-                        // Handle premium purchase logic
-                      }}
-                      className="sm:h-[45px] h-[30px] px-2 gap-2 flex bg-yellow-500 text-white rounded-md items-center justify-center"
-                    >
-                      <StarIcon fontSize="small" />
-                      <p className="sm:block hidden">{t("post.premium")}</p>
-                    </button>
+                    <PremiumButton post={postDetail} />
                   ) : (
                     <div className="relative">
                       <button

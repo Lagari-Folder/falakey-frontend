@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { usePlans } from "@/helper/plansHook";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 const Plans = () => {
   const { plans, loading, error } = usePlans();
   const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const handlePayment = (planId: string) => {
     if (window.Paddle) {
@@ -14,6 +17,9 @@ const Plans = () => {
             quantity: 1,
           },
         ],
+        customData: {
+          user_id: user!.id,
+        },
       });
     }
   };
@@ -22,8 +28,9 @@ const Plans = () => {
     if (typeof window !== "undefined" && window.Paddle) {
       window.Paddle.Environment.set("sandbox");
       window.Paddle.Initialize({
-        token: "test_7d279f61a3499fed520f7cd8c08",
-        eventCallback: function (event) {
+        token: import.meta.env.VITE_PADDLE_TOKEN,
+
+        eventCallback: function (event: any) {
           console.log(event);
         },
       });
@@ -52,7 +59,7 @@ const Plans = () => {
         ${selectedPlan?.amount ?? plans[0]?.amount ?? 0}
       </div>
       <div className="text-xl font-semibold text-gray-700 mb-6">
-        {selectedPlan?.points ?? plans[0]?.points ?? 0} نقطة
+        {selectedPlan?.credits ?? plans[0]?.credits ?? 0} نقطة
       </div>
 
       <p className="text-sm font-medium text-gray-600 mb-4">
@@ -73,7 +80,7 @@ const Plans = () => {
                     : "bg-white border-gray-300 text-gray-700 hover:border-secondary"
                 }`}
             >
-              {plan.points} نقطة
+              {plan.credits} نقطة
             </button>
           );
         })}

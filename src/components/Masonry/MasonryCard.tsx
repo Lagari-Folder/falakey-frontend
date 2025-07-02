@@ -59,7 +59,6 @@ const MasonryCard = React.memo(
 
     const { t } = useTrans();
     const { local } = useSelector((state: RootState) => state.translation);
-    console.log(data);
 
     return (
       <>

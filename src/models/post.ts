@@ -7,6 +7,7 @@ export interface Post {
   id: number;
   title: string;
   slug: string;
+  credits?: number;
   description?: string;
   location?: string;
   location_lat?: string;

@@ -24,7 +24,6 @@ export const useChatHook = () => {
           },
         }
       );
-      console.log(response.data);
       if (response.data["success"]) {
         setChats(response.data["data"]["chats"]["list"]);
       }
