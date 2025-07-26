@@ -13,8 +13,26 @@ export default async function middleware(req) {
 
   console.log("Middleware triggered for", pathname, "User-Agent:", userAgent);
 
+
+//    return new Response(
+//       `<!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="UTF-8" />
+//   <title>SEO Middleware Error</title>
+//   <meta name="viewport" content="width=device-width, initial-scale=1" />
+// </head>
+// <body>
+//   <h1>SEO Middleware Error</h1>
+//   <p><strong>Message:</strong> ${pathname.includes(".")}</p>
+//   <pre>${pathname.startsWith("/static")}</pre>
+// </body>
+// </html>`,
+//       { status: 500, headers: { "content-type": "text/html" } }
+//     );
+
   // Ignore static files (images, js, css, etc.)
-  if (pathname.startsWith("/static") || pathname.includes(".")) {
+  if (pathname.startsWith("/static") ) {
     return new Response(null, { status: 404 });
   }
 
