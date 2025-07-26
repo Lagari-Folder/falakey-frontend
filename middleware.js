@@ -11,13 +11,13 @@ const localizedContent = {
     title: "Falakey | Free Stock Photos",
     description:
       "Discover free high-quality stock photos and creative photography challenges.",
-    image: "https://falakey.com/icons/star-icon.svg",
+    image: "https://falakey.com/star-icon.svg",
   },
   ar: {
     title: "فلكي | صور مجانية عالية الجودة",
     description:
       "اكتشف صورًا مجانية عالية الجودة وتحديات إبداعية في التصوير الفوتوغرافي.",
-    image: "https://falakey.com/icons/star-icon.svg",
+    image: "https://falakey.com/star-icon.svg",
   },
 };
 
