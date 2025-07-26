@@ -17,22 +17,21 @@ export default async function middleware(req) {
   const isBot = botRegex.test(userAgent);
 
   if (!isBot) {
-    // Redirect normal users to the app, let React handle routing
-    return Response.redirect(new URL("/", req.url), 307);
+    // Redirect normal users back to the SAME path so React Router can handle it
+    return Response.redirect(new URL(req.url), 307);
   }
 
   // Extract slug and locale from URL, assuming /:locale/challenge/:slug
   const parts = pathname.split("/");
-  // parts example: ['', 'en', 'challenge', 'my-slug']
   const locale = parts[1] || "en";
   const slug = parts[3] || "";
 
   if (!slug) {
-    // No slug found, fallback
+    // No slug found, fallback to homepage
     return Response.redirect(new URL("/", req.url), 307);
   }
 
-  // Compose API URL - replace NEXT_PUBLIC_BASE_URL with your env variable name on Vercel
+  // Compose API URL
   const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/challenges/show/${slug}?locale=${locale}`;
 
   try {
@@ -42,7 +41,6 @@ export default async function middleware(req) {
       throw new Error("Failed to fetch challenge data");
     }
 
-    /** @type {import('./types').Challenge} */
     const challenge = await response.json();
 
     const title = challenge.title || `Challenge: ${slug}`;
@@ -81,7 +79,7 @@ export default async function middleware(req) {
   } catch (error) {
     console.error("Middleware SEO fetch error:", error);
 
-    // Fallback to simple redirect for normal app if fetch fails
-    return Response.redirect(new URL("/", req.url), 307);
+    // Fallback to redirect normal users to the original path on error
+    return Response.redirect(new URL(req.url), 307);
   }
 }
