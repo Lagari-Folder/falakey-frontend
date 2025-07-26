@@ -1,5 +1,9 @@
 export const config = {
   matcher: [
+    // Match with or without locale
+    "/challenge/:slug*",
+    "/listing/:picture*",
+    "/author/:username*",
     "/:locale/challenge/:slug*",
     "/:locale/listing/:picture*",
     "/:locale/author/:username*",
@@ -41,9 +45,16 @@ export default async function middleware(req) {
     return; // SPA handles normal users
   }
 
-  const parts = pathname.split("/");
-  const locale = parts[1] || "en";
-  const route = parts[2];
+  const parts = pathname.split("/").filter(Boolean); // remove empty
+  // Detect if first part is a locale
+  let locale = "en";
+  let routeIndex = 0;
+  if (parts[0] === "en" || parts[0] === "ar") {
+    locale = parts[0];
+    routeIndex = 1;
+  }
+
+  const route = parts[routeIndex];
 
   // Default values from localizedContent
   let {
@@ -56,7 +67,7 @@ export default async function middleware(req) {
 
   try {
     if (route === "challenge") {
-      const slug = parts[3] || "";
+      const slug = parts[routeIndex + 1] || "";
       if (!slug) throw new Error("No slug provided in challenge route");
 
       apiUrl = `https://admin.falakey.com/api/v1/challenges/show/${slug}?locale=${locale}`;
@@ -77,7 +88,7 @@ export default async function middleware(req) {
           ? challenge.media[0].original
           : seoImage;
     } else if (route === "listing") {
-      const picture = parts[3] || "";
+      const picture = parts[routeIndex + 1] || "";
       if (!picture) throw new Error("No picture provided in listing route");
 
       apiUrl = `https://admin.falakey.com/api/v1/posts/show/${picture}?locale=${locale}`;
@@ -94,7 +105,7 @@ export default async function middleware(req) {
       description = pictureData.description || description;
       seoImage = pictureData.preview_links?.original || seoImage;
     } else if (route === "author") {
-      const username = parts[3] || "";
+      const username = parts[routeIndex + 1] || "";
       if (!username) throw new Error("No username provided in author route");
 
       apiUrl = `https://admin.falakey.com/api/v1/users/${username}/profile/public`;
@@ -111,33 +122,23 @@ export default async function middleware(req) {
       description = author.bio || description;
       seoImage = author.avatar || seoImage;
     } else {
-      // No matching route, return localized default SEO
-      return new Response(
-        `<!DOCTYPE html>
-<html lang="${locale}">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${title}</title>
-  <meta name="description" content="${description}" />
-  <meta property="og:title" content="${title}" />
-  <meta property="og:description" content="${description}" />
-  <meta property="og:image" content="${seoImage}" />
-  <meta property="og:url" content="${req.url}" />
-  <meta property="og:type" content="website" />
-</head>
-<body>
-  <h1>${title}</h1>
-  <p>${description}</p>
-</body>
-</html>`,
-        { headers: { "content-type": "text/html" } }
-      );
+      // No matching route, return default SEO
+      return defaultSEOPage(locale, title, description, seoImage, req.url);
     }
 
-    // Return successful SEO page
-    return new Response(
-      `<!DOCTYPE html>
+    return defaultSEOPage(locale, title, description, seoImage, req.url);
+  } catch (error) {
+    console.error("Middleware SEO fetch error:", error);
+    return defaultSEOPage(locale, title, description, seoImage, req.url, error);
+  }
+}
+
+function defaultSEOPage(locale, title, description, seoImage, url, error) {
+  const errorHTML = error
+    ? `<p>Error loading dynamic SEO: ${error.message}</p>`
+    : "";
+  return new Response(
+    `<!DOCTYPE html>
 <html lang="${locale}">
 <head>
   <meta charset="UTF-8" />
@@ -147,40 +148,15 @@ export default async function middleware(req) {
   <meta property="og:title" content="${title}" />
   <meta property="og:description" content="${description}" />
   <meta property="og:image" content="${seoImage}" />
-  <meta property="og:url" content="${req.url}" />
-  <meta property="og:type" content="article" />
-</head>
-<body>
-  <h1>${title}</h1>
-  <p>${description}</p>
-</body>
-</html>`,
-      { headers: { "content-type": "text/html" } }
-    );
-  } catch (error) {
-    console.error("Middleware SEO fetch error:", error);
-
-    // Return localized fallback even on error
-    return new Response(
-      `<!DOCTYPE html>
-<html lang="${locale}">
-<head>
-  <meta charset="UTF-8" />
-  <title>${title}</title>
-  <meta name="description" content="${description}" />
-  <meta property="og:title" content="${title}" />
-  <meta property="og:description" content="${description}" />
-  <meta property="og:image" content="${seoImage}" />
-  <meta property="og:url" content="${req.url}" />
+  <meta property="og:url" content="${url}" />
   <meta property="og:type" content="website" />
 </head>
 <body>
   <h1>${title}</h1>
   <p>${description}</p>
-  <p>Error loading dynamic SEO: ${error.message}</p>
+  ${errorHTML}
 </body>
 </html>`,
-      { status: 200, headers: { "content-type": "text/html" } }
-    );
-  }
+    { headers: { "content-type": "text/html" } }
+  );
 }
