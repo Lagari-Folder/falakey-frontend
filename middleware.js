@@ -6,6 +6,21 @@ export const config = {
   ],
 };
 
+const localizedContent = {
+  en: {
+    title: "Falakey | Free Stock Photos",
+    description:
+      "Discover free high-quality stock photos and creative photography challenges.",
+    image: "https://falakey.com/icons/star-icon.svg",
+  },
+  ar: {
+    title: "فلكي | صور مجانية عالية الجودة",
+    description:
+      "اكتشف صورًا مجانية عالية الجودة وتحديات إبداعية في التصوير الفوتوغرافي.",
+    image: "https://falakey.com/icons/star-icon.svg",
+  },
+};
+
 export default async function middleware(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
@@ -13,52 +28,34 @@ export default async function middleware(req) {
 
   console.log("Middleware triggered for", pathname, "User-Agent:", userAgent);
 
-  //    return new Response(
-  //       `<!DOCTYPE html>
-  // <html lang="en">
-  // <head>
-  //   <meta charset="UTF-8" />
-  //   <title>SEO Middleware Error</title>
-  //   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  // </head>
-  // <body>
-  //   <h1>SEO Middleware Error</h1>
-  //   <p><strong>Message:</strong> ${pathname.includes(".")}</p>
-  //   <pre>${pathname.startsWith("/static")}</pre>
-  // </body>
-  // </html>`,
-  //       { status: 500, headers: { "content-type": "text/html" } }
-  //     );
-
-  // Ignore static files (images, js, css, etc.)
+  // Ignore static files
   if (pathname.startsWith("/static")) {
     return new Response(null, { status: 404 });
   }
 
-  // Detect social bots (SEO crawlers)
   const botRegex =
     /(Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator|WhatsApp)/i;
   const isBot = botRegex.test(userAgent);
 
   if (!isBot) {
-    return; // Let React SPA handle normal users
+    return; // SPA handles normal users
   }
 
   const parts = pathname.split("/");
-
-  // Extract locale (assumed always first)
   const locale = parts[1] || "en";
   const route = parts[2];
 
-  // Initialize variables with default fallbacks
+  // Default values from localizedContent
+  let {
+    title,
+    description,
+    image: seoImage,
+  } = localizedContent[locale] || localizedContent.en;
+
   let apiUrl = null;
-  let title = "Falakey - Discover amazing content";
-  let description =
-    "Explore Falakey platform for amazing challenges, pictures, and authors.";
-  let seoImage = "https://example.com/default-image.png";
 
   try {
-    if (route == "challenge") {
+    if (route === "challenge") {
       const slug = parts[3] || "";
       if (!slug) throw new Error("No slug provided in challenge route");
 
@@ -79,7 +76,7 @@ export default async function middleware(req) {
         challenge.media && challenge.media.length > 0
           ? challenge.media[0].original
           : seoImage;
-    } else if (route == "listing") {
+    } else if (route === "listing") {
       const picture = parts[3] || "";
       if (!picture) throw new Error("No picture provided in listing route");
 
@@ -96,7 +93,7 @@ export default async function middleware(req) {
       title = pictureData.title || title;
       description = pictureData.description || description;
       seoImage = pictureData.preview_links?.original || seoImage;
-    } else if (route == "author") {
+    } else if (route === "author") {
       const username = parts[3] || "";
       if (!username) throw new Error("No username provided in author route");
 
@@ -114,10 +111,31 @@ export default async function middleware(req) {
       description = author.bio || description;
       seoImage = author.avatar || seoImage;
     } else {
-      // Route not matched, let React SPA handle
-      return;
+      // No matching route, return localized default SEO
+      return new Response(
+        `<!DOCTYPE html>
+<html lang="${locale}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title}</title>
+  <meta name="description" content="${description}" />
+  <meta property="og:title" content="${title}" />
+  <meta property="og:description" content="${description}" />
+  <meta property="og:image" content="${seoImage}" />
+  <meta property="og:url" content="${req.url}" />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+  <h1>${title}</h1>
+  <p>${description}</p>
+</body>
+</html>`,
+        { headers: { "content-type": "text/html" } }
+      );
     }
 
+    // Return successful SEO page
     return new Response(
       `<!DOCTYPE html>
 <html lang="${locale}">
@@ -131,10 +149,6 @@ export default async function middleware(req) {
   <meta property="og:image" content="${seoImage}" />
   <meta property="og:url" content="${req.url}" />
   <meta property="og:type" content="article" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${title}" />
-  <meta name="twitter:description" content="${description}" />
-  <meta name="twitter:image" content="${seoImage}" />
 </head>
 <body>
   <h1>${title}</h1>
@@ -146,21 +160,27 @@ export default async function middleware(req) {
   } catch (error) {
     console.error("Middleware SEO fetch error:", error);
 
+    // Return localized fallback even on error
     return new Response(
       `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
   <meta charset="UTF-8" />
-  <title>SEO Middleware Error</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${title}</title>
+  <meta name="description" content="${description}" />
+  <meta property="og:title" content="${title}" />
+  <meta property="og:description" content="${description}" />
+  <meta property="og:image" content="${seoImage}" />
+  <meta property="og:url" content="${req.url}" />
+  <meta property="og:type" content="website" />
 </head>
 <body>
-  <h1>SEO Middleware Error</h1>
-  <p><strong>Message:</strong> ${error.message}</p>
-  <pre>${error.stack}</pre>
+  <h1>${title}</h1>
+  <p>${description}</p>
+  <p>Error loading dynamic SEO: ${error.message}</p>
 </body>
 </html>`,
-      { status: 500, headers: { "content-type": "text/html" } }
+      { status: 200, headers: { "content-type": "text/html" } }
     );
   }
 }
