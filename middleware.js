@@ -20,7 +20,7 @@ export default async function middleware(req) {
   const isBot = botRegex.test(userAgent);
 
   // Normal users just go to React
-  if (!isBot) return;
+  // if (!isBot) return;
 
   // Extract slug/locale
   const parts = pathname.split("/");
