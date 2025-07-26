@@ -11,6 +11,25 @@ export default async function middleware(req) {
   const pathname = url.pathname;
   const userAgent = req.headers.get("user-agent") || "";
 
+
+  return new Response(
+      `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SEO Middleware Error</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>SEO Middleware Error</h1>
+  <p>${url}</p>
+  <p>${pathname}</p>
+  <p>${userAgent}</p>
+</body>
+</html>`,
+      { status: 500, headers: { "content-type": "text/html" } }
+    );
+
   console.log("Middleware triggered for", pathname, "User-Agent:", userAgent);
 
   // Ignore static files (images, js, css, etc.)
@@ -23,83 +42,80 @@ export default async function middleware(req) {
     /(Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator|WhatsApp)/i;
   const isBot = botRegex.test(userAgent);
 
-  // If NOT a bot, let the React SPA handle routing
-  // if (!isBot) {
-  //   return;
-  // }
+  if (!isBot) {
+    return; // Let React SPA handle normal users
+  }
 
   const parts = pathname.split("/");
 
   // Extract locale (assumed always first)
   const locale = parts[1] || "en";
 
-  // Determine route type and extract slug/identifier
+  // Initialize variables with default fallbacks
   let apiUrl = null;
-  let title = "";
-  let description = "";
-  let seoImage = "";
+  let title = "Falakey - Discover amazing content";
+  let description =
+    "Explore Falakey platform for amazing challenges, pictures, and authors.";
+  let seoImage = "https://example.com/default-image.png";
 
   try {
     if (pathname.startsWith(`/${locale}/challenge/`)) {
-      // /:locale/challenge/:slug
       const slug = parts[3] || "";
       if (!slug) throw new Error("No slug provided in challenge route");
 
       apiUrl = `https://admin.falakey.com/api/v1/challenges/show/${slug}?locale=${locale}`;
-
       const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error(`Failed to fetch challenge data, status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(
+          `Failed to fetch challenge data, status: ${response.status}`
+        );
       const json = await response.json();
       const challenge = json.data;
       if (!challenge) throw new Error("Challenge data missing");
 
-      title = challenge.title || `Challenge: ${slug}`;
+      title = challenge.title || title;
       description =
-        challenge.short_description ||
-        challenge.description ||
-        `Join the challenge ${slug} now!`;
+        challenge.short_description || challenge.description || description;
       seoImage =
         challenge.media && challenge.media.length > 0
           ? challenge.media[0].original
-          : "https://example.com/default-image.png";
-
+          : seoImage;
     } else if (pathname.startsWith(`/${locale}/listing/`)) {
-      // /:locale/listing/:picture
       const picture = parts[3] || "";
       if (!picture) throw new Error("No picture provided in listing route");
 
       apiUrl = `https://admin.falakey.com/api/v1/posts/show/${picture}?locale=${locale}`;
-
       const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error(`Failed to fetch picture data, status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(
+          `Failed to fetch picture data, status: ${response.status}`
+        );
       const json = await response.json();
       const pictureData = json.data;
       if (!pictureData) throw new Error("Picture data missing");
 
-      title = pictureData.title || `Picture: ${picture}`;
-      description = pictureData.description || `View picture ${picture}`;
-      seoImage =
-        pictureData.media?.original || "https://example.com/default-image.png";
-
+      title = pictureData.title || title;
+      description = pictureData.description || description;
+      seoImage = pictureData.media?.original || seoImage;
     } else if (pathname.startsWith(`/${locale}/author/`)) {
-      // /:locale/author/:username
       const username = parts[3] || "";
       if (!username) throw new Error("No username provided in author route");
 
       apiUrl = `https://admin.falakey.com/api/v1/users/${username}/profile/public`;
-
       const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error(`Failed to fetch author data, status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(
+          `Failed to fetch author data, status: ${response.status}`
+        );
       const json = await response.json();
       const author = json.data;
       if (!author) throw new Error("Author data missing");
 
-      title = author.name || `Author: ${username}`;
-      description = author.bio || `Explore works by ${author.name || username}`;
-      seoImage = author.avatar || "https://example.com/default-image.png";
-
+      title = author.name || title;
+      description = author.bio || description;
+      seoImage = author.avatar || seoImage;
     } else {
-      // If route not matched, let React handle
+      // Route not matched, let React SPA handle
       return;
     }
 
