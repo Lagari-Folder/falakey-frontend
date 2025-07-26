@@ -18,7 +18,7 @@ import ContentTypeRadio from "./ContentTypeRadio";
 import ContentTypeText from "./ContentTypeText";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+// import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const UploadedData = ({
   data: uploadedData,
