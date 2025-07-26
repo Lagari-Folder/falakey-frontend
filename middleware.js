@@ -11,25 +11,6 @@ export default async function middleware(req) {
   const pathname = url.pathname;
   const userAgent = req.headers.get("user-agent") || "";
 
-
-  return new Response(
-      `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>SEO Middleware Error</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-  <h1>SEO Middleware Error</h1>
-  <p>${url}</p>
-  <p>${pathname}</p>
-  <p>${pathname.startsWith(`/${locale}/author/`)}</p>
-</body>
-</html>`,
-      { status: 500, headers: { "content-type": "text/html" } }
-    );
-
   console.log("Middleware triggered for", pathname, "User-Agent:", userAgent);
 
   // Ignore static files (images, js, css, etc.)
@@ -50,6 +31,7 @@ export default async function middleware(req) {
 
   // Extract locale (assumed always first)
   const locale = parts[1] || "en";
+  const route = parts[2];
 
   // Initialize variables with default fallbacks
   let apiUrl = null;
@@ -59,7 +41,7 @@ export default async function middleware(req) {
   let seoImage = "https://example.com/default-image.png";
 
   try {
-    if (pathname.startsWith(`/${locale}/challenge/`)) {
+    if (route == "challenge") {
       const slug = parts[3] || "";
       if (!slug) throw new Error("No slug provided in challenge route");
 
@@ -80,7 +62,7 @@ export default async function middleware(req) {
         challenge.media && challenge.media.length > 0
           ? challenge.media[0].original
           : seoImage;
-    } else if (pathname.startsWith(`/${locale}/listing/`)) {
+    } else if (route == "listing") {
       const picture = parts[3] || "";
       if (!picture) throw new Error("No picture provided in listing route");
 
@@ -97,7 +79,7 @@ export default async function middleware(req) {
       title = pictureData.title || title;
       description = pictureData.description || description;
       seoImage = pictureData.media?.original || seoImage;
-    } else if (pathname.startsWith(`/${locale}/author/`)) {
+    } else if (route == "author") {
       const username = parts[3] || "";
       if (!username) throw new Error("No username provided in author route");
 
