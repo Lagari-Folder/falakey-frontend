@@ -27,8 +27,8 @@ export default async function middleware(req) {
 
   // Ideally, fetch your SEO data here based on slug.
   // For demo, hardcoded data:
-  const title = `Challenge: ${slug}`;
-  const description = `Details for challenge ${slug}. Join now!`;
+  const title = `Challenge: 1`;
+  const description = `Details for challenge 1 . Join now!`;
   const seoImage = "https://example.com/seo-image.png";
 
   return new Response(
