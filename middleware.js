@@ -1,43 +1,44 @@
-import { NextResponse } from "next/server";
-
 export const config = {
-  matcher: ["/challenge/:slug*"], // Only challenge detail pages
+  matcher: ["/challenge/:slug*"],
 };
 
 export default async function middleware(req) {
-  const { pathname } = new URL(req.url);
+  const url = new URL(req.url);
+  const pathname = url.pathname;
 
-  // Skip static files (important!)
-//   if (pathname.startsWith("/static") || pathname.includes(".")) {
-//     return NextResponse.next();
-//   }
+  console.log(pathname);
+  // Skip static assets
+  if (pathname.startsWith("/static") || pathname.includes(".")) {
+    return new Response(null, { status: 404 });
+  }
 
-//   const userAgent = req.headers.get("user-agent") || "";
-//   const botRegex =
-//     /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
-//   const isSocialMediaCrawler = botRegex.test(userAgent);
+  const userAgent = req.headers.get("user-agent") || "";
+  const botRegex =
+    /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
+  const isBot = botRegex.test(userAgent);
 
-//   // Let normal users load the app
-//   if (!isSocialMediaCrawler) {
-//     return NextResponse.next();
-//   }
+  if (!isBot) {
+    // Let normal users load your React app (fallback to index.html)
+    return Response.redirect(new URL("/", req.url), 307);
+  }
 
-  // TODO: fetch SEO data dynamically using slug from `pathname`
-  const title = "Challenge Title";
-  const description = "This is a challenge description.";
-  const seoImage = "https://yourcdn.com/seo.jpg";
-  const author = "Falakey";
+  // Extract slug for SEO (e.g. /challenge/my-slug)
+  const slug = pathname.split("/").pop();
+
+  // Ideally, fetch your SEO data here based on slug.
+  // For demo, hardcoded data:
+  const title = `Challenge: ${slug}`;
+  const description = `Details for challenge ${slug}. Join now!`;
+  const seoImage = "https://example.com/seo-image.png";
 
   return new Response(
     `
     <!DOCTYPE html>
     <html>
     <head>
-      <meta charset="UTF-8">
+      <meta charset="UTF-8" />
       <title>${title}</title>
-      <meta name="title" content="${title}" />
       <meta name="description" content="${description}" />
-      <meta name="author" content="${author}" />
       <meta property="og:title" content="${title}" />
       <meta property="og:description" content="${description}" />
       <meta property="og:image" content="${seoImage}" />
@@ -45,11 +46,10 @@ export default async function middleware(req) {
       <meta property="og:type" content="article" />
       <meta name="twitter:title" content="${title}" />
       <meta name="twitter:description" content="${description}" />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:site" content="@falakey" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="${seoImage}" />
     </head>
-    <body><p>Social media preview for ${title}</p></body>
+    <body><h1>${title}</h1></body>
     </html>`,
     {
       headers: { "content-type": "text/html" },
