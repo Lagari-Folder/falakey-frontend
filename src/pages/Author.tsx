@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 // Platform icons
 
 import AuthorHeader from "@/components/Author/AuthorHeader";
-import { getPublicUserData } from "@/helper/userHook";
 import { User } from "@/models/user";
 import SEO from "@/components/Common/SEO";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import { search } from "@/lib/slices/searchSlice";
 import { RootState } from "@/lib/store";
 import MasonryWrapper from "@/components/Masonry/MasonryWrapper";
 import { useNavigateWithLocale } from "@/helper/navigateWithLocale";
+import { apiRequest } from "@/utils/apiRequest";
 
 const Author = () => {
   const navigate = useNavigateWithLocale();
@@ -34,9 +34,15 @@ const Author = () => {
   useEffect(() => {
     if (username) {
       setLoading(true);
-      getPublicUserData(username, token!)
+      apiRequest({
+        method: "GET",
+        url: `users/${username}/profile/public`,
+        token: token!,
+      })
         .then((result) => {
-          if (result![0]) setUser(result![1]);
+          console.log(result);
+
+          if (result["data"]["success"]) setUser(result["data"]["data"]);
         })
         .catch(() => {
           navigate("/");
@@ -61,7 +67,7 @@ const Author = () => {
             title=""
             classTitle="text-3xl mb-6"
             screenWidth="w-[95%]"
-            stringFiltering={``}
+            stringFiltering={`types=${previousSearch.types}`}
           />
         </div>
       </div>

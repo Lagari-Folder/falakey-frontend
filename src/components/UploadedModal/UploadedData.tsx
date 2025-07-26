@@ -16,6 +16,9 @@ import loadingImage from "../../../public/icons/star-icon.svg";
 import { useTrans } from "@/utils/translation";
 import ContentTypeRadio from "./ContentTypeRadio";
 import ContentTypeText from "./ContentTypeText";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const UploadedData = ({
   data: uploadedData,
@@ -78,6 +81,7 @@ const UploadedData = ({
   });
 
   const { t } = useTrans();
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const handleContentTypeChange = (type: "free" | "premium" | "locked") => {
     setContentType(type);
@@ -194,6 +198,7 @@ const UploadedData = ({
               }}
               placeholder="Search for a location..."
             />
+            {/* <GooglePlacesAutocomplete  /> */}
             {locationLoading ? (
               <CircularProgress className="!text-primary !w-[25px] !h-[25px] mx-1" />
             ) : (
@@ -278,63 +283,65 @@ const UploadedData = ({
         </div>
 
         {/* Content Type Selection */}
-        <div className="mb-4 p-3 bg-gray-50 rounded-md border border-gray-200">
-          <h3 className="text-sm font-medium text-gray-700 mb-2">
-            Content Type
-          </h3>
-          <div className="grid grid-cols-3 gap-2">
-            <ContentTypeRadio
-              title="Free"
-              description="Anyone can download"
-              icon=""
-              selectedType={contentType}
-              type="free"
-              selectedColor="primary"
-              handleContentTypeChange={(s: "free" | "premium" | "locked") =>
-                handleContentTypeChange(s)
-              }
-            />
-            <ContentTypeRadio
-              title="Premium"
-              description="Requires credits to download"
-              icon="fa-solid fa-crown"
-              selectedType={contentType}
-              type="premium"
-              selectedColor="yellow-500"
-              handleContentTypeChange={(s: "free" | "premium" | "locked") =>
-                handleContentTypeChange(s)
-              }
-            />
-            <ContentTypeRadio
-              title="Locked"
-              description="Not downloadable"
-              icon="fa-solid fa-lock"
-              selectedType={contentType}
-              type="locked"
-              selectedColor="red-500"
-              handleContentTypeChange={(s: "free" | "premium" | "locked") =>
-                handleContentTypeChange(s)
-              }
-            />
+        {user?.id == 2694 && (
+          <div className="mb-4 p-3 bg-gray-50 rounded-md border border-gray-200">
+            <h3 className="text-sm font-medium text-gray-700 mb-2">
+              {t("upload_modal.content_type")}
+            </h3>
+            <div className="grid grid-cols-3 gap-2">
+              <ContentTypeRadio
+                title={t("upload_modal.free")}
+                description={t("upload_modal.free_text")}
+                icon=""
+                selectedType={contentType}
+                type="free"
+                selectedColor="primary"
+                handleContentTypeChange={(s: "free" | "premium" | "locked") =>
+                  handleContentTypeChange(s)
+                }
+              />
+              <ContentTypeRadio
+                title={t("upload_modal.premium")}
+                description={t("upload_modal.premium_text")}
+                icon="fa-solid fa-crown"
+                selectedType={contentType}
+                type="premium"
+                selectedColor="yellow-500"
+                handleContentTypeChange={(s: "free" | "premium" | "locked") =>
+                  handleContentTypeChange(s)
+                }
+              />
+              <ContentTypeRadio
+                title={t("upload_modal.locked")}
+                description={t("upload_modal.locked_text")}
+                icon="fa-solid fa-lock"
+                selectedType={contentType}
+                type="locked"
+                selectedColor="red-500"
+                handleContentTypeChange={(s: "free" | "premium" | "locked") =>
+                  handleContentTypeChange(s)
+                }
+              />
+            </div>
+
+            {/* Status Messages */}
+            {contentType === "premium" && (
+              <ContentTypeText
+                text="This content will require admin-assigned credits to download"
+                icon="fa-solid fa-crown"
+                color="yellow-500"
+              />
+            )}
+
+            {contentType === "locked" && (
+              <ContentTypeText
+                text="This content will not be downloadable by others"
+                icon="fa-solid fa-lock"
+                color="red-500"
+              />
+            )}
           </div>
-
-          {/* Status Messages */}
-          {contentType === "premium" && (
-            <ContentTypeText
-              text="This content will require admin-assigned credits to download"
-              icon="fa-solid fa-crown"
-              color="yellow-500"
-            />
-          )}
-
-          {contentType === "locked" && (
-            <ContentTypeText
-              text="This content will not be downloadable by others"
-              icon="fa-solid fa-lock"
-              color="red-500"
-            />
-          )}
-        </div>
+        )}
 
         {/* Tags & Collections */}
         <div className="mb-4">

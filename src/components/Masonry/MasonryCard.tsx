@@ -69,7 +69,7 @@ const MasonryCard = React.memo(
             showModal={setModalOpen}
           />
         )}
-        <div className="w-full max-sm:my-2">
+        <div className="w-full max-sm:my-2 overflow-visible">
           <div
             className="relative w-full"
             onClick={(e) => {
@@ -117,14 +117,14 @@ const MasonryCard = React.memo(
               </a>
             )}
             <a
-              href={`/listing/${data.slug}`}
+              href={`/${local}/listing/${data.slug}`}
               target="_blank"
               className="relative rounded-3xl overflow-hidden"
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 if (e.ctrlKey || e.metaKey) {
-                  window.open(`/listing/${data.slug}`, "_blank");
+                  window.open(`/${local}/listing/${data.slug}`, "_blank");
                 } else {
                   handleClick();
                 }
@@ -175,6 +175,7 @@ const MasonryCard = React.memo(
                     playsInline
                     ref={videoRef}
                     preload="metadata"
+                    poster={data.thumbnails?.thumb}
                     className={`w-full h-full object-cover cursor-pointer rounded-xl overflow-hidden`}
                   >
                     <source
@@ -219,7 +220,7 @@ const MasonryCard = React.memo(
                 />
               )}
               {data.is_premium ? (
-                <div className="absolute flex items-center gap-1.5 top-2 start-2 bg-primary/60 text-white px-2 py-1 rounded-md text-xs font-bold">
+                <div className="absolute w-fit flex items-center gap-1.5 top-2 start-2 bg-primary/60 text-white px-2 py-1 rounded-md text-xs font-bold">
                   <img src={logo} className="size-[15px] object-cover" alt="" />
                   {t("post.premium")}
                 </div>
@@ -266,13 +267,32 @@ const MasonryCard = React.memo(
                   </div>
                   <FontAwesomeIcon icon={faLock} />
                 </div>
+              ) : data.is_premium ? (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    if (e.ctrlKey || e.metaKey) {
+                      window.open(`/${local}/listing/${data.slug}`, "_blank");
+                    } else {
+                      handleClick();
+                    }
+                  }}
+                  className="lg:h-[50px] md:h-[45px] h-[40px] px-4 my-2 gap-2 flex bg-yellow-500 text-white rounded-md items-center justify-center transition hover:bg-yellow-600 font-semibold text-sm"
+                  title={`${t("post.premium")} - ${
+                    data.premium_credits ?? 0
+                  } credits`}
+                >
+                  <img src={logo} className="size-[20px]" alt="" />
+                  <p>{t("post.premium")}</p>
+                </button>
               ) : (
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
                     if (e.ctrlKey || e.metaKey) {
-                      window.open(`/listing/${data.slug}`, "_blank");
+                      window.open(`/${local}/listing/${data.slug}`, "_blank");
                     } else {
                       handleClick();
                     }
@@ -304,7 +324,7 @@ const MasonryCard = React.memo(
                 e.stopPropagation();
                 e.preventDefault();
                 if (e.ctrlKey || e.metaKey) {
-                  window.open(`/listing/${data.slug}`, "_blank");
+                  window.open(`/${local}/listing/${data.slug}`, "_blank");
                 } else {
                   handleClick();
                 }
@@ -363,7 +383,7 @@ const MasonryCard = React.memo(
 
                         if (e.ctrlKey || e.metaKey) {
                           window.open(
-                            `/author/${data.author?.username}`,
+                            `/${local}/author/${data.author?.username}`,
                             "_blank"
                           );
                         } else {

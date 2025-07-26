@@ -32,6 +32,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "./lib/store";
 import SearchTabs from "./components/SearchTabs";
 import Plans from "./pages/Plans";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 
 function App() {
   return (
@@ -56,6 +58,9 @@ function App() {
           <Route path="challenge" element={<Challenge />} />
           <Route path="challenge/:slug" element={<ChallengeDetails />} />
           <Route path="license" element={<License />} />
+          <Route path="terms-and-conditions" element={<Terms />} />
+          <Route path="privacy-policy" element={<Privacy />} />
+          {/* <Route path="refund" element={<Refund />} />{" "} */}
           <Route path="falakey-stars" element={<Stars />} />
           <Route path="auth/google" element={<GoogleCallback />} />
         </Route>
@@ -87,7 +92,10 @@ function MainLayout() {
     location.pathname.replace(/\/+$/, "")
   );
   return (
-    <div dir={dir} className="relative h-full w-full">
+    <div
+      dir={dir}
+      className="relative flex flex-col justify-between h-full min-h-[100vh] w-full"
+    >
       <Navbar />
       <div className="bg-white pt-[70px]">
         {isHomePage ? null : <SearchTabs />}
@@ -102,10 +110,13 @@ function AdminLayout() {
   const { dir } = useSelector((state: RootState) => state.translation);
 
   return (
-    <div dir={dir} className="relative h-full w-full">
+    <div
+      dir={dir}
+      className="relative flex flex-col items-center justify-between h-full min-h-[100vh]"
+    >
       <Navbar />
       <SideBar />
-      <div className="max-w-[1400px] bg-white lg:pl-[70px] lg:pr-2 lg:mx-auto lg:pb-0 pb-[70px] mx-2 pt-[70px] flex flex-col gap-4">
+      <div className="max-w-[1400px] h-screen bg-white w-full lg:pb-0 pb-[70px] pt-[70px] flex flex-col justify-between items-center gap-4">
         <Outlet />
         <DashboardFooter />
       </div>

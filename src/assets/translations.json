@@ -209,7 +209,16 @@
       "read_terms": "Read the Falakey Terms",
       "you_own": "Only upload images you own the rights to",
       "respect_others": "Respect the intellectual property of others",
-      "success": "Post Uploaded Successfully!"
+      "success": "Post Uploaded Successfully!",
+      "upload_terms_text": "By uploading, you agree to our",
+      "upload_terms_link": "Terms of Service",
+      "content_type": "Content Type",
+      "free": "Free",
+      "free_text": "Anyone can Download",
+      "premium": "Premium",
+      "premium_text": "Requires Credits to Download ",
+      "locked": "Locked",
+      "locked_text": "Not Downloadable"
     },
     "account_details": {
       "title": "Account Details",
@@ -265,7 +274,8 @@
       "filter": "Filter"
     },
     "messages_dashboard": {
-      "title": "Messages"
+      "title": "Messages",
+      "no_messages": "No messages found."
     },
     "google": {
       "success_title": "Authentication Successfully!",
@@ -278,6 +288,17 @@
       "about_us": "About Us",
       "content_license": "Content License",
       "copy_right": "Copyright © Falakey"
+    },
+    "plans": {
+      "loading": "Loading credits...",
+      "error": "An error occurred while loading",
+      "title": "One-Time Plans",
+      "subtitle": "Get as many as you need with a 1-year download validity",
+      "credits": "Credits",
+      "select_prompt": "Choose the number of credits you need",
+      "subscribe_button": "Subscribe Now",
+      "terms": "Terms and Conditions",
+      "refund": "Refund Policy"
     }
   },
   "ar": {
@@ -489,7 +510,16 @@
       "read_terms": "اقرأ شروط فلكي",
       "you_own": "ارفع فقط الصور التي تملك حقوقها",
       "respect_others": "احترم الملكية الفكرية للآخرين",
-      "success": "تم رفع المشاركة بنجاح!"
+      "success": "تم رفع المشاركة بنجاح!",
+      "upload_terms_text": "بواسطة الرفع، أنت توافق على",
+      "upload_terms_link": "شروط الخدمة",
+      "content_type": "نوع المحتوى",
+      "free": "مجاني",
+      "free_text": "يمكن لأي شخص التنزيل",
+      "premium": "مميز",
+      "premium_text": "يتطلب نقاط للتنزيل",
+      "locked": "مقفل",
+      "locked_text": "غير قابل للتنزيل"
     },
     "account_details": {
       "title": "تفاصيل الحساب",
@@ -545,7 +575,8 @@
       "filter": "تصفية"
     },
     "messages_dashboard": {
-      "title": "الرسائل"
+      "title": "الرسائل",
+      "no_messages": "لا توجد رسائل."
     },
     "google": {
       "success_title": "تم التحقق بنجاح!",
@@ -558,6 +589,17 @@
       "about_us": "من نحن",
       "content_license": "ترخيص المحتوى",
       "copy_right": "حقوق النشر © فلكي"
+    },
+    "plans": {
+      "loading": "جاري تحميل النقاط...",
+      "error": "حدث خطأ أثناء التحميل",
+      "title": "باقات لمرة واحدة",
+      "credits": "نقاط",
+      "subtitle": "احصل حسب العدد الذي تحتاجه بصلاحية تحميل لمدة سنة",
+      "select_prompt": "اختر عدد النقاط التي تحتاجها",
+      "subscribe_button": "اشترك الآن",
+      "terms": "الشروط والأحكام",
+      "refund": "سياسة الاسترجاع"
     }
   }
 }

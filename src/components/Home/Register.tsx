@@ -205,7 +205,11 @@ const Register = ({
           </div>
 
           {/* Text */}
-          <a href={`/${local}/license`} className="ml-2 text-sm text-purple-800">
+          <a
+            href={`/${local}/privacy-policy`}
+            target="_blank"
+            className="ml-2 text-sm text-purple-800"
+          >
             {t("authentication.terms_agreement")}
           </a>
         </div>

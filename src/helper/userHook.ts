@@ -1,7 +1,6 @@
 import { RootState } from "@/lib/store";
 import { User } from "@/models/user";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -88,98 +87,4 @@ export const useUserHook = () => {
   return { getUserData, updateUserData, user, loading };
 };
 
-export const getPublicUserData = async (username: string, token: string) => {
-  try {
-    const response = await axios.get(
-      import.meta.env.VITE_BASE_URL + `users/${username}/profile/public`,
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
 
-    if (response.data["success"]) {
-      return [true, response.data["data"]];
-    }
-  } catch (error) {
-    console.log(error);
-    return [false, error];
-  }
-};
-
-export const getNotifications = async (token: string) => {
-  const local = Cookies.get("locale") || "ar";
-  try {
-    const response = await axios.get(
-      import.meta.env.VITE_BASE_URL + `notifications?locale=${local}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log(response.data);
-    if (response.data["success"]) {
-      return [true, response.data];
-    }
-    return [];
-  } catch (error) {
-    console.log(error);
-    return [false, error];
-  }
-};
-
-export const toggleFollow = async (username: string, token: string) => {
-  try {
-    const response = await axios.post(
-      import.meta.env.VITE_BASE_URL + "users/toggle-follow",
-      {
-        username: username,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.data["success"]) {
-      return [true, response.data["data"]];
-    }
-    return [];
-  } catch (error) {
-    console.log(error);
-    return [false, error];
-  }
-};
-export const getFollowers = async (username: string) => {
-  try {
-    const response = await axios.get(
-      import.meta.env.VITE_BASE_URL + `users/${username}/followers`
-    );
-    if (response.data["success"]) {
-      return [true, response.data["data"]];
-    }
-    return [];
-  } catch (error) {
-    console.log(error);
-    return [false, error];
-  }
-};
-export const getFollowing = async (username: string) => {
-  try {
-    const response = await axios.get(
-      import.meta.env.VITE_BASE_URL + `users/${username}/following`
-    );
-    if (response.data["success"]) {
-      return [true, response.data["data"]];
-    }
-    return [];
-  } catch (error) {
-    console.log(error);
-    return [false, error];
-  }
-};

@@ -15,13 +15,13 @@ import ResponsiveMenuModal from "./ResponsiveMenuModal";
 import FavoritesModal from "../FavoritesModal";
 import { search } from "@/lib/slices/searchSlice";
 import NotificationModal from "../NotificationModal";
-import { getNotifications } from "@/helper/userHook";
 import { Chat } from "@/models/Chat";
 import { Notification } from "@/models/notification";
 import { Badge } from "@mui/material";
 import { useTrans } from "@/utils/translation";
 import LanguageSelector from "../LanguageSelector";
 import { useNavigateWithLocale } from "@/helper/navigateWithLocale";
+import { apiRequest } from "@/utils/apiRequest";
 
 const Navbar = () => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -100,19 +100,25 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      getNotifications(token ?? "").then((result) => {
+      apiRequest({
+        method: "GET",
+        url: "notifications",
+        withLocale: true,
+        token: token!,
+      })
+        .then((result) => {
 
-        if (result[0]) {
-          setNotifications(result[1]["data"]["notifications"]["list"]);
-          setChats(result[1]["data"]["chats"]["list"]);
-          setUnread(
-            result[1]["data"]["notifications"]["unread_count"] +
-              result[1]["data"]["chats"]["unread_count"]
-          );
-        }
-      });
+          if (result["success"]) {
+            setNotifications(result["data"]["data"]["notifications"]["list"]);
+            setChats(result["data"]["data"]["chats"]["list"]);
+            setUnread(
+              result["data"]["data"]["notifications"]["unread_count"] +
+                result["data"]["data"]["chats"]["unread_count"]
+            );
+          }
+        });
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const { local } = useSelector((state: RootState) => state.translation);
 
@@ -137,7 +143,7 @@ const Navbar = () => {
         <UploadModal modalHandler={setOpenUploadModal} />
       )}
 
-      <header className="h-[70px] fixed z-10 w-screen  flex py-3 px-5 gap-4 bg-white items-center">
+      <nav className="h-[70px] fixed z-20 w-screen  flex py-3 px-5 gap-4 bg-white items-center">
         <a
           href={`/${local}?types=photo`}
           onClick={() => {
@@ -307,7 +313,7 @@ const Navbar = () => {
             />
           )}
         </div>
-      </header>
+      </nav>
     </>
   );
 };

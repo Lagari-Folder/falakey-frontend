@@ -14,6 +14,8 @@ import { useTrans } from "@/utils/translation";
 import AuthenticationModal from "@/components/Authentication/AuthenticationModal";
 import { fireConfettiAtClickPosition } from "@/helper/favoriteConfetti";
 import MasonryWrapper from "@/components/Masonry/MasonryWrapper";
+import DownloadCard from "@/components/PictureDetail/DownloadCard";
+import { DownloadData } from "@/models/post";
 
 const PictureDetail = () => {
   const { picture } = useParams();
@@ -23,7 +25,7 @@ const PictureDetail = () => {
     loading: isLoading,
     error,
   } = useFetchPostDetail(picture!);
-
+  const [selectedQuality, setSelectedQuality] = useState<DownloadData>();
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteCount, setFavoriteCount] = useState(0);
 
@@ -31,6 +33,7 @@ const PictureDetail = () => {
     if (postDetail) {
       setIsFavorite(postDetail!.is_favorite ?? false);
       setFavoriteCount(postDetail!.favorites_count ?? 0);
+      setSelectedQuality(postDetail!.download_data![0]);
     }
   }, [postDetail]);
 
@@ -98,7 +101,6 @@ const PictureDetail = () => {
         ) : (
           <div className="w-size space-y-6">
             <PictureDetailHeader
-            
               post={postDetail!}
               favoriteCount={favoriteCount}
               isFavorite={isFavorite}
@@ -109,22 +111,32 @@ const PictureDetail = () => {
                   handleFavorite(e);
                 }
               }}
-              
             />
-            {postDetail?.type == "video" ? (
-              <video
-                controls
-                className="max-h-[75vh] rounded-md max-lg:w-[98%] m-auto object-cover"
-              >
-                <source src={postDetail.preview_links?.original} type="" />
-              </video>
-            ) : (
-              <img
-                className="max-h-[75vh] rounded-md max-lg:w-[98%] m-auto object-cover"
-                src={postDetail?.preview_links?.md}
-                alt={postDetail?.title}
+            <div className="flex flex-col w-full lg:flex-row items-start gap-10 justify-center">
+              <div className="w-full flex flex-col items-center flex-1">
+                {postDetail?.type === "video" ? (
+                  <video controls className="rounded-md w-full object-cover">
+                    <source src={postDetail.preview_links?.original} />
+                  </video>
+                ) : (
+                  <img
+                    className={`rounded-md sm:w-full w-[95%] object-cover 
+                }`}
+                    src={postDetail?.preview_links?.md}
+                    alt={postDetail?.title}
+                  />
+                )}
+              </div>
+
+              <DownloadCard
+                post={postDetail!}
+                selected={selectedQuality}
+                setSelected={(s: DownloadData | undefined) =>
+                  setSelectedQuality(s!)
+                }
               />
-            )}
+            </div>
+
             <div className="my-4 mx-3 font-semibold text-lg">
               {postDetail?.title}
             </div>

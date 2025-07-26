@@ -1,34 +1,63 @@
+// PremiumButton.tsx
 import { useState } from "react";
 import { useTrans } from "@/utils/translation";
 import { StarIcon } from "@radix-ui/react-icons";
-import { Post } from "@/models/post";
+import { DownloadData, Post } from "@/models/post";
 import { useNavigateWithLocale } from "@/helper/navigateWithLocale";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import DownloadButton from "./DownloadButton";
+import AuthenticationModal from "../Authentication/AuthenticationModal";
+import { apiRequest } from "@/utils/apiRequest";
 
-const PremiumButton = ({ post }: { post: Post }) => {
+const PremiumButton = ({
+  post,
+  selected,
+}: {
+  post: Post;
+  selected: DownloadData;
+}) => {
   const { t } = useTrans();
   const navigate = useNavigateWithLocale();
   const [open, setOpen] = useState(false);
   const [insufficientCredits, setInsufficientCredits] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const [openAuthModal, setOpenAuthModal] = useState(false);
 
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user, token, isLoggedIn } = useSelector(
+    (state: RootState) => state.auth
+  );
 
-  const handlePurchase = () => {
-    if ((user?.credits ?? 0) < (post.credits ?? 0)) {
+  const handlePurchase = async () => {
+    if ((user?.wallet?.credits ?? 0) < (post.premium_credits ?? 0)) {
       setInsufficientCredits(true);
     } else {
-      console.log("Purchasing post:", post.id);
-      setOpen(false);
+      await apiRequest({
+        method: "POST",
+        url: "monetization/posts/purchase",
+        data: {
+          post_id: post.id,
+          credits: post.premium_credits,
+        },
+        token: token!,
+        withLocale: true,
+        showError: true,
+        showSuccess: true,
+      });
       setPurchaseSuccess(true);
-      // Add logic to deduct credits and unlock content
+      setOpen(false);
+    }
+  };
+
+  const handleOpen = () => {
+    if (!isLoggedIn) {
+      setOpenAuthModal(true);
+    } else {
+      setOpen(true);
     }
   };
 
   const handleBuyCredits = () => {
-    console.log("Redirecting to buy credits...");
-    // In real app:
     navigate(`/my-account/plans`);
     setInsufficientCredits(false);
     setOpen(false);
@@ -36,15 +65,20 @@ const PremiumButton = ({ post }: { post: Post }) => {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="sm:h-[45px] h-[30px] px-3 gap-2 flex bg-yellow-500 text-white rounded-md items-center justify-center transition hover:bg-yellow-600"
-      >
-        <StarIcon fontSize="small" />
-        <p className="sm:block hidden">{t("post.premium")}</p>
-      </button>
+      {post.is_purchased || purchaseSuccess ? (
+        <DownloadButton selected={selected} />
+      ) : (
+        <button
+          onClick={() => handleOpen()}
+          className="h-[45px] px-4 gap-2 flex bg-yellow-500 text-white rounded-md items-center justify-center transition hover:bg-yellow-600 font-semibold text-sm w-full"
+          title={`${t("post.premium")} - ${post.premium_credits ?? 0} credits`}
+        >
+          <StarIcon fontSize="small" />
+          <p>{t("post.download")}</p>
+        </button>
+      )}
+      {openAuthModal && <AuthenticationModal modalHandler={setOpenAuthModal} />}
 
-      {/* Main Purchase Modal */}
       {open && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center px-4">
           <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md space-y-4 animate-fade-in">
@@ -63,7 +97,7 @@ const PremiumButton = ({ post }: { post: Post }) => {
                   {t("post.credits_required")}:{" "}
                 </span>
                 <span className="text-yellow-600 font-bold">
-                  {post.credits ?? 0}
+                  {post.premium_credits ?? 0}
                 </span>
               </div>
               <div>
@@ -71,7 +105,7 @@ const PremiumButton = ({ post }: { post: Post }) => {
                   {t("post.your_credits")}:{" "}
                 </span>
                 <span className="text-green-700 font-semibold">
-                  {user?.credits ?? 0}
+                  {user?.wallet?.credits ?? 0}
                 </span>
               </div>
             </div>
@@ -94,7 +128,6 @@ const PremiumButton = ({ post }: { post: Post }) => {
         </div>
       )}
 
-      {/* Insufficient Credits Modal */}
       {insufficientCredits && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center px-4">
           <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md space-y-4">
@@ -122,7 +155,6 @@ const PremiumButton = ({ post }: { post: Post }) => {
         </div>
       )}
 
-      {/* Success Confirmation Modal */}
       {purchaseSuccess && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center px-4">
           <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md space-y-4">

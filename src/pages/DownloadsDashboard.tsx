@@ -1,9 +1,13 @@
 import { useDownloadHook } from "@/helper/downloadHook";
+import { RootState } from "@/lib/store";
 import { useTrans } from "@/utils/translation";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const DownloadsDashboard = () => {
   const { getDownloads, data, loading } = useDownloadHook();
+
+  const { local } = useSelector((state: RootState) => state.translation);
 
   useEffect(() => {
     getDownloads();
@@ -24,7 +28,7 @@ const DownloadsDashboard = () => {
             {data?.map((download) => (
               <a
                 className="w-[250px] relative  rounded-lg overflow-hidden flex flex-col gap-2 cursor-pointer"
-                href={`/listing/${download.slug}`}
+                href={`/${local}/listing/${download.slug}`}
               >
                 <img
                   src={download.preview_links?.thumb}

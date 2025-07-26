@@ -34,6 +34,7 @@ const MasonryLayout = ({
   const [openAuthModal, setOpenAuthModal] = useState(false);
 
   const { token } = useSelector((state: RootState) => state.auth);
+  const { local } = useSelector((state: RootState) => state.translation);
 
   const isFetchingRef = useRef(false);
 
@@ -47,11 +48,11 @@ const MasonryLayout = ({
   } = useMasonryPostHook();
 
   const fetchData = async () => {
-
     if (isFetchingRef.current) return;
     isFetchingRef.current = true;
     await fetchPosts(stringFiltering);
     isFetchingRef.current = false;
+    console.log(isFetchingRef);
   };
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const MasonryLayout = ({
       removeFavoriteOfAll();
     } else {
       if (selectedSlug) {
-        window.open(`/listing/${selectedSlug}`, "_self");
+        window.open(`/${local}/listing/${selectedSlug}`, "_self");
       }
     }
   }, [token]);
@@ -90,7 +91,7 @@ const MasonryLayout = ({
     <>
       {openAuthModal && <AuthenticationModal modalHandler={setOpenAuthModal} />}
 
-      <div className={`sm:max-w-screen-size max-sm:mx-3  ${screenWidth} `}>
+      <div className={`sm:max-w-screen-size max-sm:mx-3 ${screenWidth} `}>
         {title && (
           <div
             className={`${classTitle} ${
@@ -132,11 +133,14 @@ const MasonryLayout = ({
               {t("masonry.no_posts")}
             </div>
           }
+          style={{
+            overflow: "visible"
+          }}
         >
           <Masonry
             columnsCount={columnCount}
             gutter="16px"
-            className="masonry-grid mb-4"
+            className="masonry-grid mb-4 overflow-visible"
           >
             {(data ?? []).map((post) => (
               // <MasonryCardBigScreen key={post.id} post={post} />

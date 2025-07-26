@@ -1,25 +1,32 @@
-import { getNotifications } from "@/helper/userHook";
 import { RootState } from "@/lib/store";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import user_def from "../../public/icons/user-solid.svg";
 import { Notification } from "@/models/notification";
 import { useTrans } from "@/utils/translation";
+import { apiRequest } from "@/utils/apiRequest";
 
 const NotificationsDashboard = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [loading, setLoading] = useState(true); // ✅ Loading state
 
   const { token } = useSelector((state: RootState) => state.auth);
+  const { t } = useTrans();
 
   useEffect(() => {
-    getNotifications(token ?? "").then((result) => {
-      if (result[0]) {
-        setNotifications(result[1]["data"]["notifications"]["list"]);
+    setLoading(true); // ✅ Start loading
+    apiRequest({
+      method: "GET",
+      url: "notifications",
+      withLocale: true,
+      token: token!,
+    }).then((result) => {
+      if (result.success) {
+        setNotifications(result.data.data.notifications.list);
       }
+      setLoading(false); // ✅ End loading
     });
-  }, [token]); // ✅ FIXED: use [token] instead of [notifications] to avoid infinite loop
-
-  const { t } = useTrans();
+  }, [token]);
 
   return (
     <div className="">
@@ -29,12 +36,16 @@ const NotificationsDashboard = () => {
       </h1>
 
       <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
-        {notifications?.length === 0 ? (
+        {loading ? (
+          <div className="text-gray-400 text-sm text-center py-6 animate-pulse">
+            {t("loading") || "Loading..."}
+          </div>
+        ) : notifications?.length === 0 ? (
           <div className="text-gray-500 text-sm text-center py-6">
             {t("no_notifications") || "No notifications to show."}
           </div>
         ) : (
-          notifications?.map((notification, index) => (
+          notifications.map((notification, index) => (
             <div
               key={index}
               className={`flex items-center justify-between border-b ${

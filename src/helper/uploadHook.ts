@@ -127,16 +127,17 @@ export const useUploadHook = () => {
         formData.append(`items[${index}][title]`, element.title ?? "");
         formData.append(
           `items[${index}][is_download_locked]`,
-          element.isLocked!.toString()
+          String(element.isLocked ?? false)
         );
         formData.append(
           `items[${index}][is_premium]`,
-          element.isPremium!.toString()
+          String(element.isPremium ?? false)
         );
         formData.append(
           `items[${index}][location]`,
           element.location ? element.location.name ?? "" : ""
         );
+
         formData.append(
           `items[${index}][location_lat]`,
           element.location ? element.location.lat ?? "" : ""

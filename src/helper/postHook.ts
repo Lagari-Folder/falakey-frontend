@@ -73,7 +73,8 @@ export const useMasonryPostHook = () => {
   const pageRef = useRef<number>(1);
 
   const fetchPosts = async (stringFiltering?: string) => {
-    if (!more || loading) return;
+
+    if (loading) return;
 
     // Abort previous request if needed
     if (abortControllerRef.current) {
@@ -129,6 +130,7 @@ export const useMasonryPostHook = () => {
           signal: controller.signal,
         }
       );
+      console.log("Response Data: ", response.data);
 
       if (response.data?.success) {
         const newData: Post[] = response.data.data;
@@ -314,5 +316,32 @@ export const getFileTemp = async (file: File, token: string) => {
       message: error.response.data.message ?? "",
       temp_file_path: "",
     };
+  }
+};
+
+export const purchasePost = async (
+  postId: string,
+  credits: number,
+  token: string
+) => {
+  const locale = Cookies.get("locale") || "ar";
+  try {
+    const response = axios.post(
+      import.meta.env.VITE_BASE_URL +
+        `monetization/posts/purchase?locale=${locale}`,
+      {
+        post_id: postId,
+        credits: credits,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Response: ", response);
+  } catch (error) {
+    console.log("Error: ", error);
   }
 };

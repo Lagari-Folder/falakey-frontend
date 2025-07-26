@@ -65,7 +65,7 @@ const SideBar = () => {
           </MenuItem>
         </Select>
       </div>
-      <div className="lg:flex hidden fixed left-0 top-[70px] bottom-0 w-[60px] bg-white flex-col items-center justify-start py-6 shadow-md gap-6 z-50">
+      <div className="lg:flex hidden fixed left-0 top-[70px] bottom-0 w-[60px] bg-white flex-col items-center justify-start py-6 shadow-md gap-6 z-10">
         <SideBarLink
           title={t("sidebar.dashboard")}
           route={`/${local}/my-account`}

@@ -49,7 +49,7 @@ const FalakeyStarsBanner = ({
                       : ""
                   } border-primary sm:py-5 `}
                 >
-                  <div className="flex gap-3  items-center overflow-hidden">
+                  <div className="flex gap-3  items-center overflow-visible">
                     <img
                       src={leader.author?.avatar ?? unkownProfile}
                       className="rounded-full object-cover aspect-square sm:size-[40px] xs:size-[30px] size-[25px]"
@@ -59,9 +59,6 @@ const FalakeyStarsBanner = ({
                       <div className="!leading-4 sm:text-sm xs:text-xs  text-[12px]   font-bold overflow-hidden">
                         {leader.author?.display_name}
                       </div>
-                      {/* <div className="sm:text-xs text-[0.5rem] font-semibold text-gray-400">
-                    {leader.total_views} views
-                    </div> */}
                     </div>
                   </div>
                 </td>

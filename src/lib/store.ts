@@ -2,8 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice, { login } from "./slices/authSlice";
 import searchSlice from "./slices/searchSlice";
 import transSlice from "./slices/transSlice";
-import { getUserProfile } from "@/helper/authHook";
 import Cookies from "js-cookie";
+import { apiRequest } from "@/utils/apiRequest";
 
 const KNOWN_LOCALES = ["en", "ar"];
 const FALLBACK_LOCALE = "ar";
@@ -117,11 +117,15 @@ store.subscribe(() => {
   const token = state.auth.token;
 
   if (token) {
-    const result = await getUserProfile(token);
-    if (result) {
+    const result = await apiRequest({
+      method: "GET",
+      url: "users/profile/private",
+      token: token,
+    });
+    if (result["success"]) {
       store.dispatch(
         login({
-          user: result,
+          user: result["data"]["data"],
           isLoggedIn: true,
           token,
         })

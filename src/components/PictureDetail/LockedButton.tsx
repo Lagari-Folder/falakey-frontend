@@ -7,9 +7,9 @@ const LockedButton = () => {
   return (
     <button
       disabled
-      className="sm:h-[45px] h-[30px] aspect-square px-2 gap-2 flex bg-[#b17ece]/50 text-white rounded-md items-center justify-center"
+      className="h-[45px] w-full px-2 gap-2 flex bg-[#b17ece]/50 text-white rounded-md items-center justify-center"
     >
-      <p className="sm:block hidden">{t("post.download")}</p>
+      <p>{t("post.download")}</p>
       <span className="flex items-center justify-center">
         <FontAwesomeIcon icon={faLock} />
       </span>

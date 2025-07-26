@@ -1,4 +1,4 @@
-import { resetPassword, sendOTPEmail } from "@/helper/authHook";
+import { apiRequest } from "@/utils/apiRequest";
 import { useTrans } from "@/utils/translation";
 import { Input } from "@mui/material";
 import { useState } from "react";
@@ -88,9 +88,18 @@ const ForgetPassword = ({ switchToLogin }: { switchToLogin: () => void }) => {
           if (!loading) {
             setLoading(true);
             if (otpSent) {
-              resetPassword(email, password, passwordConfirmation, otp)
+              apiRequest({
+                method: "POST",
+                url: "auth/reset-password",
+                data: {
+                  email: email,
+                  password: password,
+                  password_confirmation: passwordConfirmation,
+                  otp: otp,
+                },
+              })
                 .then((result) => {
-                  if (result) {
+                  if (result["data"]["success"]) {
                     switchToLogin();
                   }
                 })
@@ -98,9 +107,15 @@ const ForgetPassword = ({ switchToLogin }: { switchToLogin: () => void }) => {
                   setLoading(false);
                 });
             } else {
-              sendOTPEmail(email)
+              apiRequest({
+                method: "POST",
+                url: "auth/send-otp/email",
+                data: {
+                  email: email,
+                },
+              })
                 .then((result) => {
-                  setOtpSent(result);
+                  setOtpSent(result["data"]["success"]);
                 })
                 .finally(() => {
                   setLoading(false);

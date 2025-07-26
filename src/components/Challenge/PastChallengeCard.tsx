@@ -7,7 +7,7 @@ const PastChallengeCard = ({ challenge }: { challenge: Challenge }) => {
   const { t } = useTrans();
 
   return (
-    <div className="flex lg:flex-row flex-col max-lg:items-center md:gap-16 gap-6 max-w-[1100px] w-[98%] lg:h-[320px] h-full mx-3 my-6 ">
+    <div className="flex lg:flex-row flex-col max-lg:items-center md:gap-16 gap-6 max-w-[1100px] w-[98%] lg:min-h-[320px] h-full mx-3 my-6 ">
       <div className="h-[320px] lg:w-[550px] lg:min-w-[500px] w-full flex gap-1 justify-between rounded-[25px] overflow-hidden">
         <img
           src={challenge.media[0].thumb}

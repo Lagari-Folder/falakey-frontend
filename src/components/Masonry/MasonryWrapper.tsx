@@ -21,6 +21,8 @@ const MasonryWrapper = ({
   const [modalDataSlug, setModalDataSlug] = useState<string>();
   const searchState = useSelector((state: RootState) => state.search);
 
+  const {local} = useSelector((state: RootState) => state.translation)
+
   const previousURLRef = useRef<string | null>(null);
 
   // Manage body scroll when modal is open
@@ -36,7 +38,7 @@ const MasonryWrapper = ({
   // ✅ Handle click to open modal and save previous route
   const handleCardClick = (slug: string) => {
     previousURLRef.current = window.location.pathname + window.location.search;
-    window.history.pushState({ modalOpen: true }, "", `/listing/${slug}`);
+    window.history.pushState({ modalOpen: true }, "", `/${local}/listing/${slug}`);
     setModalDataSlug(slug);
   };
 

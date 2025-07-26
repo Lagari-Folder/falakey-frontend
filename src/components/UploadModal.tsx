@@ -23,6 +23,8 @@ const UploadModal = ({
   modalHandler: (b: boolean) => void;
   filtering?: { key: string; value: string }[];
 }) => {
+  const { local } = useSelector((state: RootState) => state.translation);
+
   const [uploadData, setUploadData] = useState<UploadParam[]>([]);
   const [imageDataLoading, setImageDataLoading] = useState(false);
   const maxUploads = filtering?.some((item) => item.key === "challenge_id")
@@ -162,7 +164,6 @@ const UploadModal = ({
         // Continue with getFileTemp logic...
         getFileTemp(file, token!)
           .then((result) => {
-
             if (result["success"]) {
               setUploadData((prevFiles: UploadParam[]) =>
                 prevFiles.map((uploadFile) =>
@@ -406,6 +407,19 @@ const UploadModal = ({
                     {maxUploads - uploadData.length}{" "}
                     {t("upload_modal.more_items")}
                   </div>
+                  <div className="w-full text-center mt-4 mb-6">
+                    <p className="text-xs sm:text-sm text-gray-600">
+                      By uploading, you agree to our{" "}
+                      <a
+                        href="/en/terms-and-conditions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-primary hover:text-primary-dark font-medium"
+                      >
+                        Terms of Service
+                      </a>
+                    </p>
+                  </div>
                 </div>
               )}
               <div className="w-full flex justify-center lg:justify-start flex-wrap gap-2">
@@ -468,6 +482,20 @@ const UploadModal = ({
                 <li>&#8226; {t("upload_modal.you_own")}</li>
                 <li>&#8226; {t("upload_modal.respect_others")}</li>
               </ul>
+              <div className="w-full text-center mt-4 mb-6">
+                <p className="text-xs sm:text-sm text-gray-600">
+                  {t("upload_modal.upload_terms_text")}{" "}
+                  <a
+                    href={`/${local}/terms-and-conditions`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="underline text-primary hover:text-primary-dark font-medium"
+                  >
+                    {t("upload_modal.upload_terms_link")}
+                  </a>
+                </p>
+              </div>
             </div>
           )}
           <div className="w-full  flex justify-end gap-3 mt-1">

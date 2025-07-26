@@ -37,7 +37,7 @@ const Dashboard = () => {
       </h1>
 
       {loading ? (
-        <div className="space-y-6 animate-pulse">
+        <div className="space-y-6 animate-pulse max-w-[1400px] w-[1400px]">
           <Skeleton
             variant="rounded"
             className="rounded-lg"

@@ -10,7 +10,7 @@ const ActiveChallengeCard = ({ challenge }: { challenge: Challenge }) => {
   const { local } = useSelector((state: RootState) => state.translation);
 
   return (
-    <div className="flex lg:flex-row flex-col max-lg:items-center gap-16 max-w-[1100px] w-[98%] lg:h-[320px] h-full mx-3 my-6 ">
+    <div className="flex lg:flex-row flex-col max-lg:items-center gap-16 max-w-[1100px] w-[98%] lg:min-h-[320px] h-full mx-3 my-6 ">
       <div className="h-[320px] lg:w-[550px] lg:min-w-[500px] w-full flex gap-1 justify-between rounded-[25px] overflow-hidden">
         <img
           src={challenge.media[0].thumb}

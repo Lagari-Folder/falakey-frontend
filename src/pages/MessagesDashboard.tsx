@@ -43,51 +43,59 @@ const MessagesDashboard = () => {
         </div>
       ) : (
         <div className="bg-white border border-gray-300 rounded-lg py-1 px-5 ">
-          {chats!.map((chat: Chat) => (
-            <div
-              key={chat.id}
-              className="flex items-center justify-between border-b border-gray-200 py-3 last:border-none cursor-pointer h-[80px]"
-              onClick={() => handleShowModal(chat)} // Opens modal on row click
-            >
-              <div className="flex items-center gap-4 h-full">
-                <div className="relative size-[45px] rounded-full bg-black flex items-center justify-center ">
-                  {!chat.last_message.is_read && (
-                    <span className="absolute top-0 right-0 w-[12px] h-[12px] bg-red-500 rounded-full border-2 border-white"></span>
-                  )}
-                  {chat.peer ? (
-                    <img
-                      className="size-full object-cover rounded-full"
-                      src={chat.peer.avatar}
-                      alt={chat.peer.display_name || "Profile Picture"}
-                    />
-                  ) : (
-                    <img
-                      className="size-full rounded-full object-cover"
-                      src={unkownProf}
-                      alt={(chat.peer as User).display_name! ?? "Profile Picture"}
-                    />
-                  )}
+          {chats && chats.length > 0 ? (
+            chats.map((chat: Chat) => (
+              <div
+                key={chat.id}
+                className="flex items-center justify-between border-b border-gray-200 py-3 last:border-none cursor-pointer h-[80px]"
+                onClick={() => handleShowModal(chat)} // Opens modal on row click
+              >
+                <div className="flex items-center gap-4 h-full">
+                  <div className="relative size-[45px] rounded-full bg-black flex items-center justify-center">
+                    {!chat.last_message.is_read && (
+                      <span className="absolute top-0 right-0 w-[12px] h-[12px] bg-red-500 rounded-full border-2 border-white"></span>
+                    )}
+                    {chat.peer ? (
+                      <img
+                        className="size-full object-cover rounded-full"
+                        src={chat.peer.avatar}
+                        alt={chat.peer.display_name || "Profile Picture"}
+                      />
+                    ) : (
+                      <img
+                        className="size-full rounded-full object-cover"
+                        src={unkownProf}
+                        alt={
+                          (chat.peer as User).display_name! ?? "Profile Picture"
+                        }
+                      />
+                    )}
+                  </div>
+
+                  <div className="pl-3">
+                    <p className="font-semibold text-[14px]">
+                      {chat.peer.display_name || chat.peer.username}
+                    </p>
+                    <p className="text-[13px] text-gray-500">
+                      {chat.last_message.created_at}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="pl-3">
-                  <p className="font-semibold text-[14px]">
-                    {chat.peer.display_name || chat.peer.username}
-                  </p>
-                  <p className="text-[13px] text-gray-500">
-                    {chat.last_message.created_at}
-                  </p>
-                </div>
+                {chat.post && (
+                  <img
+                    className="size-[45px] object-cover rounded-md aspect-square"
+                    src={chat.post?.preview_links?.thumb}
+                    alt={chat.post.title}
+                  />
+                )}
               </div>
-
-              {chat.post && (
-                <img
-                  className="size-[45px] object-cover rounded-md aspect-square"
-                  src={chat.post?.preview_links?.thumb}
-                  alt={chat.post.title}
-                />
-              )}
+            ))
+          ) : (
+            <div className="text-center py-6 text-gray-500 text-lg font-medium">
+              {t("messages_dashboard.no_messages") || "No messages found."}
             </div>
-          ))}
+          )}
         </div>
       )}
 

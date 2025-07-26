@@ -1,8 +1,10 @@
 import { useFavoriteHook } from "@/helper/postHook";
+import { RootState } from "@/lib/store";
 import { useTrans } from "@/utils/translation";
 import { ImageIcon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
 import { FaTrash } from "react-icons/fa"; // Importing the trash icon
+import { useSelector } from "react-redux";
 
 const FavoritesModal = ({
   showModal,
@@ -11,6 +13,8 @@ const FavoritesModal = ({
   showModal: (b: boolean) => void;
   showFavoritesModal: boolean;
 }) => {
+  const { local } = useSelector((state: RootState) => state.translation);
+
   const { fetchFavorites, removeFavorite, favorites, loading } =
     useFavoriteHook();
   useEffect(() => {
@@ -66,7 +70,7 @@ const FavoritesModal = ({
                   <a
                     key={item.id}
                     className="relative w-[90px] h-[60px] rounded-md overflow-hidden bg-gray-100 z-10"
-                    href={`/listing/${item.slug}`}
+                    href={`/${local}/listing/${item.slug}`}
                     onClick={() => {
                       showModal(false);
                     }}

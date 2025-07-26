@@ -96,11 +96,11 @@ const Home = () => {
         // setSelectedCategoryIndex={setSelectedCategoryIndex}
       />
       <div className="w-full flex justify-center">
-        <div className="sm:max-w-screen-size sm:w-[95%] w-full mx-3">
+        <div className="sm:max-w-screen-size w-[95%]">
           {/* First row: On lg and bigger, two divs side by side */}
           <div className="lg:grid-cols-[1fr_300px] md:grid-cols-[1fr_250px] grid grid-cols-1  gap-4">
             {/* First container */}
-            <div className="h-[300px] md:h-[325px] lg:h-[375px]   w-full">
+            <div className="h-[300px] md:h-[325px] lg:h-[375px] w-full">
               <HomeBanner
                 slogan={t("home.banner_slogan")}
                 author={
@@ -124,14 +124,19 @@ const Home = () => {
 
           {/* Second row: On lg and bigger, full-width third container */}
           {/* On smaller screens, second and third containers are side by side */}
-          <div className="grid grid-cols-[1fr_150px] gap-4 mt-4 md:grid-cols-1">
-            {/* Second container (again on small screens) */}
-            <div className="md:hidden flex-1 h-[150px] sm:h-[150px] lg:h-[125px] w-full">
+          <div className="grid grid-cols-[1fr_auto] gap-4 mt-4 md:grid-cols-1 items-start">
+            {/* Stars banner - fills remaining space */}
+            <div className="md:hidden w-full h-[clamp(110px,8vw,160px)] min-[500px]:h-[clamp(125px,9vw,175px)] min-[768px]:h-[clamp(140px,10vw,200px)]">
               <FalakeyStarsBanner leaderBoardUser={data?.leaderboard ?? []} />
             </div>
 
-            {/* Third container */}
-            <div className="aspect-square md:aspect-auto h-[150px] sm:h-[150px] md:h-[125px] lg:h-[125px] ">
+            {/* Explore banner - same height, square, responsive */}
+            <div
+              className="h-[clamp(110px,8vw,160px)] w-[clamp(110px,8vw,160px)] 
+              min-[500px]:h-[clamp(125px,9vw,175px)] min-[500px]:w-[clamp(125px,9vw,175px)] 
+              min-[768px]:h-[clamp(120px,10vw,140px)] 
+              md:w-full "
+            >
               <ExploreChallengesBanner />
             </div>
           </div>

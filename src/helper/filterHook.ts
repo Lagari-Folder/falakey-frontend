@@ -39,7 +39,7 @@ export const useFetchFilter = (stringFiltering: string) => {
     };
 
     fetchPosts();
-  }, [stringFiltering]);
+  }, [stringFiltering, local]);
 
   return { data, loading, error };
 };

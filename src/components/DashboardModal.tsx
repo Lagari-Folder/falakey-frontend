@@ -56,7 +56,7 @@ const DashboardModal = ({
       {openModal && (
         <div
           ref={modalRef}
-          className="absolute top-full right-0 mt-2 bg-white border border-gray-300 shadow-xl rounded-lg  w-72 py-5 text-[#767676] !text-md font-semibold space-y-2 z-50"
+          className="absolute top-full right-0 mt-2 bg-white border border-gray-300 shadow-xl rounded-lg  w-72 py-5 text-[#767676] !text-md font-semibold space-y-2 z-20"
         >
           <NavLink
             to={`/${local}/my-account`}
