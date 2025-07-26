@@ -6,6 +6,8 @@ export default async function middleware(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
 
+  console.log("HERE IT IS ");
+
   // Skip static assets or files requests
   if (pathname.startsWith("/static") || pathname.includes(".")) {
     return new Response(null, { status: 404 });
