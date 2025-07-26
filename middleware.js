@@ -24,9 +24,9 @@ export default async function middleware(req) {
   const isBot = botRegex.test(userAgent);
 
   // If NOT a bot, let the React SPA handle routing
-  if (!isBot) {
-    return;
-  }
+  // if (!isBot) {
+  //   return;
+  // }
 
   const parts = pathname.split("/");
 
