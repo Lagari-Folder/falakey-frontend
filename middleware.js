@@ -84,7 +84,7 @@ export default async function middleware(req) {
       const username = parts[3] || "";
       if (!username) return;
 
-      apiUrl = `https://admin.falakey.com/api/v1/users/${username}/profile/public?locale=${locale}`;
+      apiUrl = `https://admin.falakey.com/api/v1/users/${username}/profile/public`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) throw new Error(`Failed to fetch author data`);
