@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export const config = {
   matcher: ["/challenge/:slug*"],
 };
@@ -12,7 +14,7 @@ export default async function middleware(req) {
 
   // return the actual page if it's a user request
   if (!isSocialMediaCrawler) {
-    return;
+    return NextResponse.next(); // let normal users load your app
   }
   return new Response(
     `
