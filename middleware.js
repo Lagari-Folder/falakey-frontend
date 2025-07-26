@@ -34,7 +34,7 @@ export default async function middleware(req) {
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) throw new Error("Failed to fetch challenge data");
-    const challenge = await response.json();
+    const challenge = await response.json()["data"];
 
     const title = challenge.title || `Challenge: ${slug}`;
     const description =
