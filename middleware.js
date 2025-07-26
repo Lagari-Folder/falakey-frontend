@@ -25,7 +25,7 @@ export default async function middleware(req) {
     });
   }
 
-  const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/challenges/show/${slug}?locale=${locale}`;
+  const apiUrl = `https://admin.falakey.com/api/v1//challenges/show/${slug}?locale=${locale}`;
   console.log("Fetching SEO data:", apiUrl);
 
   try {
