@@ -13,7 +13,7 @@ export default async function middleware(req) {
   if (!isSocialMediaCrawler) {
     return;
   }
-
+  console.log("HELLO");
   return new Response(
     `
     <html>
