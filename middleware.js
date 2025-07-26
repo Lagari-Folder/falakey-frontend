@@ -5,75 +5,78 @@ export const config = {
 export default async function middleware(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
-
   const userAgent = req.headers.get("user-agent") || "";
+
   console.log("Middleware triggered for", pathname, "User-Agent:", userAgent);
 
-  // Skip static files
+  // Ignore static files
   if (pathname.startsWith("/static") || pathname.includes(".")) {
     return new Response(null, { status: 404 });
   }
 
-  // Detect social bots
-  const botRegex =
-    /(Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator|WhatsApp)/i;
-  const isBot = botRegex.test(userAgent);
-
-  // Normal users just go to React
-  // if (!isBot) return;
-
-  // Extract slug/locale
+  // Extract locale and slug
   const parts = pathname.split("/");
   const locale = parts[1] || "en";
   const slug = parts[3] || "";
-  if (!slug) return;
+  if (!slug) {
+    return new Response(`<h1>No slug found in path: ${pathname}</h1>`, {
+      headers: { "content-type": "text/html" },
+      status: 400,
+    });
+  }
 
   const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/challenges/show/${slug}?locale=${locale}`;
   console.log("Fetching SEO data:", apiUrl);
 
   try {
     const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error("Failed to fetch challenge data");
-    const challenge = await response.json()["data"];
 
-    const title = challenge.title || `Challenge: ${slug}`;
-    const description =
-      challenge.short_description ||
-      challenge.description ||
-      `Join the challenge ${slug} now!`;
-    const seoImage =
-      challenge.media && challenge.media.length > 0
-        ? challenge.media[0].original
-        : "https://example.com/default-image.png";
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch challenge data. Status: ${response.status}`
+      );
+    }
 
+    const json = await response.json();
+    console.log("API Raw JSON:", json);
+
+    const challenge = json.data;
+    if (!challenge) {
+      throw new Error("Challenge data missing from API response");
+    }
+
+    // Show data for debugging
     return new Response(
       `<!DOCTYPE html>
 <html lang="${locale}">
 <head>
   <meta charset="UTF-8" />
-  <title>${title}</title>
-  <meta name="description" content="${description}" />
-  <meta property="og:title" content="${title}" />
-  <meta property="og:description" content="${description}" />
-  <meta property="og:image" content="${seoImage}" />
-  <meta property="og:url" content="${req.url}" />
-  <meta property="og:type" content="article" />
-  <meta name="twitter:title" content="${title}" />
-  <meta name="twitter:description" content="${description}" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="${seoImage}" />
+  <title>Debug SEO Data</title>
 </head>
 <body>
-  <h1>${title}</h1>
-  <p>${description}</p>
+  <h1>Debug SEO Data for slug: ${slug}</h1>
+  <p><strong>API URL:</strong> ${apiUrl}</p>
+  <pre>${JSON.stringify(challenge, null, 2)}</pre>
 </body>
 </html>`,
-      {
-        headers: { "content-type": "text/html" },
-      }
+      { headers: { "content-type": "text/html" } }
     );
   } catch (error) {
     console.error("Middleware SEO fetch error:", error);
-    return;
+
+    // Show error page
+    return new Response(
+      `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>SEO Debug Error</title></head>
+<body>
+  <h1>Middleware SEO fetch error</h1>
+  <p><strong>API URL:</strong> ${apiUrl}</p>
+  <p><strong>Error:</strong> ${error.message}</p>
+  <pre>${error.stack}</pre>
+</body>
+</html>`,
+      { headers: { "content-type": "text/html" }, status: 500 }
+    );
   }
 }
