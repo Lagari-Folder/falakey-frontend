@@ -24,7 +24,7 @@ export default async function middleware(req) {
   <h1>SEO Middleware Error</h1>
   <p>${url}</p>
   <p>${pathname}</p>
-  <p>${userAgent}</p>
+  <p>${pathname.startsWith(`/${locale}/author/`)}</p>
 </body>
 </html>`,
       { status: 500, headers: { "content-type": "text/html" } }
