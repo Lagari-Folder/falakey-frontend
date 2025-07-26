@@ -12,35 +12,31 @@ export default async function middleware(req) {
   }
 
   const userAgent = req.headers.get("user-agent") || "";
-
-  // Include WhatsApp bot in the regex
   const botRegex =
     /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator|WhatsApp/i;
 
   const isBot = botRegex.test(userAgent);
 
   if (!isBot) {
-    // Redirect normal users back to the SAME path so React Router can handle it
-    return Response.redirect(null, { status: 200 });
+    // Let React app handle normal user requests
+    return; // No redirect!
   }
 
+  // Extract slug and locale
+  const parts = pathname.split("/");
   const locale = parts[1] || "en";
   const slug = parts[3] || "";
 
   if (!slug) {
-    // No slug found, fallback to homepage
-    return Response.redirect(new URL("/", req.url), 307);
+    return; // fallback to SPA
   }
 
-  // Compose API URL
   const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/challenges/show/${slug}?locale=${locale}`;
 
   try {
     const response = await fetch(apiUrl);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch challenge data");
-    }
+    if (!response.ok) throw new Error("Failed to fetch challenge data");
 
     const challenge = await response.json();
 
@@ -79,8 +75,6 @@ export default async function middleware(req) {
     );
   } catch (error) {
     console.error("Middleware SEO fetch error:", error);
-
-    // Fallback to redirect normal users to the original path on error
-    return Response.redirect(null, { status: 200 });
+    return; // Let the frontend handle it on error
   }
 }
