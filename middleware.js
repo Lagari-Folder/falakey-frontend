@@ -1,12 +1,12 @@
 export const config = {
-  matcher: ["/challenge/:slug*"],
+  matcher: ["/ar/challenge/:slug*"],
 };
 
 export default async function middleware(req) {
   // const url = new URL(req.url);
   // const pathname = url.pathname;
 
-  // console.log(pathname);
+  console.log("HELLO THERE");
   // // Skip static assets
   // if (pathname.startsWith("/static") || pathname.includes(".")) {
   //   return new Response(null, { status: 404 });
