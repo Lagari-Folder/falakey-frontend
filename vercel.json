@@ -1,22 +1,15 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
-
   "version": 2,
   "builds": [
-    { "src": "vite.config.*", "use": "@vercel/static-build" },
-    { "src": "package.json", "use": "@vercel/static-build" }
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "headers": {
-        "x-prerender": "1"
-      }
+      "dest": "/index.html"
     }
-  ],
-  "prerender": {
-    "expiration": 3600,
-    "group": 1
-  }
+  ]
 }
