@@ -1,23 +1,20 @@
-// src/components/Common/SEO.tsx
-
 import { Helmet } from "react-helmet-async";
-import icon from "../../../public/star-icon.svg"; // Your default icon
+import icon from "/star-icon.svg"; // public/star-icon.svg
 import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store"; // Adjust this path if needed
+import { RootState } from "@/lib/store";
 
-// 🔍 Localized content for title and description
 const localizedContent = {
   en: {
     title: "Falakey | Free Stock Photos",
     description:
       "Discover free high-quality stock photos and creative photography challenges.",
-    image: "/icons/star-icon.svg", // You can override per page or use default
+    image: "/icons/star-icon.svg",
   },
   ar: {
     title: "فلكي | صور مجانية عالية الجودة",
     description:
       "اكتشف صورًا مجانية عالية الجودة وتحديات إبداعية في التصوير الفوتوغرافي.",
-    image: "/icons/star-icon.svg", // Replace with an Arabic-specific image if desired
+    image: "/icons/star-icon.svg",
   },
 };
 
@@ -43,26 +40,28 @@ export default function SEO({
   const content =
     localizedContent[locale as "en" | "ar"] || localizedContent.en;
 
+  // Avoid SSR crashes (window is undefined during SSR)
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
+  const path = typeof window !== "undefined" ? window.location.pathname : "";
+
   const resolvedTitle = title || content.title;
   const resolvedDescription = description || content.description;
-  const resolvedImage = `${window.location.origin}${image || content.image}`;
+  const resolvedImage = `${origin}${image || content.image}`;
 
-  const canonicalUrl = `${window.location.origin}${window.location.pathname}`;
-  const enUrl = `${window.location.origin}/en${window.location.pathname}`;
-  const arUrl = `${window.location.origin}/ar${window.location.pathname}`;
+  const canonicalUrl = `${origin}${path}`;
+  const enUrl = `${origin}/en${path}`;
+  const arUrl = `${origin}/ar${path}`;
 
   return (
     <Helmet htmlAttributes={{ lang: locale, dir }}>
-      {/* Page Title */}
       <title>{resolvedTitle}</title>
 
-      {/* Favicon */}
+      {/* favicon */}
       <link rel="icon" type="image/svg+xml" href={icon} />
 
-      {/* Meta Description */}
       <meta name="description" content={resolvedDescription} />
 
-      {/* Open Graph / Facebook / WhatsApp Tags */}
+      {/* Open Graph */}
       <meta property="og:type" content={type || "website"} />
       <meta property="og:title" content={resolvedTitle} />
       <meta property="og:description" content={resolvedDescription} />
@@ -74,14 +73,14 @@ export default function SEO({
       />
       <meta property="og:site_name" content="Falakey" />
 
-      {/* Twitter Card */}
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={resolvedTitle} />
       <meta name="twitter:description" content={resolvedDescription} />
       <meta name="twitter:image" content={resolvedImage} />
       <meta name="twitter:site" content={name || "@falakey"} />
 
-      {/* Hreflang Tags for Multilingual SEO */}
+      {/* Multilingual links */}
       <link rel="alternate" hrefLang="en" href={enUrl} />
       <link rel="alternate" hrefLang="ar" href={arUrl} />
       <link rel="alternate" hrefLang="x-default" href={enUrl} />

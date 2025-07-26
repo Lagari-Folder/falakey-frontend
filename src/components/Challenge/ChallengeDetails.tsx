@@ -59,6 +59,7 @@ const ChallengeDetails = () => {
         } challenge on Falakey and showcase your creativity!`}
         name="Falakey"
         type="article"
+        image={data?.media?.[0]?.original} // dynamic OG image
       />
 
       {openAuthModal && <AuthenticationModal modalHandler={setOpenAuthModal} />}
