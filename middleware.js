@@ -1,5 +1,9 @@
 export const config = {
-  matcher: ["/:locale/challenge/:slug*"],
+  matcher: [
+    "/:locale/challenge/:slug*",
+    "/:locale/listing/:picture*",
+    "/:locale/author/:username*",
+  ],
 };
 
 export default async function middleware(req) {
@@ -21,46 +25,81 @@ export default async function middleware(req) {
 
   // If NOT a bot, let the React SPA handle routing
   if (!isBot) {
-    return; // return undefined means pass-through
+    return;
   }
 
-  // Extract locale and slug from /:locale/challenge/:slug
   const parts = pathname.split("/");
-  const locale = parts[1] || "en";
-  const slug = parts[3] || "";
-  if (!slug) {
-    return; // fallback to React SPA
-  }
 
-  const apiUrl = `https://admin.falakey.com/api/v1/challenges/show/${slug}?locale=${locale}`;
-  console.log("Fetching SEO data:", apiUrl);
+  // Extract locale (assumed always first)
+  const locale = parts[1] || "en";
+
+  // Determine route type and extract slug/identifier
+  let apiUrl = null;
+  let title = "";
+  let description = "";
+  let seoImage = "";
 
   try {
-    const response = await fetch(apiUrl);
+    if (pathname.startsWith(`/${locale}/challenge/`)) {
+      // /:locale/challenge/:slug
+      const slug = parts[3] || "";
+      if (!slug) return;
 
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch challenge data. Status: ${response.status}`
-      );
+      apiUrl = `https://admin.falakey.com/api/v1/challenges/show/${slug}?locale=${locale}`;
+
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error(`Failed to fetch challenge data`);
+      const json = await response.json();
+      const challenge = json.data;
+      if (!challenge) throw new Error("Challenge data missing");
+
+      title = challenge.title || `Challenge: ${slug}`;
+      description =
+        challenge.short_description ||
+        challenge.description ||
+        `Join the challenge ${slug} now!`;
+      seoImage =
+        challenge.media && challenge.media.length > 0
+          ? challenge.media[0].original
+          : "https://example.com/default-image.png";
+    } else if (pathname.startsWith(`/${locale}/listing/`)) {
+      // /:locale/listing/:picture
+      const picture = parts[3] || "";
+      if (!picture) return;
+
+      apiUrl = `https://admin.falakey.com/api/v1/posts/show/${slug}?locale=${local}`;
+
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error(`Failed to fetch picture data`);
+      const json = await response.json();
+      const pictureData = json.data;
+      if (!pictureData) throw new Error("Picture data missing");
+
+      title = pictureData.title || `Picture: ${picture}`;
+      description = pictureData.description || `View picture ${picture}`;
+      seoImage =
+        pictureData.media?.original || "https://example.com/default-image.png";
+    } else if (pathname.startsWith(`/${locale}/author/`)) {
+      // /:locale/author/:username
+      const username = parts[3] || "";
+      if (!username) return;
+
+      apiUrl = `https://admin.falakey.com/api/v1/users/${username}/profile/public?locale=${locale}`;
+
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error(`Failed to fetch author data`);
+      const json = await response.json();
+      const author = json.data;
+      if (!author) throw new Error("Author data missing");
+
+      title = author.name || `Author: ${username}`;
+      description = author.bio || `Explore works by ${author.name || username}`;
+      seoImage = author.avatar || "https://example.com/default-image.png";
+    } else {
+      // If route not matched, let React handle
+      return;
     }
 
-    const json = await response.json();
-    const challenge = json.data;
-    if (!challenge) {
-      throw new Error("Challenge data missing from API response");
-    }
-
-    const title = challenge.title || `Challenge: ${slug}`;
-    const description =
-      challenge.short_description ||
-      challenge.description ||
-      `Join the challenge ${slug} now!`;
-    const seoImage =
-      challenge.media && challenge.media.length > 0
-        ? challenge.media[0].original
-        : "https://example.com/default-image.png";
-
-    // Return SEO-friendly HTML
     return new Response(
       `<!DOCTYPE html>
 <html lang="${locale}">
@@ -88,8 +127,6 @@ export default async function middleware(req) {
     );
   } catch (error) {
     console.error("Middleware SEO fetch error:", error);
-
-    // On error, fallback to client-side rendering
-    return; // Let React handle it
+    return;
   }
 }
