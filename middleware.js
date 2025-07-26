@@ -1,23 +1,36 @@
 import { NextResponse } from "next/server";
 
 export const config = {
-  matcher: ["/challenge/:slug*"],
+  matcher: ["/challenge/:slug*"], // Only challenge detail pages
 };
 
 export default async function middleware(req) {
-  console.log("HELLO");
-  const userAgent = req.headers.get("user-agent");
+  const { pathname } = new URL(req.url);
 
-  const socialMediaCrawlerUserAgents =
-    /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
-  const isSocialMediaCrawler = socialMediaCrawlerUserAgents.test(userAgent);
-
-  // return the actual page if it's a user request
-  if (!isSocialMediaCrawler) {
-    return NextResponse.next(); // let normal users load your app
+  // Skip static files (important!)
+  if (pathname.startsWith("/static") || pathname.includes(".")) {
+    return NextResponse.next();
   }
+
+  const userAgent = req.headers.get("user-agent") || "";
+  const botRegex =
+    /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
+  const isSocialMediaCrawler = botRegex.test(userAgent);
+
+  // Let normal users load the app
+  if (!isSocialMediaCrawler) {
+    return NextResponse.next();
+  }
+
+  // TODO: fetch SEO data dynamically using slug from `pathname`
+  const title = "Challenge Title";
+  const description = "This is a challenge description.";
+  const seoImage = "https://yourcdn.com/seo.jpg";
+  const author = "Falakey";
+
   return new Response(
     `
+    <!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
@@ -33,10 +46,10 @@ export default async function middleware(req) {
       <meta name="twitter:title" content="${title}" />
       <meta name="twitter:description" content="${description}" />
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:site" content="@seam_xyz" />
+      <meta name="twitter:site" content="@falakey" />
       <meta name="twitter:image" content="${seoImage}" />
     </head>
-    <body><img src=${seoImage} /></body>
+    <body><p>Social media preview for ${title}</p></body>
     </html>`,
     {
       headers: { "content-type": "text/html" },
