@@ -95,7 +95,7 @@ export default async function middleware(req) {
 
       title = pictureData.title || title;
       description = pictureData.description || description;
-      seoImage = pictureData.media?.original || seoImage;
+      seoImage = pictureData.preview_links?.original || seoImage;
     } else if (route == "author") {
       const username = parts[3] || "";
       if (!username) throw new Error("No username provided in author route");
