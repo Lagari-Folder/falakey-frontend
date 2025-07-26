@@ -43,12 +43,12 @@ export default async function middleware(req) {
     if (pathname.startsWith(`/${locale}/challenge/`)) {
       // /:locale/challenge/:slug
       const slug = parts[3] || "";
-      if (!slug) return;
+      if (!slug) throw new Error("No slug provided in challenge route");
 
       apiUrl = `https://admin.falakey.com/api/v1/challenges/show/${slug}?locale=${locale}`;
 
       const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error(`Failed to fetch challenge data`);
+      if (!response.ok) throw new Error(`Failed to fetch challenge data, status: ${response.status}`);
       const json = await response.json();
       const challenge = json.data;
       if (!challenge) throw new Error("Challenge data missing");
@@ -62,15 +62,16 @@ export default async function middleware(req) {
         challenge.media && challenge.media.length > 0
           ? challenge.media[0].original
           : "https://example.com/default-image.png";
+
     } else if (pathname.startsWith(`/${locale}/listing/`)) {
       // /:locale/listing/:picture
       const picture = parts[3] || "";
-      if (!picture) return;
+      if (!picture) throw new Error("No picture provided in listing route");
 
-      apiUrl = `https://admin.falakey.com/api/v1/posts/show/${slug}?locale=${local}`;
+      apiUrl = `https://admin.falakey.com/api/v1/posts/show/${picture}?locale=${locale}`;
 
       const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error(`Failed to fetch picture data`);
+      if (!response.ok) throw new Error(`Failed to fetch picture data, status: ${response.status}`);
       const json = await response.json();
       const pictureData = json.data;
       if (!pictureData) throw new Error("Picture data missing");
@@ -79,15 +80,16 @@ export default async function middleware(req) {
       description = pictureData.description || `View picture ${picture}`;
       seoImage =
         pictureData.media?.original || "https://example.com/default-image.png";
+
     } else if (pathname.startsWith(`/${locale}/author/`)) {
       // /:locale/author/:username
       const username = parts[3] || "";
-      if (!username) return;
+      if (!username) throw new Error("No username provided in author route");
 
       apiUrl = `https://admin.falakey.com/api/v1/users/${username}/profile/public`;
 
       const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error(`Failed to fetch author data`);
+      if (!response.ok) throw new Error(`Failed to fetch author data, status: ${response.status}`);
       const json = await response.json();
       const author = json.data;
       if (!author) throw new Error("Author data missing");
@@ -95,6 +97,7 @@ export default async function middleware(req) {
       title = author.name || `Author: ${username}`;
       description = author.bio || `Explore works by ${author.name || username}`;
       seoImage = author.avatar || "https://example.com/default-image.png";
+
     } else {
       // If route not matched, let React handle
       return;
@@ -127,6 +130,22 @@ export default async function middleware(req) {
     );
   } catch (error) {
     console.error("Middleware SEO fetch error:", error);
-    return;
+
+    return new Response(
+      `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SEO Middleware Error</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>SEO Middleware Error</h1>
+  <p><strong>Message:</strong> ${error.message}</p>
+  <pre>${error.stack}</pre>
+</body>
+</html>`,
+      { status: 500, headers: { "content-type": "text/html" } }
+    );
   }
 }
