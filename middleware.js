@@ -3,6 +3,7 @@ export const config = {
 };
 
 export default async function middleware(req) {
+  console.log("HELLO");
   const userAgent = req.headers.get("user-agent");
 
   const socialMediaCrawlerUserAgents =
@@ -13,7 +14,6 @@ export default async function middleware(req) {
   if (!isSocialMediaCrawler) {
     return;
   }
-  console.log("HELLO");
   return new Response(
     `
     <html>
