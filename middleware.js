@@ -6,9 +6,10 @@ export default async function middleware(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
 
-  console.log("HERE IT IS ");
+  // Server-side log (visible in Vercel logs or `vercel dev`)
+  console.log("Middleware triggered:", pathname);
 
-  // Skip static assets or files requests
+  // Skip static assets or file requests
   if (pathname.startsWith("/static") || pathname.includes(".")) {
     return new Response(null, { status: 404 });
   }
@@ -19,21 +20,36 @@ export default async function middleware(req) {
 
   const isBot = botRegex.test(userAgent);
 
-  if (!isBot) {
-    // Let React app handle normal user requests
-    return; // No redirect!
-  }
-
   // Extract slug and locale
   const parts = pathname.split("/");
   const locale = parts[1] || "en";
   const slug = parts[3] || "";
 
+  // For debugging: show info for normal users in the browser
+  if (!isBot) {
+    return new Response(
+      `
+      <html>
+        <body>
+          <h1>Debug Middleware Output</h1>
+          <pre>${JSON.stringify(
+            { pathname, locale, slug, userAgent, isBot },
+            null,
+            2
+          )}</pre>
+        </body>
+      </html>
+      `,
+      { headers: { "content-type": "text/html" } }
+    );
+  }
+
   if (!slug) {
-    return; // fallback to SPA
+    return; // fallback to SPA if slug is missing
   }
 
   const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/challenges/show/${slug}?locale=${locale}`;
+  console.log("Fetching SEO data from:", apiUrl);
 
   try {
     const response = await fetch(apiUrl);
@@ -77,6 +93,6 @@ export default async function middleware(req) {
     );
   } catch (error) {
     console.error("Middleware SEO fetch error:", error);
-    return; // Let the frontend handle it on error
+    return; // Let React handle it on error
   }
 }
