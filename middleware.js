@@ -12,17 +12,18 @@ export default async function middleware(req) {
   }
 
   const userAgent = req.headers.get("user-agent") || "";
+
+  // Include WhatsApp bot in the regex
   const botRegex =
-    /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
+    /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator|WhatsApp/i;
+
   const isBot = botRegex.test(userAgent);
 
   if (!isBot) {
     // Redirect normal users back to the SAME path so React Router can handle it
-    return Response.redirect(new URL(req.url), 307);
+    return Response.redirect(null, { status: 200 });
   }
 
-  // Extract slug and locale from URL, assuming /:locale/challenge/:slug
-  const parts = pathname.split("/");
   const locale = parts[1] || "en";
   const slug = parts[3] || "";
 
@@ -80,6 +81,6 @@ export default async function middleware(req) {
     console.error("Middleware SEO fetch error:", error);
 
     // Fallback to redirect normal users to the original path on error
-    return Response.redirect(new URL(req.url), 307);
+    return Response.redirect(null, { status: 200 });
   }
 }
