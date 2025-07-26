@@ -8,19 +8,19 @@ export default async function middleware(req) {
   const { pathname } = new URL(req.url);
 
   // Skip static files (important!)
-  if (pathname.startsWith("/static") || pathname.includes(".")) {
-    return NextResponse.next();
-  }
+//   if (pathname.startsWith("/static") || pathname.includes(".")) {
+//     return NextResponse.next();
+//   }
 
-  const userAgent = req.headers.get("user-agent") || "";
-  const botRegex =
-    /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
-  const isSocialMediaCrawler = botRegex.test(userAgent);
+//   const userAgent = req.headers.get("user-agent") || "";
+//   const botRegex =
+//     /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
+//   const isSocialMediaCrawler = botRegex.test(userAgent);
 
-  // Let normal users load the app
-  if (!isSocialMediaCrawler) {
-    return NextResponse.next();
-  }
+//   // Let normal users load the app
+//   if (!isSocialMediaCrawler) {
+//     return NextResponse.next();
+//   }
 
   // TODO: fetch SEO data dynamically using slug from `pathname`
   const title = "Challenge Title";
