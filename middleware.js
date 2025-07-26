@@ -13,26 +13,25 @@ export default async function middleware(req) {
 
   console.log("Middleware triggered for", pathname, "User-Agent:", userAgent);
 
-
-//    return new Response(
-//       `<!DOCTYPE html>
-// <html lang="en">
-// <head>
-//   <meta charset="UTF-8" />
-//   <title>SEO Middleware Error</title>
-//   <meta name="viewport" content="width=device-width, initial-scale=1" />
-// </head>
-// <body>
-//   <h1>SEO Middleware Error</h1>
-//   <p><strong>Message:</strong> ${pathname.includes(".")}</p>
-//   <pre>${pathname.startsWith("/static")}</pre>
-// </body>
-// </html>`,
-//       { status: 500, headers: { "content-type": "text/html" } }
-//     );
+  //    return new Response(
+  //       `<!DOCTYPE html>
+  // <html lang="en">
+  // <head>
+  //   <meta charset="UTF-8" />
+  //   <title>SEO Middleware Error</title>
+  //   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  // </head>
+  // <body>
+  //   <h1>SEO Middleware Error</h1>
+  //   <p><strong>Message:</strong> ${pathname.includes(".")}</p>
+  //   <pre>${pathname.startsWith("/static")}</pre>
+  // </body>
+  // </html>`,
+  //       { status: 500, headers: { "content-type": "text/html" } }
+  //     );
 
   // Ignore static files (images, js, css, etc.)
-  if (pathname.startsWith("/static") ) {
+  if (pathname.startsWith("/static")) {
     return new Response(null, { status: 404 });
   }
 
@@ -111,7 +110,7 @@ export default async function middleware(req) {
       const author = json.data;
       if (!author) throw new Error("Author data missing");
 
-      title = author.displayName || title;
+      title = author.display_name || title;
       description = author.bio || description;
       seoImage = author.avatar || seoImage;
     } else {
