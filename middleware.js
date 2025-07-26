@@ -1,5 +1,5 @@
 export const config = {
-  matcher: ["/ar/challenge/:slug*"],
+  matcher: ["/:locale/challenge/:slug*"],
 };
 
 export default async function middleware(req) {
