@@ -53,10 +53,8 @@ const ChallengeDetails = () => {
   return (
     <>
       <SEO
-        title={`Falakey | Challenge | ${data?.title || slug}`}
-        description={`Join the ${
-          data?.title || "photography"
-        } challenge on Falakey and showcase your creativity!`}
+        title={`${data?.title}`}
+        description={`Join the ${data?.title} challenge on Falakey and showcase your creativity!`}
         name="Falakey"
         type="article"
         image={data?.media?.[0]?.original} // dynamic OG image
