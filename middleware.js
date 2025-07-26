@@ -111,7 +111,7 @@ export default async function middleware(req) {
       const author = json.data;
       if (!author) throw new Error("Author data missing");
 
-      title = author.name || title;
+      title = author.displayName || title;
       description = author.bio || description;
       seoImage = author.avatar || seoImage;
     } else {
