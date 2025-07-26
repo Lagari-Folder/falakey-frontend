@@ -3,27 +3,27 @@ export const config = {
 };
 
 export default async function middleware(req) {
-  const url = new URL(req.url);
-  const pathname = url.pathname;
+  // const url = new URL(req.url);
+  // const pathname = url.pathname;
 
-  console.log(pathname);
-  // Skip static assets
-  if (pathname.startsWith("/static") || pathname.includes(".")) {
-    return new Response(null, { status: 404 });
-  }
+  // console.log(pathname);
+  // // Skip static assets
+  // if (pathname.startsWith("/static") || pathname.includes(".")) {
+  //   return new Response(null, { status: 404 });
+  // }
 
-  const userAgent = req.headers.get("user-agent") || "";
-  const botRegex =
-    /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
-  const isBot = botRegex.test(userAgent);
+  // const userAgent = req.headers.get("user-agent") || "";
+  // const botRegex =
+  //   /Twitterbot|facebookexternalhit|Facebot|LinkedInBot|Pinterest|Slackbot|vkShare|W3C_Validator/i;
+  // const isBot = botRegex.test(userAgent);
 
-  if (!isBot) {
-    // Let normal users load your React app (fallback to index.html)
-    return Response.redirect(new URL("/", req.url), 307);
-  }
+  // if (!isBot) {
+  //   // Let normal users load your React app (fallback to index.html)
+  //   return Response.redirect(new URL("/", req.url), 307);
+  // }
 
-  // Extract slug for SEO (e.g. /challenge/my-slug)
-  const slug = pathname.split("/").pop();
+  // // Extract slug for SEO (e.g. /challenge/my-slug)
+  // const slug = pathname.split("/").pop();
 
   // Ideally, fetch your SEO data here based on slug.
   // For demo, hardcoded data:
