@@ -98,7 +98,9 @@ export default async function middleware(req) {
       const username = parts[routeIndex + 1] || "";
       if (!username) throw new Error("No username provided in author route");
 
-      apiUrl = `https://admin.falakey.com/api/v1/users/${username}/profile/public`;
+      apiUrl = `https://admin.falakey.com/api/v1/users/${username.slice(
+        1
+      )}/profile/public`;
       const response = await fetch(apiUrl);
       if (!response.ok)
         throw new Error(`Author fetch failed: ${response.status}`);

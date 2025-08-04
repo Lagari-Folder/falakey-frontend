@@ -53,7 +53,7 @@ const ChallengeDetails = () => {
   return (
     <>
       <SEO
-        title={`${data?.title}`}
+        title={`${data?.title ?? t("seo.challenges_title")}`}
         description={`Join the ${data?.title} challenge on Falakey and showcase your creativity!`}
         name="Falakey"
         type="article"
