@@ -132,8 +132,12 @@ const PictureDetail = () => {
                   </video>
                 ) : (
                   <img
-                    className={`rounded-md sm:w-full w-[95%] object-cover 
-                }`}
+                    className="rounded-md sm:w-full w-[95%] object-cover 
+                    max-h-[500px]"
+                    style={{
+                      aspectRatio: `${postDetail?.aspect_ratio || 1}`,
+                      maxWidth: `${(postDetail?.aspect_ratio || 1) * 500}px`,
+                    }}
                     src={
                       postDetail?.preview_links?.sm_watermarked ??
                       postDetail?.preview_links?.sm

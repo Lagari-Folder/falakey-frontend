@@ -222,8 +222,14 @@ export const CardDetailModal = ({
                     </video>
                   ) : (
                     <img
-                      className={`rounded-md sm:w-full w-[95%] object-cover 
-                    }`}
+                      className="rounded-md sm:w-full w-[95%] object-cover 
+                    max-h-[500px]"
+                      style={{
+                        aspectRatio: `${fetchedPostDetail?.aspect_ratio || 1}`,
+                        maxWidth: `${
+                          (fetchedPostDetail?.aspect_ratio || 1) * 500
+                        }px`,
+                      }}
                       src={
                         fetchedPostDetail?.preview_links?.sm_watermarked ??
                         fetchedPostDetail?.preview_links?.sm
