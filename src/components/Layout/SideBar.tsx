@@ -3,7 +3,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DownloadIcon from "@mui/icons-material/Download";
-import StyleIcon from "@mui/icons-material/Style";
 import LockIcon from "@mui/icons-material/Lock";
 import { useState } from "react";
 import SideBarLink from "./SideBarLink";

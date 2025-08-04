@@ -7,7 +7,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { useTrans } from "@/utils/translation";
@@ -19,9 +19,8 @@ const Dashboard = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTrans();
   const { local } = useSelector((state: RootState) => state.translation);
-  const navigate = useNavigate();
 
-  const { getDashboardData, data, loading } = useDashboardHook();
+  const { getDashboardData,  loading } = useDashboardHook();
 
   useEffect(() => {
     getDashboardData();
