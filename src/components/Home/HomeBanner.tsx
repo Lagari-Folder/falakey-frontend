@@ -45,9 +45,9 @@ const HomeBanner = ({
           alt="Flakey Logo"
         />
         <div className="flex flex-col w-full">
-          <div className="xl:text-4xl lg:text-3xl sm:text-2xl text-lg  font-bold text-white">
+          <h1 className="xl:text-4xl lg:text-3xl sm:text-2xl text-lg  font-bold text-white">
             {slogan}
-          </div>
+          </h1>
           <div className="flex w-full justify-between ">
             <div className="w-[70%] xl:block hidden">
               <SearchInput categoryVar={categoryVar} options={typeOptions} />

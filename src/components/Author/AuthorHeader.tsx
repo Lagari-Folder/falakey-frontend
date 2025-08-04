@@ -118,9 +118,9 @@ const AuthorHeader = ({
 
           <div className="flex flex-col gap-6 items-start max-w-[500px] h-full md:items-start">
             <div className="flex flex-row flex-wrap items-center gap-2 ">
-              <h5 className="font-semibold text-4xl font-lexend text-black mr-3">
+              <h1 className="font-semibold text-4xl font-lexend text-black mr-3">
                 {author?.display_name || t("author.anonymous")}
-              </h5>
+              </h1>
 
               {author?.available_for_hire === true && (
                 <button

@@ -157,9 +157,9 @@ const PictureDetail = () => {
               />
             </div>
 
-            <div className="my-4 mx-3 font-semibold text-lg">
+            <h1 className="my-4 mx-3 font-semibold text-lg">
               {postDetail?.title}
-            </div>
+            </h1>
             <div className="md:justify-between justify-center mx-3 md:flex grid grid-cols-1">
               <div className="space-y-5 flex-1">
                 <div className="w-full flex gap-24 justify-start text-gray-400">

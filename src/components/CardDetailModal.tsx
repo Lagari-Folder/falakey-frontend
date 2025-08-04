@@ -248,9 +248,9 @@ export const CardDetailModal = ({
                 />
               </div>
 
-              <div className="mt-4 font-semibold text-lg">
+              <h1 className="mt-4 font-semibold text-lg">
                 {postDetail?.title}
-              </div>
+              </h1>
 
               {/* Bottom part with view/download counts */}
               <div className="mt-4 flex gap-24 w-full text-gray-400 mx-3">
