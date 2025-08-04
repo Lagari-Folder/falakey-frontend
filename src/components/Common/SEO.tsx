@@ -9,12 +9,16 @@ const localizedContent = {
     description:
       "Discover free high-quality stock photos and creative photography challenges.",
     image: "/icons/star-icon.svg",
+    keywords:
+      "free photos, stock images, videos, vectors, Arab digital creativity, photography challenges, Falakey, download photos",
   },
   ar: {
     title: "فلكي | إبداع رقمي عربي صور فيديو فيكتور",
     description:
       "اكتشف صورًا مجانية عالية الجودة وتحديات إبداعية في التصوير الفوتوغرافي.",
     image: "/icons/star-icon.svg",
+    keywords:
+      "صور مجانية, فيديوهات, فيكتور, تصوير إبداعي, منصة عربية, فلكي, تحميل صور, تصميم عربي",
   },
 };
 
@@ -24,6 +28,7 @@ export type SEOPROPS = {
   name?: string;
   type?: string;
   image?: string;
+  keywords?: string;
 };
 
 export default function SEO({
@@ -32,6 +37,7 @@ export default function SEO({
   name,
   type,
   image,
+  keywords,
 }: SEOPROPS) {
   const { local: locale, dir } = useSelector(
     (state: RootState) => state.translation
@@ -46,8 +52,8 @@ export default function SEO({
 
   const resolvedTitle = title || content.title;
   const resolvedDescription = description || content.description;
+  const resolvedKeywords = keywords || content.keywords;
   const resolvedImage = `${origin}${image || content.image}`;
-
   const canonicalUrl = `${origin}${path}`;
   const enUrl = `${origin}/en${path}`;
   const arUrl = `${origin}/ar${path}`;
@@ -60,6 +66,7 @@ export default function SEO({
       <link rel="icon" type="image/svg+xml" href={icon} />
 
       <meta name="description" content={resolvedDescription} />
+      <meta name="keywords" content={resolvedKeywords} />
 
       {/* Open Graph */}
       <meta property="og:type" content={type || "website"} />

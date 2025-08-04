@@ -29,6 +29,7 @@ export interface Post {
   is_purchased?: boolean;
   favorites_count: number;
   created_at?: string;
+  seo_keywords?: string[];
   status?: { key: string; color: string };
 }
 

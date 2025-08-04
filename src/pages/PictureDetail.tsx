@@ -81,6 +81,7 @@ const PictureDetail = () => {
         title={`Post | ${postDetail?.title || picture}`}
         description=""
         type="article"
+        keywords={postDetail?.seo_keywords?.join(", ")}
         name="Falakey"
       />
 
