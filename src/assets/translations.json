@@ -10,7 +10,24 @@
       "error": "Error!",
       "error_text": "An unexpected error occurred.",
       "cancel": "Cancel",
-      "confirm_purchase": "Confirm Purchase"
+      "confirm_purchase": "Confirm Purchase",
+      "settings": "Settings"
+    },
+    "seo": {
+      "title": "Falakey | Arabic Digital Creativity Photos Videos Vectors",
+      "description": "Explore a vast collection of photos and videos. Join challenges, connect with creators, and unleash your creativity with Falakey.",
+      "explore_title": "Explore - Explore Photos and Videos",
+      "explore_description": "Browse through a diverse range of photos and videos. Discover new content, follow your favorite creators, and get inspired.",
+      "challenges_title": "Challenges - Join Exciting Challenges",
+      "challenges_description": "Participate in photo and video challenges that ignite your creativity. Showcase your talent and stand a chance to win amazing prizes.",
+      "license_title": "Content License - Understand Your Rights",
+      "license_description": "Learn about the Falakey content license, including usage rights, restrictions and how to properly attribute creators.",
+      "terms_title": "Terms of Service - Know the Rules",
+      "terms_description": "Read the terms of service for using Falakey. Understand your rights and responsibilities as a user.",
+      "privacy_title": "Privacy Policy - Your Data Matters",
+      "privacy_description": "Learn about how Falakey collects, uses, and protects your personal information.",
+      "stars_title": "Falakey's Stars - Top Creators",
+      "stars_description": "Discover the top creators on Falakey. See who has the most views and engagement on their content."
     },
     "navbar": {
       "select_language": "Select Language",
@@ -27,6 +44,7 @@
       "downloads": "Downloads",
       "messages": "Messages",
       "notifications": "Notifications",
+      "notification-settings": "Notification Settings",
       "account_details": "Account Details",
       "logout": "Log out",
       "favorites": "Favorites"
@@ -98,7 +116,7 @@
       "first_name": "First Name",
       "last_name": "Last Name",
       "confirm_password": "Repeat Password",
-      "terms_agreement": "I agree with the terms and conditions"
+      "privacy_agreement": "I agree with the privacy policy"
     },
     "forget_password": {
       "title": "Request a password reset.",
@@ -172,7 +190,8 @@
       "need_more_credits_message": "You don't have enough credits to unlock this post. Please buy more credits to proceed.",
       "buy_credits": "Buy Credits",
       "purchase_success_title": "Purchase Successful",
-      "purchase_success_message": "You've successfully unlocked this post!"
+      "purchase_success_message": "You've successfully unlocked this post!",
+      "locked_text": "This post is locked by the author and cannot be downloaded"
     },
     "favorite_modal": {
       "my_favorites": "My Favorites",
@@ -312,7 +331,24 @@
       "error": "خطأ!",
       "error_text": "حدث خطأ غير متوقع.",
       "cancel": "إلغاء",
-      "confirm_purchase": "تأكيد الشراء"
+      "confirm_purchase": "تأكيد الشراء",
+      "settings": "الإعدادات"
+    },
+    "seo": {
+      "title": " فلكي | إبداع رقمي عربي صور فيديو فيكتور",
+      "description": "استكشف مجموعة واسعة من الصور ومقاطع الفيديو. انضم إلى التحديات، وتواصل مع المبدعين، وأطلق إبداعك مع فلكي.",
+      "explore_title": "استكشاف - استكشف الصور ومقاطع الفيديو",
+      "explore_description": "تصفح مجموعة متنوعة من الصور ومقاطع الفيديو. اكتشف محتوى جديدًا، تابع مبدعيك المفضلين، واستلهم.",
+      "challenges_title": "التحديات - انضم إلى تحديات مثيرة",
+      "challenges_description": "شارك في تحديات الصور والفيديو التي تشعل إبداعك. اعرض موهبتك وقد تفوز بجوائز رائعة.",
+      "license_title": "ترخيص المحتوى - فهم حقوقك",
+      "license_description": "تعرف على ترخيص محتوى فلكي، بما في ذلك حقوق الاستخدام والقيود وكيفية الإشارة بشكل صحيح إلى المبدعين.",
+      "terms_title": "شروط الخدمة - تعرف على القواعد",
+      "terms_description": "اقرأ شروط الخدمة لاستخدام فلكي. افهم حقوقك ومسؤولياتك كمستخدم.",
+      "privacy_title": "سياسة الخصوصية - بياناتك مهمة",
+      "privacy_description": "تعرف على كيفية جمع فلكي واستخدام وحماية معلوماتك الشخصية.",
+      "stars_title": "نجوم فلكي - أفضل المبدعين",
+      "stars_description": "اكتشف أفضل المبدعين على فلكي. شاهد من لديه أكبر عدد من المشاهدات والتفاعل على محتواهم."
     },
     "navbar": {
       "select_language": "اختر اللغة",
@@ -330,6 +366,7 @@
       "downloads": "التنزيلات",
       "messages": "الرسائل",
       "notifications": "الإشعارات",
+      "notification-settings": "إعدادات الإشعارات",
       "account_details": "تفاصيل الحساب",
       "logout": "تسجيل الخروج",
       "favorites": "المفضلة"
@@ -355,7 +392,7 @@
       "learn_more": "اعرف المزيد",
       "sponsored_by": "برعاية",
       "sponsers": "الرعاة",
-      "days_left": " أيام متبقية",
+      "days_left": "يوم متبقي",
       "ended": "انتهى",
       "all_submissions": "جميع المشاركات",
       "about": "عن هذا التحدي",
@@ -399,7 +436,7 @@
       "first_name": "الاسم الأول",
       "last_name": "اسم العائلة",
       "confirm_password": "تأكيد كلمة المرور",
-      "terms_agreement": "أوافق على الشروط والأحكام"
+      "privacy_agreement": "أوافق على سياسة الخصوصية"
     },
     "forget_password": {
       "title": "طلب إعادة تعيين كلمة المرور.",
@@ -473,7 +510,8 @@
       "need_more_credits_message": "ليس لديك ما يكفي من النقاط لفتح هذه المشاركة. يرجى شراء المزيد من النقاط للمتابعة.",
       "buy_credits": "شراء نقاط",
       "purchase_success_title": "تم الشراء بنجاح",
-      "purchase_success_message": "لقد قمت بفتح هذه المشاركة بنجاح!"
+      "purchase_success_message": "لقد قمت بفتح هذه المشاركة بنجاح!",
+      "locked_text": "هذه المشاركة مقفلة من قبل المؤلف ولا يمكن تنزيلها"
     },
     "favorite_modal": {
       "my_favorites": "مفضلتي",

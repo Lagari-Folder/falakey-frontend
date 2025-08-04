@@ -5,13 +5,13 @@ import { RootState } from "@/lib/store";
 
 const localizedContent = {
   en: {
-    title: "Falakey | Free Stock Photos",
+    title: "Falakey | Arab Digital Creativity - Photos, Videos, Vectors",
     description:
       "Discover free high-quality stock photos and creative photography challenges.",
     image: "/icons/star-icon.svg",
   },
   ar: {
-    title: "فلكي | صور مجانية عالية الجودة",
+    title: "فلكي | إبداع رقمي عربي صور فيديو فيكتور",
     description:
       "اكتشف صورًا مجانية عالية الجودة وتحديات إبداعية في التصوير الفوتوغرافي.",
     image: "/icons/star-icon.svg",

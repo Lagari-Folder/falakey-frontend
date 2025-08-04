@@ -16,8 +16,6 @@ import loadingImage from "../../../public/icons/star-icon.svg";
 import { useTrans } from "@/utils/translation";
 import ContentTypeRadio from "./ContentTypeRadio";
 import ContentTypeText from "./ContentTypeText";
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
 // import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const UploadedData = ({
@@ -81,7 +79,6 @@ const UploadedData = ({
   });
 
   const { t } = useTrans();
-  const { user } = useSelector((state: RootState) => state.auth);
 
   const handleContentTypeChange = (type: "free" | "premium" | "locked") => {
     setContentType(type);
@@ -283,7 +280,7 @@ const UploadedData = ({
         </div>
 
         {/* Content Type Selection */}
-        {user?.id == 2694 && (
+      
           <div className="mb-4 p-3 bg-gray-50 rounded-md border border-gray-200">
             <h3 className="text-sm font-medium text-gray-700 mb-2">
               {t("upload_modal.content_type")}
@@ -300,7 +297,7 @@ const UploadedData = ({
                   handleContentTypeChange(s)
                 }
               />
-              <ContentTypeRadio
+              {/* <ContentTypeRadio
                 title={t("upload_modal.premium")}
                 description={t("upload_modal.premium_text")}
                 icon="fa-solid fa-crown"
@@ -310,7 +307,7 @@ const UploadedData = ({
                 handleContentTypeChange={(s: "free" | "premium" | "locked") =>
                   handleContentTypeChange(s)
                 }
-              />
+              /> */}
               <ContentTypeRadio
                 title={t("upload_modal.locked")}
                 description={t("upload_modal.locked_text")}
@@ -341,7 +338,7 @@ const UploadedData = ({
               />
             )}
           </div>
-        )}
+       
 
         {/* Tags & Collections */}
         <div className="mb-4">

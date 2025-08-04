@@ -28,7 +28,7 @@ const MessagesDashboard = () => {
   return (
     <div className="">
       {/* Title */}
-      <h1 className="text-[30px] font-bold font-lexend text-left mb-10">
+      <h1 className="text-[30px] font-bold font-lexend text-start mb-10">
         {t("messages_dashboard.title")}
       </h1>
 
@@ -42,7 +42,7 @@ const MessagesDashboard = () => {
           {t("common.loading")}
         </div>
       ) : (
-        <div className="bg-white border border-gray-300 rounded-lg py-1 px-5 ">
+        <div className="bg-white border border-gray-300 rounded-lg py-1 px-5 min-w-[600px] w-full">
           {chats && chats.length > 0 ? (
             chats.map((chat: Chat) => (
               <div
@@ -92,7 +92,7 @@ const MessagesDashboard = () => {
               </div>
             ))
           ) : (
-            <div className="text-center py-6 text-gray-500 text-lg font-medium">
+            <div className="text-center py-6 text-gray-500 text-lg font-medium min-w-[600px] w-full">
               {t("messages_dashboard.no_messages") || "No messages found."}
             </div>
           )}

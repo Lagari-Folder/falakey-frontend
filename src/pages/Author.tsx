@@ -17,6 +17,7 @@ import { apiRequest } from "@/utils/apiRequest";
 const Author = () => {
   const navigate = useNavigateWithLocale();
   const { username } = useParams();
+
   const [loading, setLoading] = useState(true);
 
   const [user, setUser] = useState<User>();
@@ -26,7 +27,7 @@ const Author = () => {
 
   dispatch(
     search({
-      author: username,
+      author: username?.slice(1),
       types: previousSearch.types,
       placeholder: previousSearch.placeholder,
     })
@@ -36,7 +37,7 @@ const Author = () => {
       setLoading(true);
       apiRequest({
         method: "GET",
-        url: `users/${username}/profile/public`,
+        url: `users/${username.slice(1)}/profile/public`,
         token: token!,
       })
         .then((result) => {

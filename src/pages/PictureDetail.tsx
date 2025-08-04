@@ -115,14 +115,29 @@ const PictureDetail = () => {
             <div className="flex flex-col w-full lg:flex-row items-start gap-10 justify-center">
               <div className="w-full flex flex-col items-center flex-1">
                 {postDetail?.type === "video" ? (
-                  <video controls className="rounded-md w-full object-cover">
-                    <source src={postDetail.preview_links?.original} />
+                  <video
+                    controls
+                    className="rounded-md w-full object-cover max-h-[500px]"
+                    style={{
+                      aspectRatio: `${postDetail?.aspect_ratio || 1}`,
+                      maxWidth: `${(postDetail?.aspect_ratio || 1) * 500}px`,
+                    }}
+                  >
+                    <source
+                      src={
+                        postDetail.preview_links?.original ??
+                        postDetail.preview_links?.md
+                      }
+                    />
                   </video>
                 ) : (
                   <img
                     className={`rounded-md sm:w-full w-[95%] object-cover 
                 }`}
-                    src={postDetail?.preview_links?.md}
+                    src={
+                      postDetail?.preview_links?.sm_watermarked ??
+                      postDetail?.preview_links?.sm
+                    }
                     alt={postDetail?.title}
                   />
                 )}

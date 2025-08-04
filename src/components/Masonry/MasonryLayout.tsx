@@ -48,6 +48,8 @@ const MasonryLayout = ({
   } = useMasonryPostHook();
 
   const fetchData = async () => {
+    console.log("string Filtering: ", stringFiltering);
+
     if (isFetchingRef.current) return;
     isFetchingRef.current = true;
     await fetchPosts(stringFiltering);
@@ -56,7 +58,6 @@ const MasonryLayout = ({
   };
 
   useEffect(() => {
-
     fetchData();
   }, [stringFiltering]);
 
@@ -134,7 +135,7 @@ const MasonryLayout = ({
             </div>
           }
           style={{
-            overflow: "visible"
+            overflow: "visible",
           }}
         >
           <Masonry

@@ -4,6 +4,7 @@ import searchSlice from "./slices/searchSlice";
 import transSlice from "./slices/transSlice";
 import Cookies from "js-cookie";
 import { apiRequest } from "@/utils/apiRequest";
+import { useSearchParams } from "react-router-dom";
 
 const KNOWN_LOCALES = ["en", "ar"];
 const FALLBACK_LOCALE = "ar";

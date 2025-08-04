@@ -19,7 +19,7 @@ const AvailableForHire = ({
         color: gray ? "#eee" : "#007fff",
         fontWeight: "300",
       }}
-      href={`/author/${username}`}
+      href={`/author/@${username}`}
     >
       {t("common.available_hire")} <CheckCircleIcon className="!text-sm" />
     </a>

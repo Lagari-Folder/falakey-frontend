@@ -18,7 +18,6 @@ const SearchTabs = ({ onChangeAddons }: { onChangeAddons?: () => void }) => {
   const { local, dir } = useSelector((state: RootState) => state.translation);
 
   useEffect(() => {
-
     if (collection) {
       dispatch(
         search({
@@ -87,6 +86,16 @@ const SearchTabs = ({ onChangeAddons }: { onChangeAddons?: () => void }) => {
                 placeholder: type.search_placeholder,
               })
             );
+            const params = new URLSearchParams(window.location.search);
+            params.set("types", type.key);
+
+            const newUrl =
+              window.location.pathname +
+              "?" +
+              params.toString() +
+              window.location.hash;
+
+            window.history.replaceState({}, "", newUrl);
           }}
         />
       ))}

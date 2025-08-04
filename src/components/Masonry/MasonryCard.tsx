@@ -52,9 +52,9 @@ const MasonryCard = React.memo(
     };
 
     const handleVideoLeave = () => {
-      // if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-      // videoRef.current?.pause();
-      // videoRef.current!.currentTime = 0;
+      if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+      videoRef.current?.pause();
+      videoRef.current!.currentTime = 0;
     };
 
     const { t } = useTrans();
@@ -78,18 +78,18 @@ const MasonryCard = React.memo(
           >
             {data.author && (
               <a
-                href={`/author/${data.author?.username}`}
+                href={`/author/@${data.author?.username}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
 
                   if (e.ctrlKey || e.metaKey) {
                     window.open(
-                      `/${local}/author/${data.author?.username}`,
+                      `/${local}/author/@${data.author?.username}`,
                       "_blank"
                     );
                   } else {
-                    navigate("/author/" + data.author?.username);
+                    navigate("/author/@" + data.author?.username);
                   }
                 }}
                 className="flex gap-2 items-center justify-start mb-3 xl:hidden relative"
@@ -217,6 +217,7 @@ const MasonryCard = React.memo(
                     }`,
                     backgroundColor: data.dominant_color ?? "#ccc",
                   }}
+                  onContextMenu={(e) => e.preventDefault()}
                 />
               )}
               {data.is_premium ? (
@@ -261,7 +262,7 @@ const MasonryCard = React.memo(
                 {data.favorites_count}
               </div>
               {data.is_download_locked ? (
-                <div className="lg:h-[50px] md:h-[45px] h-[40px] max-w-[80px] w-full flex cursor-pointer px-2 gap-2 justify-between shadow-md rounded-md  items-center my-2 bg-gray-50 border-gray-200 border text-gray-500 ">
+                <div className="lg:h-[50px] md:h-[45px] h-[40px] w-fit flex cursor-pointer px-2 gap-2 justify-between shadow-md rounded-md  items-center my-2 bg-gray-50 border-gray-200 border text-gray-500 ">
                   <div className="text-center lg:text-lg md:text-md text-sm  ">
                     {t("masonry.download")}
                   </div>
@@ -297,7 +298,7 @@ const MasonryCard = React.memo(
                       handleClick();
                     }
                   }}
-                  className="lg:h-[50px] md:h-[45px] h-[40px] max-w-[80px] w-full flex cursor-pointer px-2 gap-2 justify-between shadow-md rounded-md  items-center my-2 bg-gray-50 border-gray-200 border text-gray-500 "
+                  className="lg:h-[50px] md:h-[45px] h-[40px]  w-fit flex cursor-pointer px-2 gap-2 justify-between shadow-md rounded-md  items-center my-2 bg-gray-50 border-gray-200 border text-gray-500 "
                 >
                   <div className="text-center lg:text-lg md:text-md text-sm  ">
                     {t("masonry.download")}
@@ -376,18 +377,18 @@ const MasonryCard = React.memo(
                       onMouseLeave={() => {
                         setShowProfileModal(false);
                       }}
-                      href={`/author/${data.author?.username}`}
+                      href={`/author/@${data.author?.username}`}
                       onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
 
                         if (e.ctrlKey || e.metaKey) {
                           window.open(
-                            `/${local}/author/${data.author?.username}`,
+                            `/${local}/author/@${data.author?.username}`,
                             "_blank"
                           );
                         } else {
-                          navigate("/author/" + data.author?.username);
+                          navigate("/author/@" + data.author?.username);
                         }
                       }}
                     >

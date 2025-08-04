@@ -13,7 +13,10 @@ const Challenge = () => {
 
   return (
     <>
-      <SEO title="Challenge" description="" name="Falakey" type="article" />
+      <SEO
+        title={t("seo.challenges_title")}
+        description={t("seo.challenges_description")}
+      />
 
       <div className="bg-primary w-full">
         <div className="bg-white md:rounded-b-[100px] rounded-b-[50px] text-center md:py-24 py-0 md:pb-36 pb-12 flex flex-col items-center gap-3">

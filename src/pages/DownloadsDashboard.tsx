@@ -18,7 +18,7 @@ const DownloadsDashboard = () => {
     <>
       <div className="sm:px-8 md:px-12 xl:px-16">
         {/* Title */}
-        <h1 className="text-[24px] sm:text-[28px] md:text-[30px] font-semibold font-lexend text-left mb-6">
+        <h1 className="text-[24px] sm:text-[28px] md:text-[30px] font-semibold font-lexend text-start mb-6">
           {t("download.title")}
         </h1>
         {loading ? (

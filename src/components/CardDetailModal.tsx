@@ -125,7 +125,7 @@ export const CardDetailModal = ({
               <div className="w-full flex justify-between items-center mb-6 flex-wrap	gap-[10px] max-[880px]:justify-start">
                 <a
                   className="flex items-center justify-start gap-3 cursor-pointer"
-                  href={`/author/${fetchedPostDetail?.author?.username}`}
+                  href={`/author/@${fetchedPostDetail?.author?.username}`}
                 >
                   {fetchedPostDetail?.author?.avatar ? (
                     <img
@@ -203,14 +203,31 @@ export const CardDetailModal = ({
               <div className="flex flex-col w-full lg:flex-row items-start gap-10 justify-center">
                 <div className="w-full flex flex-col items-center flex-1">
                   {fetchedPostDetail?.type === "video" ? (
-                    <video controls className="rounded-md w-full object-cover">
-                      <source src={fetchedPostDetail.preview_links?.original} />
+                    <video
+                      controls
+                      className="rounded-md w-full object-cover max-h-[500px]"
+                      style={{
+                        aspectRatio: `${fetchedPostDetail?.aspect_ratio || 1}`,
+                        maxWidth: `${
+                          (fetchedPostDetail?.aspect_ratio || 1) * 500
+                        }px`,
+                      }}
+                    >
+                      <source
+                        src={
+                          fetchedPostDetail.preview_links?.original ??
+                          fetchedPostDetail.preview_links?.md
+                        }
+                      />
                     </video>
                   ) : (
                     <img
                       className={`rounded-md sm:w-full w-[95%] object-cover 
                     }`}
-                      src={fetchedPostDetail?.preview_links?.md}
+                      src={
+                        fetchedPostDetail?.preview_links?.sm_watermarked ??
+                        fetchedPostDetail?.preview_links?.sm
+                      }
                       alt={fetchedPostDetail?.title}
                     />
                   )}

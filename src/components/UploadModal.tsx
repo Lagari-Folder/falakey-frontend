@@ -30,7 +30,7 @@ const UploadModal = ({
   const maxUploads = filtering?.some((item) => item.key === "challenge_id")
     ? 1
     : 10;
-  const acceptUpload = "image/*,application/postscript";
+  const acceptUpload = "image/*,video/*,application/postscript";
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fireConfetti = (particleRatio: number, options = {}) => {
     const particleCount = 200;

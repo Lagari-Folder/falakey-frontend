@@ -37,7 +37,7 @@ const FalakeyStarsBanner = ({
               <tr
                 key={index}
                 className="w-full  cursor-pointer items-center flex md:h-[90px] md:max-h-[90px]  py-1"
-                onClick={() => navigate(`/author/${leader.author?.username}`)}
+                onClick={() => navigate(`/author/@${leader.author?.username}`)}
               >
                 <td className="font-bold sm:text-2xl xs:text-lg text-xs pr-2 text-secondary">
                   {leader.rank}

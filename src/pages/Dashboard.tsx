@@ -1,7 +1,4 @@
-import {
-  faCaretRight,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import TimelineIcon from "@mui/icons-material/Timeline";
@@ -32,7 +29,7 @@ const Dashboard = () => {
 
   return (
     <div className="sm:px-8 md:px-12 xl:px-16">
-      <h1 className="text-[24px] sm:text-[28px] md:text-[30px] font-semibold font-lexend text-left mb-6">
+      <h1 className="text-[24px] sm:text-[28px] md:text-[30px] font-semibold font-lexend text-start mb-6">
         {t("dashboard.title")}
       </h1>
 
@@ -94,7 +91,7 @@ const Dashboard = () => {
                 )}
               </div>
               <a
-                href={`/author/${user?.username}`}
+                href={`/author/@${user?.username}`}
                 className="bg-white h-[35px] flex items-center justify-center py-3 px-4 rounded-md hover:bg-slate-100 font-semibold text-md text-black"
               >
                 {t("dashboard.view_profile")}{" "}
@@ -105,7 +102,7 @@ const Dashboard = () => {
           </div>
 
           {/* Credits */}
-          <div className="my-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-300 p-5 rounded-lg">
+          {/* <div className="my-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-300 p-5 rounded-lg">
             <div className="text-xl font-semibold">
               {t("dashboard.credits")}:{" "}
               <span className="text-primary font-bold">
@@ -118,7 +115,7 @@ const Dashboard = () => {
             >
               {t("dashboard.view_plans")}
             </button>
-          </div>
+          </div> */}
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -176,7 +173,7 @@ const Dashboard = () => {
               icon={<NotificationsIcon />}
               title={t("dashboard.notifications")}
               description={t("dashboard.notifications_description")}
-              link={`/${local}/my-account/notification-settings`}
+              link={`/${local}/my-account/notification`}
               loading={loading}
             />
           </div>

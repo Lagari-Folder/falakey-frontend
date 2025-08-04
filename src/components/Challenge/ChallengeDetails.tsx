@@ -94,7 +94,8 @@ const ChallengeDetails = () => {
                     dot: true,
                     title:
                       data?.days_left ?? 0 > 0
-                        ? (data?.days_left.toString() ?? "") +
+                        ? data?.days_left.toString() +
+                          " " +
                           t("challenge.days_left")
                         : t("challenge.ended"),
                   },
@@ -169,6 +170,7 @@ const ChallengeDetails = () => {
                         src={media.sm ?? media.original}
                         alt={data?.title}
                         className="w-full h-full object-cover"
+                        onContextMenu={(e) => e.preventDefault()}
                       />
                     </div>
                   ))}

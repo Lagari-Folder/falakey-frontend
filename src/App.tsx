@@ -34,16 +34,12 @@ import SearchTabs from "./components/SearchTabs";
 import Plans from "./pages/Plans";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import NotificationSettingsDashboard from "./pages/NotificationSettingsDashboard";
 
 function App() {
   return (
     <BrowserRouter>
-      <SEO
-        title="Falakey | Free Stock Photos (Beta)"
-        description="Discover free high-quality stock photos and creative photography challenges on Falakey."
-        name="Falakey"
-        type="article"
-      />
+      <SEO />
       <Routes>
         <Route path="/:locale" element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -60,7 +56,6 @@ function App() {
           <Route path="license" element={<License />} />
           <Route path="terms-and-conditions" element={<Terms />} />
           <Route path="privacy-policy" element={<Privacy />} />
-          {/* <Route path="refund" element={<Refund />} />{" "} */}
           <Route path="falakey-stars" element={<Stars />} />
           <Route path="auth/google" element={<GoogleCallback />} />
         </Route>
@@ -70,9 +65,10 @@ function App() {
           <Route path="plans" element={<Plans />} />
           <Route path="listings" element={<ListingsDashboard />} />
           <Route path="messages" element={<MessagesDashboard />} />
+          <Route path="notification" element={<NotificationsDashboard />} />
           <Route
             path="notification-settings"
-            element={<NotificationsDashboard />}
+            element={<NotificationSettingsDashboard />}
           />
           <Route path="account-details" element={<AccountDetailsDashboard />} />
           <Route path="downloads" element={<DownloadsDashboard />} />

@@ -1,3 +1,6 @@
+import { RootState } from "@/lib/store";
+import { useSelector } from "react-redux";
+
 const TagBadge = ({
   dot,
   title,
@@ -11,9 +14,11 @@ const TagBadge = ({
   black?: boolean;
   red?: boolean;
 }) => {
+  const { dir } = useSelector((state: RootState) => state.translation);
   return (
     <a
       href={href}
+      dir={dir}
       target="_blank"
       className={`flex items-center gap-2 border rounded-full py-2 px-3 ${
         black ? "border-[#dfdfe0] text-black" : "border-white text-white"

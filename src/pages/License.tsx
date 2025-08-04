@@ -1,13 +1,14 @@
 import SEO from "@/components/Common/SEO";
+import { useTrans } from "@/utils/translation";
 
 export const License = () => {
+  const { t } = useTrans();
+
   return (
     <>
       <SEO
-        title="Content License"
-        description=""
-        name="Falakey"
-        type="article"
+        title={t("seo.license_title")}
+        description={t("seo.license_description")}
       />
       <div className="px-6 lg:px-12 xl:px-20 py-8 bg-gray-50 text-black font-noto">
         <div className="max-w-7xl mx-auto">

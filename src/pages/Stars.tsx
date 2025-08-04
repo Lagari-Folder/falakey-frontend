@@ -62,7 +62,10 @@ export const Stars = () => {
 
   return (
     <>
-      <SEO title="Falakey Stars" description="" name="Falakey" type="article" />
+      <SEO
+        title={t("seo.stars_title")}
+        description={t("seo.stars_description")}
+      />
 
       <div className="flex flex-col gap-3 items-center min-h-screen px-1">
         {/* Title */}

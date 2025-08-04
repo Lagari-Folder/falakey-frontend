@@ -50,8 +50,8 @@ const SideBar = () => {
               {t("siderbar.messages")}
             </NavLink>
           </MenuItem>
-          <MenuItem value={`/${local}/my-account/notification-settings`}>
-            <NavLink to={`/${local}/my-account/notification-settings`}>
+          <MenuItem value={`/${local}/my-account/notification`}>
+            <NavLink to={`/${local}/my-account/notification`}>
               {t("siderbar.notiifcations")}
             </NavLink>
           </MenuItem>
@@ -88,13 +88,13 @@ const SideBar = () => {
         />
         <SideBarLink
           title={t("sidebar.notifications")}
-          route={`/${local}/my-account/notification-settings`}
+          route={`/${local}/my-account/notification`}
           element={<NotificationsIcon className="!text-[20px]" />}
         />
         <SideBarLink
           title={t("sidebar.account_details")}
           route={`/${local}/my-account/account-details`}
-          element={<StyleIcon className="!text-[20px]" />}
+          element={<i className="fa-solid fa-user  !text-[15px]" />}
         />
         <div
           onMouseEnter={() => setHoverState(true)}

@@ -32,7 +32,7 @@ const ProfileCard = ({
           <div className="font-bold text-xl">{author!.display_name}</div>
           <a
             className="text-primary text-xs cursor-pointer"
-            href={`/author/${authorUsername}`}
+            href={`/author/@${authorUsername}`}
           >
             {t("author.view_profile")}
           </a>

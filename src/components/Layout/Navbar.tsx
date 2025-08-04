@@ -32,7 +32,6 @@ const Navbar = () => {
   const [openNotificationModal, setOpenNotificationModal] = useState(false);
   const [openResponsiveMenu, setOpenResponsiveMenu] = useState(false);
 
-  const [searchValue, setSearchValue] = useState(""); // State to store input value
   const navigate = useNavigateWithLocale();
 
   const { user, isLoggedIn, token } = useSelector(
@@ -48,6 +47,8 @@ const Navbar = () => {
   const [showFavoritesModal, setShowFavoritesModal] = useState(false);
 
   const location = useLocation();
+
+  const [searchValue, setSearchValue] = useState(previousearchData.search); // State to store input value
 
   const { t } = useTrans();
 
@@ -105,18 +106,16 @@ const Navbar = () => {
         url: "notifications",
         withLocale: true,
         token: token!,
-      })
-        .then((result) => {
-
-          if (result["success"]) {
-            setNotifications(result["data"]["data"]["notifications"]["list"]);
-            setChats(result["data"]["data"]["chats"]["list"]);
-            setUnread(
-              result["data"]["data"]["notifications"]["unread_count"] +
-                result["data"]["data"]["chats"]["unread_count"]
-            );
-          }
-        });
+      }).then((result) => {
+        if (result["success"]) {
+          setNotifications(result["data"]["data"]["notifications"]["list"]);
+          setChats(result["data"]["data"]["chats"]["list"]);
+          setUnread(
+            result["data"]["data"]["notifications"]["unread_count"] +
+              result["data"]["data"]["chats"]["unread_count"]
+          );
+        }
+      });
     }
   }, [isLoggedIn]);
 
@@ -161,23 +160,17 @@ const Navbar = () => {
             placeholder={
               previousearchData.placeholder || t("navbar.search_photo")
             }
-            value={
-              searchValue !== "" ? searchValue : previousearchData.search ?? ""
-            }
+            value={searchValue ?? ""}
             onChange={(e) => {
               setSearchValue(e.target.value);
             }}
             onKeyDown={(e: any) => {
-              if (e.key === "Enter" && searchValue.trim() !== "") {
+              if (e.key === "Enter" && searchValue!.trim() !== "") {
                 handleSearchEvent();
                 navigate(
                   `/explore?types=${
                     previousearchData.types ?? "photo"
-                  }&search=${encodeURIComponent(
-                    searchValue !== ""
-                      ? searchValue
-                      : previousearchData.search ?? ""
-                  )}`
+                  }&search=${encodeURIComponent(searchValue ?? "")}`
                 );
               }
             }}
@@ -187,9 +180,7 @@ const Navbar = () => {
           <NavLink
             to={`/${local}/explore?types=${
               previousearchData.types
-            }&search=${encodeURIComponent(
-              searchValue !== "" ? searchValue : previousearchData.search ?? ""
-            )}`}
+            }&search=${encodeURIComponent(searchValue ?? "")}`}
             onClick={() => {
               handleSearchEvent();
             }}

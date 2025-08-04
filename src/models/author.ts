@@ -9,4 +9,6 @@ export interface Author {
   socialMedia?: [];
   posts?: Post[];
   available_for_hire?: boolean;
+  is_followed?: boolean;
+  followers_count?: number;
 }

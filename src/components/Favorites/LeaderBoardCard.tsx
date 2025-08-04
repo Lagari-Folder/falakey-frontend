@@ -15,7 +15,7 @@ const LeaderBoardCard = ({ data }: { data: LeaderBoardUser }) => {
       <div className="flex max-w-[400px] w-[400px] gap-2 items-start sm:justify-start justify-center">
         <a
           className="flex items-center gap-2"
-          href={`/author/${data.author?.username}`}
+          href={`/author/@${data.author?.username}`}
         >
           <div className="sm:text-4xl text-3xl text-black w-[40px]">
             {data.rank}
@@ -29,7 +29,7 @@ const LeaderBoardCard = ({ data }: { data: LeaderBoardUser }) => {
         <div className="flex flex-col items-start">
           <a
             className="md:text-xl text-md text-start text-black font-medium cursor-pointer"
-            href={`/author/${data.author?.username}`}
+            href={`/author/@${data.author?.username}`}
           >
             {data.author?.display_name}
           </a>
@@ -58,7 +58,7 @@ const LeaderBoardCard = ({ data }: { data: LeaderBoardUser }) => {
            ${
              i === 2 ? "max-md:hidden" : ""
            } bg-gray-300 rounded-lg overflow-hidden`}
-            href={`/author/${data.author?.username}`}
+            href={`/author/@${data.author?.username}`}
           >
             <img
               src={post.preview_links?.thumb}
@@ -69,7 +69,7 @@ const LeaderBoardCard = ({ data }: { data: LeaderBoardUser }) => {
             {i === (data.latest_posts?.length ?? 0) - 1 &&
               (data.total_posts ?? 0) > 4 && (
                 <a
-                  href={`/author/${data.author?.username}`}
+                  href={`/author/@${data.author?.username}`}
                   className="absolute inset-0 cursor-pointer bg-black bg-opacity-60 flex flex-col items-center justify-center text-[40px] text-white rounded-lg"
                 >
                   <span>+{data.total_posts_display}</span>

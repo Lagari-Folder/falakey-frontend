@@ -96,7 +96,7 @@ const AdminNavbar = () => {
         </NavLink>
         <NavLink
           className="text-center space-y-1"
-          to={`/${local}/my-account/notification-settings`}
+          to={`/${local}/my-account/notification`}
         >
           <NotificationsIcon sx={{ fontSize: 20 }} />
           <div>Notifications</div>

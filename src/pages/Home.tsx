@@ -8,21 +8,23 @@ import { useHomeHook } from "@/helper/homeHook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Grid2 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import SearchTabs from "@/components/SearchTabs";
 import { useTrans } from "@/utils/translation";
 import MasonryWrapper from "@/components/Masonry/MasonryWrapper";
 import SEO from "@/components/Common/SEO";
+import { search } from "@/lib/slices/searchSlice";
 const Home = () => {
   const { getHomeData, loading, data } = useHomeHook();
+  const dispatch = useDispatch();
 
   const { t } = useTrans();
   const { local } = useSelector((state: RootState) => state.translation);
 
   const { types } = useSelector((state: RootState) => state.search);
 
-  const previousearchData = useSelector((state: RootState) => state.search);
+  const previousSearch = useSelector((state: RootState) => state.search);
 
   const masonryRef = useRef<HTMLDivElement | null>(null);
   const [scrolling, setScrolling] = useState(false);
@@ -39,6 +41,13 @@ const Home = () => {
   };
 
   useEffect(() => {
+    dispatch(
+      search({
+        author: null,
+        types: previousSearch!.types,
+        placeholder: previousSearch.placeholder,
+      })
+    );
     getHomeData();
   }, [local]);
 
@@ -109,7 +118,7 @@ const Home = () => {
                   ""
                 }
                 authorSlug={data?.banner.author.username ?? ""}
-                categoryVar={previousearchData.types}
+                categoryVar={previousSearch.types}
                 homeImage={data?.banner.image}
                 typeOptions={data?.types ?? []}
                 bannerPosition={data?.banner.position}

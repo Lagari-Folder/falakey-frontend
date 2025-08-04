@@ -31,11 +31,17 @@ const NotificationsDashboard = () => {
   return (
     <div className="">
       {/* Title */}
-      <h1 className="text-[30px] font-bold font-lexend text-left mb-10">
-        {t("sidebar.notifications")}
+      <h1 className="text-[30px] font-bold font-lexend text-start mb-10 flex justify-between">
+        <span>{t("sidebar.notifications")}</span>
+        <a
+          href="/my-account/notification-settings"
+          className="bg-primary text-white hover:bg-primary/80 py-1 px-2 text-[20px] rounded-md flex items-center justify-center "
+        >
+          {t("common.settings")}
+        </a>
       </h1>
 
-      <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <div className="bg-white border border-gray-300 rounded-lg overflow-hidden min-w-[600px]">
         {loading ? (
           <div className="text-gray-400 text-sm text-center py-6 animate-pulse">
             {t("loading") || "Loading..."}

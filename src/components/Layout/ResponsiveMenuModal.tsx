@@ -82,7 +82,7 @@ const ResponsiveMenuModal = ({
                 <MessageIcon className="!text-[18px]" /> {t("sidebar.messages")}
               </NavLink>
               <NavLink
-                to={`/${local}/my-account/notification-settings`}
+                to={`/${local}/my-account/notification`}
                 onClick={() => modalHandler(false)}
                 className="hover:text-primary items-center flex gap-3 text-lg px-5"
               >

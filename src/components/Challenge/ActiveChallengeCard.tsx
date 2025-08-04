@@ -36,7 +36,8 @@ const ActiveChallengeCard = ({ challenge }: { challenge: Challenge }) => {
           {[
             {
               dot: true,
-              title: challenge.days_left.toString() + " days left",
+              title:
+                challenge.days_left.toString() + " " + t("challenge.days_left"),
               link: "",
             },
 

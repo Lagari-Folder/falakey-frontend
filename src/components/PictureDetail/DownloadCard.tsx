@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { DownloadData, Post } from "@/models/post";
 import LockedButton from "./LockedButton";
 import PremiumButton from "./PremiumButton";
 import DownloadButton from "./DownloadButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { useTrans } from "@/utils/translation";
+import { StarIcon } from "@radix-ui/react-icons";
+import DownloadingIcon from "@mui/icons-material/Downloading";
 
 const DownloadCard = ({
   post,
@@ -12,9 +18,14 @@ const DownloadCard = ({
   selected: DownloadData | undefined;
   setSelected: (o: DownloadData | undefined) => void;
 }) => {
-  return (
+  const { t } = useTrans();
+
+  const [open, setOpen] = useState(false);
+
+  // The same card content as before
+  const cardContent = (
     <div
-      className={`border p-4 sm:p-6 sm:rounded-xl w-full max-w-[600px] shadow-lg bg-white ${
+      className={`border p-4 sm:p-6 sm:rounded-xl md:w-[600px] w-full  shadow-lg bg-white ${
         post?.is_download_locked
           ? "opacity-50 pointer-events-none select-none"
           : ""
@@ -57,7 +68,7 @@ const DownloadCard = ({
 
       {post?.is_download_locked == true && (
         <div className="text-sm sm:text-base text-red-600 font-medium mb-4">
-          This download is locked. Please unlock it to continue.
+          {t("post.locked_text")}
         </div>
       )}
 
@@ -66,7 +77,7 @@ const DownloadCard = ({
         selected != null && (
           <div className="flex items-center justify-center mb-4 gap-2 bg-yellow-100 border border-yellow-400 rounded-lg p-2">
             <span className="text-yellow-700 font-bold text-md sm:text-xl">
-              Requires {post.premium_credits} Credits
+              {t("post.credits_required")}: {post.premium_credits}
             </span>
           </div>
         )}
@@ -81,6 +92,64 @@ const DownloadCard = ({
         )}
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {/* Desktop / tablet: Show full card */}
+
+      <div className="hidden sm:block">{cardContent}</div>
+      {/* Mobile: Show only a download button */}
+      <div className="flex justify-center sm:hidden w-full">
+        <div className="w-[95%]">
+          <button
+            onClick={() => setOpen(true)}
+            className="h-[45px] w-full px-2 gap-2 flex bg-[#b17ece] text-white rounded-md items-center justify-center"
+          >
+            {post.is_download_locked ? (
+              <>
+                <p>{t("post.download")}</p>
+                <span className="flex items-center justify-center">
+                  <FontAwesomeIcon icon={faLock} />
+                </span>
+              </>
+            ) : post.is_premium ? (
+              <>
+                <StarIcon fontSize="small" />
+                <p>{t("post.download")}</p>
+              </>
+            ) : (
+              <>
+                <p>{t("post.download")}</p>
+                <span className="flex items-center justify-center">
+                  <DownloadingIcon fontSize="small" />
+                </span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {open && (
+          <div
+            className="fixed inset-0 z-50 bg-black/50 flex items-end"
+            onClick={() => setOpen(false)}
+          >
+            <div
+              className="bg-white w-full rounded-t-2xl p-4 max-h-[80%] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setOpen(false)}
+                className="text-gray-600 mb-4 block"
+              >
+                Close
+              </button>
+              {cardContent}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

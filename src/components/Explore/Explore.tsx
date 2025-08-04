@@ -41,13 +41,14 @@ const Explore = () => {
     );
   }, [dispatch]);
 
-  
-
   const { t } = useTrans();
 
   return (
     <>
-      <SEO title="Explore" description="" name="Falakey" type="article" />
+      <SEO
+        title={t("seo.explore_title")}
+        description={t("seo.explore_description")}
+      />
 
       <div className="header justify-center items-center flex flex-col flex-wrap">
         <div className="explore w-full max-w-screen-size px-4">

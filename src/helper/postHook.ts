@@ -281,6 +281,8 @@ export const getFileTemp = async (file: File, token: string) => {
   const local = Cookies.get("locale") || "ar";
 
   try {
+
+
     const formData = new FormData();
     formData.append("file", file);
 
@@ -296,6 +298,7 @@ export const getFileTemp = async (file: File, token: string) => {
     );
 
     console.log(response.data);
+
 
     if (response.data.success) {
       return {

@@ -3,5 +3,7 @@ export interface Media {
   lg: string;
   md: string;
   sm: string;
+  sm_watermarked: string;
   thumb: string;
+  thumb_watermarked: string;
 }

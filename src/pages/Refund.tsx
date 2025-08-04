@@ -1,6 +1,6 @@
 const Refund = () => {
   return (
-    <div className=" py-12 px-4 sm:px-6 lg:px-8">
+    <div className=" py-12 px-4 sm:px-6 lg:px-8" dir="ltr">
       <div className="max-w-3xl mx-auto">
         <div className="bg-white  rounded-xl p-8 space-y-6">
           <div>

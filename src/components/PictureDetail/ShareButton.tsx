@@ -31,7 +31,7 @@ const ShareButton = ({ post }: { post: Post }) => {
     };
   }, []);
   return (
-    <div className="h-full relative z-50" ref={dropdownRef}>
+    <div className="h-full relative z-10" ref={dropdownRef}>
       <button
         onClick={() => {
           setShow(!show);

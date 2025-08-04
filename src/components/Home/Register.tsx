@@ -210,7 +210,7 @@ const Register = ({
             target="_blank"
             className="ml-2 text-sm text-purple-800"
           >
-            {t("authentication.terms_agreement")}
+            {t("authentication.privacy_agreement")}
           </a>
         </div>
         <div>{message}</div>

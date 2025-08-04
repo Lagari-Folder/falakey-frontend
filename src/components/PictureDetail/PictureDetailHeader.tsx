@@ -27,7 +27,7 @@ const PictureDetailHeader = ({
   return (
     <div className="flex justify-between items-start w-[95%] m-auto  gap-6 flex-wrap ">
       <a
-        href={`/author/${post.author?.username}`}
+        href={`/author/@${post.author?.username}`}
         className="flex cursor-pointer items-center justify-center gap-3"
       >
         {post.author!.avatar ? (
